@@ -1,70 +1,194 @@
-# Getting Started with Create React App
+# Zestora — Modern Food Delivery & Quick-Commerce Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> **A fully original, production-grade, multi-actor food delivery and quick-commerce ecosystem serving Bhatkal & Coastal Karnataka.**
 
-## Available Scripts
+![Zestora Banner](https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&auto=format&fit=crop&q=80)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🌟 What is Zestora?
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Zestora is a complete, unified platform that connects **Customers** with the best local restaurants and grocery stores, **Restaurant Partners** with a live kitchen management hub, **Delivery Heroes** with their ride dispatch app, and **Platform Admins** with an enterprise operations command center — all in one unified Next.js ecosystem.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## ⚡ Quick Start (Demo Mode — No Database Required)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+# 1. Install dependencies
+npm install
 
-### `npm run build`
+# 2. Start the development server
+npm run dev
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# 3. Open browser at
+http://localhost:3000
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> **Demo Mode** includes a fully reactive in-memory data store with seed restaurants, groceries, a delivery partner, and a seeded delivered order — letting you experience the complete 4-actor order lifecycle without PostgreSQL setup.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🎭 Multi-Actor Role Switcher (Top Demo Bar)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The **global role switcher bar** at the very top of every page lets you switch personas in one click:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+| Role | Route | Description |
+|------|-------|-------------|
+| 👤 **Customer** | `/` | Browse restaurants & grocery, order food, track live delivery |
+| 🍳 **Restaurant Partner** | `/restaurant-dashboard` | Accept/reject orders, manage menu, view settlement reports |
+| 🛵 **Delivery Partner** | `/delivery-dashboard` | Toggle online status, accept pickups, confirm delivery |
+| ⚡ **Admin** | `/admin` | Platform GMV, commission analytics, audit logs, zone management |
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🔄 Complete End-to-End Demo Flow
 
-## Learn More
+1. **Customer** browses restaurants → selects "Spice Garden" → opens *Special Chicken Biryani* → customizes (Jumbo Pack + Extra Egg) → adds to cart
+2. Applies coupon **`ZEST50`** at checkout → selects UPI payment → places order
+3. **Switch to Restaurant Partner** → accepts order → marks Preparing → marks Ready for Pickup
+4. **Switch to Delivery Partner** → accepts pickup request → confirms pickup → marks Delivered
+5. **Switch back to Customer** → tracks real-time delivery → submits 5-star review → downloads printable PDF invoice
+6. **Switch to Admin** → reviews updated GMV, commission, and audit log
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📦 Technology Stack
 
-### Code Splitting
+| Category | Technology |
+|----------|-----------|
+| Framework | Next.js 14 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS |
+| Icons | Lucide React |
+| Database ORM | Prisma (PostgreSQL) |
+| State | React Context API |
+| Demo Store | In-memory reactive class singleton |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## 🗂 Project Architecture
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+zestora/
+├── app/                          # Next.js App Router pages & API
+│   ├── page.tsx                  # Customer Homepage (Hero, Restaurants, Grocery, Coupons)
+│   ├── layout.tsx                # Root Layout + CartProvider
+│   ├── restaurants/              # Restaurant listing & detail pages
+│   ├── grocery/                  # 10-20 min QuickMart grocery page
+│   ├── checkout/                 # Checkout with coupon, tip, payment
+│   ├── orders/                   # Order history & live tracking
+│   ├── restaurant-dashboard/     # Restaurant Partner Kitchen Hub
+│   ├── delivery-dashboard/       # Delivery Partner Driver App
+│   ├── admin/                    # Platform Admin Command Center
+│   ├── support/                  # Customer support & tickets
+│   ├── offers/                   # Coupons & promo codes
+│   └── api/v1/                   # REST API routes
+│       ├── restaurants/          # GET, PATCH
+│       ├── products/             # GET
+│       ├── orders/               # GET, POST, PATCH/:id
+│       ├── coupons/              # GET, POST /validate
+│       ├── delivery/             # GET, POST (toggle online)
+│       ├── reviews/              # GET, POST
+│       ├── support/              # GET, POST
+│       └── admin/metrics/        # GET (GMV, commission, audit logs)
+│
+├── components/                   # Shared UI components
+│   ├── Navbar.tsx               # Sticky navbar with role switcher
+│   ├── CartDrawer.tsx            # Slide-out cart with bill breakdown
+│   ├── Footer.tsx               # Partner ecosystem links
+│   ├── LocationModal.tsx         # Delivery zone picker
+│   └── FoodCustomizationModal.tsx # Variants, toppings, instructions
+│
+├── server/                       # Backend services & data layer
+│   ├── dataStore.ts             # Reactive singleton store (demo engine)
+│   └── seedData.ts              # Seed restaurants, grocery, orders
+│
+├── lib/
+│   ├── cartContext.tsx           # Cart state + pricing + role switcher
+│   └── utils.ts                 # formatCurrency, cn, formatDateTime
+│
+├── types/index.ts                # Full TypeScript model definitions
+├── prisma/schema.prisma          # 35+ production database models
+├── tests/run-tests.js            # Automated test suite
+└── .env.example                  # Environment variable template
+```
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🏗 Production Database Setup (PostgreSQL + Prisma)
 
-### Advanced Configuration
+```bash
+# 1. Copy env file and configure DATABASE_URL
+cp .env.example .env.local
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+# 2. Run database migrations
+npm run db:migrate
 
-### Deployment
+# 3. Seed production data
+npm run db:seed
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## 🧪 Running Tests
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm test
+```
+
+Tests cover:
+- ✅ Authoritative server-side pricing (Subtotal + Taxes + Fees - Discounts)
+- ✅ Free delivery threshold rule (≥ ₹499)
+- ✅ ZEST50 coupon validation (min order + max discount cap)
+- ✅ Order state machine (legal vs illegal status transitions)
+- ✅ Grocery inventory reservation (anti-overselling)
+
+---
+
+## 🌐 Available Pages
+
+| Page | URL | Actor |
+|------|-----|-------|
+| Homepage & Discovery | `/` | Customer |
+| Restaurant Listing | `/restaurants` | Customer |
+| Restaurant Detail + Menu | `/restaurants/[slug]` | Customer |
+| QuickMart Grocery | `/grocery` | Customer |
+| Checkout | `/checkout` | Customer |
+| Order History | `/orders` | Customer |
+| Live Order Tracking | `/orders/[id]` | Customer |
+| Favorites | `/favorites` | Customer |
+| Coupons & Offers | `/offers` | Customer |
+| Customer Support | `/support` | Customer |
+| Restaurant Dashboard | `/restaurant-dashboard` | Restaurant Partner |
+| Delivery Dashboard | `/delivery-dashboard` | Delivery Partner |
+| Admin Command Center | `/admin` | Platform Admin |
+
+---
+
+## 🍽 Seed Data — Featured Restaurants in Bhatkal
+
+| Restaurant | Cuisine | Rating | Delivery |
+|-----------|---------|--------|----------|
+| **Spice Garden** | North Indian • Tandoor | ⭐ 4.6 | 25–35 min |
+| **Coastal Bites** | Coastal Seafood • Mangalorean | ⭐ 4.8 | 20–30 min |
+| **Biryani House** | Authentic Dum Biryani | ⭐ 4.9 | 20–30 min |
+| **Pizza Street** | Artisan Wood-Fired Pizza | ⭐ 4.7 | 25–35 min |
+| **Burger Hub** | Smash Burgers • American | ⭐ 4.5 | 15–25 min |
+| **Cafe Aroma** | Desserts • Beverages • Bakery | ⭐ 4.6 | 15–25 min |
+
+---
+
+## 🎟 Demo Coupon Codes
+
+| Code | Type | Benefit |
+|------|------|---------|
+| `ZEST50` | 50% OFF | Up to ₹100 discount, min order ₹299 |
+| `FREEDEL` | Free Delivery | Zero delivery fee, min order ₹199 |
+| `WELCOME100` | ₹100 Flat OFF | On orders above ₹399 |
+
+---
+
+## 📄 License
+
+MIT © Zestora Technologies — Original design, architecture & implementation.
