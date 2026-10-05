@@ -33,9 +33,12 @@ export type PaymentMethod =
 
 export type PaymentStatus =
   | 'PENDING'
-  | 'AUTHORIZED'
+  | 'PROCESSING'
+  | 'PAID'
   | 'SUCCESS'
   | 'FAILED'
+  | 'EXPIRED'
+  | 'CANCELLED'
   | 'REFUNDED';
 
 export interface User {
@@ -45,6 +48,7 @@ export interface User {
   phone: string;
   role: Role;
   avatar?: string;
+  passwordHash?: string; // stored server-side only, never sent to client
 }
 
 export interface Address {
@@ -143,6 +147,9 @@ export interface Product {
   reserved: number;
   sku: string;
   categoryName: string;
+  isAvailable?: boolean;
+  rating?: number;
+  ratingCount?: number;
 }
 
 export interface ProductCategory {
@@ -235,6 +242,10 @@ export interface Order {
   totalAmount: number;
   paymentMethod: PaymentMethod;
   paymentStatus: PaymentStatus;
+  razorpayOrderId?: string;
+  razorpayPaymentId?: string;
+  razorpaySignature?: string;
+  razorpayQrString?: string;
   deliveryType: 'STANDARD' | 'SCHEDULED';
   scheduledTime?: string;
   estimatedDeliveryTime?: string;
@@ -247,6 +258,18 @@ export interface Order {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface RazorpayOrderDetails {
+  orderId: string;
+  razorpayOrderId: string;
+  amountInPaise: number;
+  amountInRupees: number;
+  currency: string;
+  qrString: string;
+  paymentStatus: PaymentStatus;
+  expiresAt: string;
+}
+
 
 export interface Coupon {
   id: string;

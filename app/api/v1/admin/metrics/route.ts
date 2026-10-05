@@ -1,8 +1,14 @@
 import { NextResponse } from 'next/server';
 import { zestoraStore } from '@/server/dataStore';
 import { SEED_SERVICE_AREAS } from '@/server/seedData';
+import { requireAdmin } from '@/server/auth';
 
-export async function GET() {
+export async function GET(request: Request) {
+  const auth = requireAdmin(request);
+  if ('errorResponse' in auth) {
+    return auth.errorResponse;
+  }
+
   try {
     const metrics = zestoraStore.getAdminMetrics();
     const auditLogs = zestoraStore.getAuditLogs();

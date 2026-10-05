@@ -4,6 +4,17 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { CartItem, CartPricing, Coupon, Address, Role, User } from '@/types';
 import { SEED_USERS } from '@/server/seedData';
 
+interface LoginResult {
+  success: boolean;
+  message: string;
+  role?: Role;
+}
+
+interface RegisterResult {
+  success: boolean;
+  message: string;
+}
+
 interface CartContextType {
   items: CartItem[];
   addItem: (item: CartItem) => void;
@@ -20,7 +31,10 @@ interface CartContextType {
   pricing: CartPricing;
   currentRole: Role;
   currentUser: User;
-  switchRole: (role: Role) => void;
+  isAuthenticated: boolean;
+  login: (email: string, password: string) => Promise<LoginResult>;
+  logout: () => Promise<void>;
+  register: (name: string, email: string, phone: string, password: string) => Promise<RegisterResult>;
   isCartDrawerOpen: boolean;
   setIsCartDrawerOpen: (open: boolean) => void;
 }
@@ -42,6 +56,16 @@ const DEFAULT_ADDRESS: Address = {
   isDefault: true,
 };
 
+// Default guest user shown before auth state is loaded
+const GUEST_USER: User = {
+  id: '',
+  name: 'Guest',
+  email: '',
+  phone: '',
+  role: 'CUSTOMER',
+  avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
+};
+
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
@@ -50,38 +74,153 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [tip, setTip] = useState<number>(20);
   const [selectedAddress, setSelectedAddress] = useState<Address>(DEFAULT_ADDRESS);
   const [currentRole, setCurrentRole] = useState<Role>('CUSTOMER');
+  const [currentUser, setCurrentUser] = useState<User>(GUEST_USER);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isCartDrawerOpen, setIsCartDrawerOpen] = useState<boolean>(false);
 
-  // Load cart from localStorage if available
+  // On mount: restore session from cookies + localStorage
   useEffect(() => {
     try {
       const saved = localStorage.getItem('zestora_cart');
       if (saved) setItems(JSON.parse(saved));
-      const savedRole = localStorage.getItem('zestora_role') as Role;
-      if (savedRole) setCurrentRole(savedRole);
+
+      // Read session cookies set by server
+      const cookieRole = document.cookie
+        .split('; ')
+        .find((r) => r.startsWith('zestora_role='))
+        ?.split('=')[1] as Role | undefined;
+
+      const cookieToken = document.cookie
+        .split('; ')
+        .find((r) => r.startsWith('zestora_token='))
+        ?.split('=')[1];
+
+      if (cookieToken && cookieRole) {
+        // Try to restore user from localStorage cache
+        const cachedUser = localStorage.getItem('zestora_user');
+        if (cachedUser) {
+          const parsedUser: User = JSON.parse(cachedUser);
+          // SECURITY: use role from cookie (set by server), not from localStorage
+          setCurrentUser({ ...parsedUser, role: cookieRole });
+          setCurrentRole(cookieRole);
+          setIsAuthenticated(true);
+        } else {
+          // Fallback: find from seed data by token
+          const seedUser = SEED_USERS.find((u) => u.id === cookieToken);
+          if (seedUser) {
+            const { passwordHash, ...safeUser } = seedUser as any;
+            setCurrentUser({ ...safeUser, role: cookieRole });
+            setCurrentRole(cookieRole);
+            setIsAuthenticated(true);
+          }
+        }
+      }
     } catch {
-      // Ignore localStorage errors
+      // Ignore storage errors
     }
   }, []);
 
+  // Persist cart
   useEffect(() => {
     try {
       localStorage.setItem('zestora_cart', JSON.stringify(items));
     } catch {}
   }, [items]);
 
-  const switchRole = (role: Role) => {
-    setCurrentRole(role);
+  /**
+   * LOGIN — sends credentials to server, role is returned from server response.
+   * Never trusts a role from client code.
+   */
+  const login = async (email: string, password: string): Promise<LoginResult> => {
     try {
-      localStorage.setItem('zestora_role', role);
-    } catch {}
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+
+      if (data.success && data.user) {
+        // Role is sourced from the server response — never from client input
+        const serverRole: Role = data.role || data.user.role;
+        setCurrentUser({ ...data.user, role: serverRole });
+        setCurrentRole(serverRole);
+        setIsAuthenticated(true);
+        localStorage.setItem('zestora_user', JSON.stringify({ ...data.user, role: serverRole }));
+        return { success: true, message: data.message, role: serverRole };
+      }
+
+      return { success: false, message: data.message || 'Login failed' };
+    } catch (e: any) {
+      return { success: false, message: e.message || 'Network error during login' };
+    }
   };
 
-  const currentUser = SEED_USERS.find((u) => u.role === currentRole) || SEED_USERS[0];
+  /**
+   * REGISTER — always creates a CUSTOMER account.
+   * Role is hardcoded on server — client cannot influence it.
+   */
+  const register = async (
+    name: string,
+    email: string,
+    phone: string,
+    password: string
+  ): Promise<RegisterResult> => {
+    try {
+      const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, password }),
+      });
+      const data = await res.json();
+
+      if (data.success && data.user) {
+        // Always CUSTOMER — trust server response
+        const newUser: User = { ...data.user, role: 'CUSTOMER' as Role };
+        setCurrentUser(newUser);
+        setCurrentRole('CUSTOMER');
+        setIsAuthenticated(true);
+        localStorage.setItem('zestora_user', JSON.stringify(newUser));
+        return { success: true, message: data.message };
+      }
+
+      return { success: false, message: data.message || 'Registration failed' };
+    } catch (e: any) {
+      return { success: false, message: e.message || 'Network error during registration' };
+    }
+  };
+
+  /**
+   * LOGOUT — clears all session data.
+   */
+  const logout = async (): Promise<void> => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+    } catch {}
+
+    // Clear cookies
+    if (typeof document !== 'undefined') {
+      document.cookie = 'zestora_role=; path=/; max-age=0;';
+      document.cookie = 'zestora_token=; path=/; max-age=0;';
+    }
+
+    // Clear localStorage
+    localStorage.removeItem('zestora_role');
+    localStorage.removeItem('zestora_user');
+    localStorage.removeItem('zestora_cart');
+
+    // Reset state
+    setIsAuthenticated(false);
+    setCurrentUser(GUEST_USER);
+    setCurrentRole('CUSTOMER');
+    setItems([]);
+    setAppliedCoupon(null);
+  };
+
+  // ── Cart operations ────────────────────────────────────────────────────────
 
   const addItem = (newItem: CartItem) => {
     setItems((prev) => {
-      // Check if exact same item with same variant/addons exists
       const existingIndex = prev.findIndex(
         (i) =>
           i.id === newItem.id &&
@@ -107,9 +246,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       removeItem(id);
       return;
     }
-    setItems((prev) =>
-      prev.map((i) => (i.id === id ? { ...i, quantity } : i))
-    );
+    setItems((prev) => prev.map((i) => (i.id === id ? { ...i, quantity } : i)));
   };
 
   const clearCart = () => {
@@ -130,7 +267,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         return { success: true, message: data.message };
       }
       return { success: false, message: data.message || 'Invalid coupon' };
-    } catch (e) {
+    } catch {
       // Fallback local validation
       const codeUpper = code.toUpperCase().trim();
       if (codeUpper === 'ZEST50' && pricing.subtotal >= 299) {
@@ -168,7 +305,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setAppliedCoupon(null);
   };
 
-  // Pricing calculation
+  // ── Pricing calculation ────────────────────────────────────────────────────
+
   const subtotal = items.reduce((sum, item) => {
     let itemPrice = item.unitPrice;
     if (item.selectedVariant) itemPrice = item.selectedVariant.price;
@@ -186,7 +324,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   let discount = 0;
   if (appliedCoupon) {
     if (appliedCoupon.type === 'PERCENTAGE') {
-      discount = Math.min((subtotal * appliedCoupon.discountValue) / 100, appliedCoupon.maxDiscount || 100);
+      discount = Math.min(
+        (subtotal * appliedCoupon.discountValue) / 100,
+        appliedCoupon.maxDiscount || 100
+      );
     } else if (appliedCoupon.type === 'FIXED_AMOUNT') {
       discount = Math.min(appliedCoupon.discountValue, subtotal);
     } else if (appliedCoupon.type === 'FREE_DELIVERY') {
@@ -226,7 +367,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         pricing,
         currentRole,
         currentUser,
-        switchRole,
+        isAuthenticated,
+        login,
+        logout,
+        register,
         isCartDrawerOpen,
         setIsCartDrawerOpen,
       }}

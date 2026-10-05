@@ -11,6 +11,8 @@ import {
   SupportTicket,
   AuditLog,
   ServiceArea,
+  User,
+  PaymentStatus,
 } from '@/types';
 import {
   SEED_RESTAURANTS,
@@ -28,6 +30,7 @@ class ZestoraStore {
   private restaurants: Restaurant[] = JSON.parse(JSON.stringify(SEED_RESTAURANTS));
   private products: Product[] = JSON.parse(JSON.stringify(SEED_PRODUCTS));
   private orders: Order[] = JSON.parse(JSON.stringify(INITIAL_ORDERS));
+  private users: User[] = JSON.parse(JSON.stringify(SEED_USERS));
   private coupons: Coupon[] = JSON.parse(JSON.stringify(SEED_COUPONS));
   private serviceAreas: ServiceArea[] = JSON.parse(JSON.stringify(SEED_SERVICE_AREAS));
   private deliveryPartners: DeliveryPartner[] = [
@@ -119,6 +122,59 @@ class ZestoraStore {
 
   getProductById(id: string): Product | undefined {
     return this.products.find((p) => p.id === id);
+  }
+
+  addProduct(productData: Partial<Product>): Product {
+    const newProduct: Product = {
+      id: productData.id || `prod-custom-${Date.now()}`,
+      name: productData.name || 'New Product',
+      slug: (productData.name || 'new-product').toLowerCase().replace(/\s+/g, '-'),
+      category: productData.category || 'General',
+      price: productData.price || 99,
+      unit: productData.unit || '1 pc',
+      image: productData.image || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&auto=format&fit=crop&q=80',
+      stock: productData.stock ?? 50,
+      reserved: 0,
+      isAvailable: productData.isAvailable ?? true,
+      description: productData.description || 'Fresh quality item',
+      rating: 4.8,
+      ratingCount: 12,
+    };
+    this.products.unshift(newProduct);
+    this.addAuditLog('PRODUCT_CREATED', 'Product', newProduct.id, 'NONE', newProduct.name);
+    return newProduct;
+  }
+
+  updateProduct(id: string, updates: Partial<Product>): Product | null {
+    const prod = this.getProductById(id);
+    if (!prod) return null;
+    Object.assign(prod, updates);
+    this.addAuditLog('PRODUCT_UPDATED', 'Product', id, 'PREVIOUS', JSON.stringify(updates));
+    return prod;
+  }
+
+  deleteProduct(id: string): boolean {
+    const index = this.products.findIndex((p) => p.id === id);
+    if (index === -1) return false;
+    const removed = this.products.splice(index, 1)[0];
+    this.addAuditLog('PRODUCT_DELETED', 'Product', id, removed.name, 'DELETED');
+    return true;
+  }
+
+  // USERS
+  getUsers(): User[] {
+    return this.users;
+  }
+
+  getUserById(id: string): User | undefined {
+    return this.users.find((u) => u.id === id || u.email === id);
+  }
+
+  addUser(user: User): User {
+    const existing = this.users.find((u) => u.email === user.email);
+    if (existing) return existing;
+    this.users.push(user);
+    return user;
   }
 
   // COUPONS
@@ -215,6 +271,10 @@ class ZestoraStore {
     return this.orders;
   }
 
+  getOrdersForUser(userId: string): Order[] {
+    return this.orders.filter((o) => o.customerId === userId);
+  }
+
   getOrderById(id: string): Order | undefined {
     return this.orders.find((o) => o.id === id || o.orderNumber === id);
   }
@@ -273,12 +333,21 @@ class ZestoraStore {
     const orderNumber = `ZES-${dateStr}-${randomSuffix}`;
     const orderId = `order-${Date.now()}`;
 
+    // Generate dynamic UPI QR string for this order and amount
+    const shortRef = orderId.replace(/[^a-zA-Z0-9]/g, '').slice(-6);
+    const razorpayOrderId = `order_${shortRef}_${Date.now().toString(36)}`;
+    const razorpayQrString = `upi://pay?pa=zestora.pay@razorpay&pn=Zestora+Food&am=${pricing.total.toFixed(2)}&tr=${orderId}&cu=INR&tn=Order+${encodeURIComponent(orderNumber)}`;
+
+    const customerId = (payload as any).customerId || 'user-customer-1';
+    const customerName = (payload as any).customerName || payload.address.fullName || 'Anas Ahmed';
+    const customerPhone = (payload as any).customerPhone || payload.address.phone || '+91 98765 43210';
+
     const newOrder: Order = {
       id: orderId,
       orderNumber,
-      customerId: 'user-customer-1',
-      customerName: 'Anas Ahmed',
-      customerPhone: payload.address.phone || '+91 98765 43210',
+      customerId,
+      customerName,
+      customerPhone,
       restaurantId: payload.restaurantId,
       restaurantName: payload.restaurantName,
       groceryStoreId: payload.groceryStoreId,
@@ -294,11 +363,11 @@ class ZestoraStore {
         addons: i.selectedAddons?.map((a) => a.name),
         instructions: i.instructions,
       })),
-      status: 'PLACED',
+      status: 'PAYMENT_PENDING',
       statusHistory: [
         {
-          status: 'PLACED',
-          note: 'Order successfully created and payment verified',
+          status: 'PAYMENT_PENDING',
+          note: 'Order placed, awaiting Razorpay payment verification',
           timestamp: new Date().toISOString(),
         },
       ],
@@ -311,7 +380,9 @@ class ZestoraStore {
       tip: pricing.tip,
       totalAmount: pricing.total,
       paymentMethod: payload.paymentMethod || 'UPI',
-      paymentStatus: 'SUCCESS',
+      paymentStatus: 'PENDING',
+      razorpayOrderId,
+      razorpayQrString,
       deliveryType: payload.deliveryType || 'STANDARD',
       scheduledTime: payload.scheduledTime,
       estimatedDeliveryTime: '30-40 mins',
@@ -326,10 +397,54 @@ class ZestoraStore {
       'Order',
       newOrder.orderNumber,
       'NONE',
-      `Amount: ₹${newOrder.totalAmount}`
+      `Amount: ₹${newOrder.totalAmount} | Razorpay: ${razorpayOrderId}`
     );
 
     return { success: true, order: newOrder };
+  }
+
+  updatePaymentStatus(
+    orderId: string,
+    paymentStatus: PaymentStatus,
+    details?: {
+      razorpayPaymentId?: string;
+      razorpayOrderId?: string;
+      razorpaySignature?: string;
+    }
+  ): { success: boolean; order?: Order; message?: string } {
+    const order = this.getOrderById(orderId);
+    if (!order) return { success: false, message: 'Order not found' };
+
+    order.paymentStatus = paymentStatus;
+    if (details?.razorpayPaymentId) order.razorpayPaymentId = details.razorpayPaymentId;
+    if (details?.razorpayOrderId) order.razorpayOrderId = details.razorpayOrderId;
+    if (details?.razorpaySignature) order.razorpaySignature = details.razorpaySignature;
+
+    if (paymentStatus === 'PAID' || paymentStatus === 'SUCCESS') {
+      order.status = 'CONFIRMED';
+      order.statusHistory.push({
+        status: 'CONFIRMED',
+        note: `Payment verified successfully via Razorpay (${details?.razorpayPaymentId || 'pay_verified'}). Order confirmed.`,
+        timestamp: new Date().toISOString(),
+      });
+      this.addAuditLog('PAYMENT_CONFIRMED', 'Order', order.orderNumber, 'PENDING', `PAID: ₹${order.totalAmount}`);
+    } else if (paymentStatus === 'FAILED') {
+      order.statusHistory.push({
+        status: order.status,
+        note: `Razorpay payment attempt failed. Awaiting customer retry.`,
+        timestamp: new Date().toISOString(),
+      });
+    } else if (paymentStatus === 'EXPIRED') {
+      order.status = 'CANCELLED';
+      order.statusHistory.push({
+        status: 'CANCELLED',
+        note: 'Payment session expired. Order cancelled.',
+        timestamp: new Date().toISOString(),
+      });
+    }
+
+    order.updatedAt = new Date().toISOString();
+    return { success: true, order };
   }
 
   // ORDER STATE MACHINE & PROGRESSION

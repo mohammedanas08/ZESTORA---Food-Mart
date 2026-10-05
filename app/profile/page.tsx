@@ -19,11 +19,9 @@ import {
   Clock,
 } from 'lucide-react';
 import { useCart } from '@/lib/cartContext';
-import { SEED_USERS } from '@/server/seedData';
-import { Role } from '@/types';
 
 export default function ProfilePage() {
-  const { currentUser, currentRole, switchRole } = useCart();
+  const { currentUser, currentRole, logout } = useCart();
 
   const [notifications, setNotifications] = useState({
     orderUpdates: true,
@@ -39,12 +37,7 @@ export default function ProfilePage() {
     { label: 'Avg Delivery Time', value: '28m', icon: Clock },
   ];
 
-  const roles: { id: Role; label: string; desc: string; color: string }[] = [
-    { id: 'CUSTOMER', label: '👤 Customer', desc: 'Order food & groceries', color: 'brand' },
-    { id: 'RESTAURANT_OWNER', label: '🍳 Restaurant Partner', desc: 'Manage kitchen & orders', color: 'amber' },
-    { id: 'DELIVERY_PARTNER', label: '🛵 Delivery Partner', desc: 'Accept & deliver orders', color: 'emerald' },
-    { id: 'ADMIN', label: '⚡ Platform Admin', desc: 'Oversee platform operations', color: 'slate' },
-  ];
+
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 min-h-screen">
@@ -115,35 +108,27 @@ export default function ProfilePage() {
         <div className="md:col-span-8 space-y-5">
           {/* Demo Role Switcher */}
           <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-card">
-            <h3 className="text-base font-bold text-slate-900 mb-1">Zestora Demo Role Switcher</h3>
+            <h3 className="text-base font-bold text-slate-900 mb-1 flex items-center gap-2">
+              <Shield className="w-4 h-4 text-orange-500" />
+              Account Information
+            </h3>
             <p className="text-xs text-slate-500 mb-4">
-              Instantly switch between portals to explore all platform capabilities
+              Your account details and role assigned by Zestora
             </p>
-            <div className="space-y-2">
-              {roles.map((r) => {
-                const isActive = currentRole === r.id;
-                return (
-                  <button
-                    key={r.id}
-                    onClick={() => switchRole(r.id)}
-                    className={`w-full flex items-center justify-between p-3.5 rounded-2xl border text-left transition ${
-                      isActive
-                        ? 'border-brand-500 bg-brand-50/50 shadow-xs'
-                        : 'border-slate-100 hover:border-slate-300 hover:bg-slate-50'
-                    }`}
-                  >
-                    <div>
-                      <div className="font-bold text-xs text-slate-900">{r.label}</div>
-                      <div className="text-[11px] text-slate-500">{r.desc}</div>
-                    </div>
-                    {isActive && (
-                      <div className="w-6 h-6 rounded-full bg-brand-500 text-white flex items-center justify-center">
-                        <Check className="w-3.5 h-3.5" />
-                      </div>
-                    )}
-                  </button>
-                );
-              })}
+            <div className="space-y-3">
+              <div className="flex items-center justify-between p-3.5 rounded-2xl border border-slate-100 bg-slate-50">
+                <div>
+                  <div className="font-bold text-xs text-slate-900">Account Role</div>
+                  <div className="text-[11px] text-slate-500">Assigned by Zestora upon registration</div>
+                </div>
+                <span className={`px-3 py-1 rounded-full text-xs font-black uppercase ${
+                  currentRole === 'ADMIN' || currentRole === 'SUPER_ADMIN'
+                    ? 'bg-amber-100 text-amber-800'
+                    : 'bg-orange-50 text-orange-700'
+                }`}>
+                  {currentRole}
+                </span>
+              </div>
             </div>
           </div>
 

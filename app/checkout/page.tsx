@@ -114,7 +114,7 @@ export default function CheckoutPage() {
       const data = await res.json();
       if (data.success && data.data) {
         clearCart();
-        router.push(`/orders/${data.data.id}`);
+        router.push(`/checkout/payment/${data.data.id}`);
       } else {
         alert(data.message || 'Failed to place order. Please review items.');
         setIsSubmitting(false);

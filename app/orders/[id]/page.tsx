@@ -19,14 +19,12 @@ import {
 } from 'lucide-react';
 import { Order, OrderStatus } from '@/types';
 import { formatCurrency, formatDateTime } from '@/lib/utils';
-import { useCart } from '@/lib/cartContext';
 
 export default function OrderTrackingPage({
   params,
 }: {
   params: { id: string };
 }) {
-  const { switchRole } = useCart();
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [reviewOpen, setReviewOpen] = useState<boolean>(false);
@@ -184,7 +182,7 @@ export default function OrderTrackingPage({
           </div>
         </div>
 
-        {/* Action Buttons: Invoice & Role Quick test */}
+        {/* Action Buttons */}
         <div className="flex items-center gap-2">
           <button
             onClick={() => window.print()}
@@ -193,34 +191,9 @@ export default function OrderTrackingPage({
             <Printer className="w-3.5 h-3.5" />
             <span>Download Invoice</span>
           </button>
-
-          {!isDelivered && !isCancelled && (
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => {
-                  switchRole('RESTAURANT_OWNER');
-                }}
-                className="hidden sm:inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-amber-500 text-white font-bold text-xs shadow-xs"
-                title="Switch to Restaurant view to accept/prepare this order"
-              >
-                <Store className="w-3.5 h-3.5" />
-                <span>Simulate Kitchen</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  switchRole('DELIVERY_PARTNER');
-                }}
-                className="hidden sm:inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-emerald-600 text-white font-bold text-xs shadow-xs"
-                title="Switch to Driver view to pick up/deliver this order"
-              >
-                <Bike className="w-3.5 h-3.5" />
-                <span>Simulate Driver</span>
-              </button>
-            </div>
-          )}
         </div>
       </div>
+
 
       {/* MAIN TRACKING GRID */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
