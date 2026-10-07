@@ -56,9 +56,18 @@ export function Field({ label, children }: { label: string; children: ReactNode 
 
 export function PageTitle({ children, sub }: { children: ReactNode; sub?: string }) {
   return (
-    <div className="mb-4">
-      <h1 className="text-2xl font-bold">{children}</h1>
-      {sub && <p className="text-sm text-stone-500">{sub}</p>}
+    <div className="mb-5">
+      <h1 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">{children}</h1>
+      {sub && <p className="mt-1 text-sm text-stone-500">{sub}</p>}
     </div>
   );
 }
+
+/** Small inline icons (no icon library needed). All are decorative: the buttons that use them carry their own labels. */
+const base = { width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true } as const;
+export const CartIcon = () => (<svg {...base}><path d="M3 4h2l2.2 10.2a1 1 0 0 0 1 .8h8.6a1 1 0 0 0 1-.76L19.5 8H6" /><circle cx="9" cy="19.5" r="1.2" /><circle cx="17" cy="19.5" r="1.2" /></svg>);
+export const SearchIcon = () => (<svg {...base}><circle cx="11" cy="11" r="6.5" /><path d="m20 20-4-4" /></svg>);
+export const PlusIcon = () => (<svg {...base}><path d="M12 5v14M5 12h14" /></svg>);
+export const MenuIcon = () => (<svg {...base}><path d="M4 7h16M4 12h16M4 17h16" /></svg>);
+export const CloseIcon = () => (<svg {...base}><path d="m6 6 12 12M18 6 6 18" /></svg>);
+export const HeartIcon = ({ filled }: { filled?: boolean }) => (<svg {...base} fill={filled ? 'currentColor' : 'none'}><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z" /></svg>);

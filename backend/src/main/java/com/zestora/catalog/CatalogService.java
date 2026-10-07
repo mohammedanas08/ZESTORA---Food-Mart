@@ -29,7 +29,7 @@ public class CatalogService {
     public CatalogDtos.RestaurantMenuDto menu(Long restaurantId) {
         Restaurant r = restaurants.findById(restaurantId).filter(Restaurant::isActive)
                 .orElseThrow(() -> ApiException.notFound("Restaurant not found"));
-        var items = products.findByRestaurantIdOrderByCategoryAscNameAsc(restaurantId).stream()
+        var items = products.findByRestaurantIdOrderByIdAsc(restaurantId).stream()
                 .map(CatalogDtos.ProductDto::of).toList();
         return new CatalogDtos.RestaurantMenuDto(CatalogDtos.RestaurantDto.of(r), items);
     }
@@ -65,7 +65,7 @@ public class CatalogService {
     @Transactional(readOnly = true)
     public CatalogDtos.RestaurantMenuDto myMenu(AuthUser user) {
         Restaurant r = restaurantOf(user);
-        var items = products.findByRestaurantIdOrderByCategoryAscNameAsc(r.getId()).stream().map(CatalogDtos.ProductDto::of).toList();
+        var items = products.findByRestaurantIdOrderByIdAsc(r.getId()).stream().map(CatalogDtos.ProductDto::of).toList();
         return new CatalogDtos.RestaurantMenuDto(CatalogDtos.RestaurantDto.of(r), items);
     }
 

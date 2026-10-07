@@ -297,4 +297,13 @@ class OrderFlowIntegrationTest {
                 "{\"items\":[{\"productId\":" + item.get("id").asLong() + ",\"quantity\":1}]," + ADDRESS + "}", 409);
         assertThat(err.at("/error/message").asText()).contains("no listed price");
     }
+    @Test @Order(17)
+    void aMenuIsReturnedInTheRestaurantsOwnOrderNotAlphabetically() throws Exception {
+        long restaurantId = getJson("/api/v1/partner/restaurant", owner(), 200).at("/data/restaurant/id").asLong();
+        java.util.List<String> names = new java.util.ArrayList<>();
+        for (JsonNode i : body(mvc.perform(get("/api/v1/restaurants/" + restaurantId)).andReturn()).at("/data/items")) names.add(i.get("name").asText());
+        // seeded as: biryani (Biryani), butter chicken (Main Course), paneer tikka (Starters), garlic naan (Breads).
+        // An alphabetical-by-category menu would put Garlic Naan (Breads) second.
+        assertThat(names.subList(0, 4)).containsExactly("Special Chicken Biryani", "Butter Chicken", "Paneer Tikka", "Garlic Naan");
+    }
 }

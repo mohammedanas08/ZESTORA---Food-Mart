@@ -22,22 +22,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Loads restaurants for the Bhatkal area, dev profile "bhatkal" only. Two data files, same format:
- * <ul>
- *   <li>{@code seed/bhatkal-restaurants.json}: real PLACES from OpenStreetMap (scripts/generate_bhatkal_seed.py) with SAMPLE menus.</li>
- *   <li>{@code seed/curated-restaurants.json}: hand-entered restaurants whose menus were transcribed from the restaurant's own menu.
- *       Fields that could not be verified are simply absent (null price = "ask the restaurant", null veg = unknown).</li>
- * </ul>
- * Idempotent: an owner email that already exists is skipped, so restarting never duplicates data.
+ * Loads the hand-entered restaurants in {@code seed/curated-restaurants.json} (dev profile "bhatkal" only): Layali Arabia Restaurant and
+ * Udupi Deluxe, each with the menu supplied for it. Fields that could not be verified are simply absent (null price = "ask the restaurant",
+ * null veg = unknown).
+ * <p>Idempotent: an owner email that already exists is skipped (and a restaurant with an empty menu gets its menu filled in).
  * Every owner logs in with DEMO_PASSWORD from backend/.env.
  */
 @Component
 @Order(2)
 public class BhatkalDemoSeeder implements CommandLineRunner {
     private static final Logger log = LoggerFactory.getLogger(BhatkalDemoSeeder.class);
-    private static final List<String> FILES = List.of("seed/bhatkal-restaurants.json", "seed/curated-restaurants.json");
-    private static final List<String> SAMPLE_SLUGS =
-            List.of("spice-garden", "coastal-bites", "biryani-house", "pizza-street", "burger-hub", "cafe-aroma");
+    private static final List<String> FILES = List.of("seed/curated-restaurants.json");
 
     private final AppProperties props;
     private final ObjectMapper json;
@@ -63,24 +58,23 @@ public class BhatkalDemoSeeder implements CommandLineRunner {
         String demoPassword = DemoPasswords.require(props);
 
         int added = 0;
+        int filled = 0;
         for (String file : FILES) {
             JsonNode root;
             try (InputStream in = new ClassPathResource(file).getInputStream()) {
                 root = json.readTree(in);
             }
             for (JsonNode r : root.get("restaurants")) {
-                if (users.existsByEmailIgnoreCase(r.get("ownerEmail").asText())) continue;
+                if (users.existsByEmailIgnoreCase(r.get("ownerEmail").asText())) {
+                    if (fillEmptyMenu(r)) filled++;       // restaurant exists but still has no menu: load it now
+                    continue;
+                }
                 seedRestaurant(r, demoPassword);
                 added++;
             }
         }
 
-        if (props.dev().hideSampleRestaurants()) {
-            for (String slug : SAMPLE_SLUGS) {
-                restaurants.findAll().stream().filter(x -> slug.equals(x.getSlug())).forEach(x -> x.setActive(false));
-            }
-        }
-        log.warn("Bhatkal demo data: {} restaurant(s) added (see backend/DEMO_ACCOUNTS.md for logins)", added);
+        log.warn("Bhatkal demo data: {} restaurant(s) added, {} menu(s) filled in (see backend/DEMO_ACCOUNTS.md for logins)", added, filled);
     }
 
     private void seedRestaurant(JsonNode r, String demoPassword) {
@@ -109,8 +103,25 @@ public class BhatkalDemoSeeder implements CommandLineRunner {
         }
         // Rating, review count and cost-for-two stay at "unknown": there is no real data for them.
         restaurants.save(rest);
+        addMenu(rest, r.get("menu"));
+    }
 
-        for (JsonNode m : r.get("menu")) {
+    /**
+     * A restaurant that was seeded earlier without a menu (nothing verified at the time) gets its menu and details once the data file has them.
+     * A restaurant that already has dishes is never touched, so edits made by its owner are safe.
+     */
+    private boolean fillEmptyMenu(JsonNode r) {
+        if (r.get("menu").isEmpty()) return false;
+        return restaurants.findBySlug(r.get("slug").asText()).filter(rest -> products.countByRestaurantId(rest.getId()) == 0).map(rest -> {
+            rest.setDescription(text(r, "description"));
+            rest.setCuisines(String.join(", ", strings(r.get("cuisines"))));
+            addMenu(rest, r.get("menu"));
+            return true;
+        }).orElse(false);
+    }
+
+    private void addMenu(Restaurant rest, JsonNode menu) {
+        for (JsonNode m : menu) {
             Product p = new Product();
             p.setRestaurantId(rest.getId());
             p.setName(m.get("name").asText());

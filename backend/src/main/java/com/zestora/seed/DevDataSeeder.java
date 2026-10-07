@@ -58,7 +58,6 @@ public class DevDataSeeder implements CommandLineRunner {
 
         user("Anas Ahmed", "customer@zestora.com", "+91 98765 43210", demoPassword, Role.CUSTOMER);
         user("Zestora Admin", "admin@zestora.com", "+91 90000 00001", demoPassword, Role.SUPER_ADMIN);
-        User owner = user("Tariq - Spice Garden", "spicegarden@zestora.local", "+91 98800 11223", demoPassword, Role.RESTAURANT_OWNER);
         User rider = user("Rahul Naik", "rahul.rider@zestora.local", "+91 94488 55667", demoPassword, Role.DELIVERY_PARTNER);
 
         DeliveryPartner dp = new DeliveryPartner();
@@ -68,6 +67,25 @@ public class DevDataSeeder implements CommandLineRunner {
         dp.setOnline(true);
         riders.save(dp);
 
+        if (props.dev().seedSampleRestaurants()) seedSampleRestaurants(demoPassword);
+
+        grocery("Fresh Milk 1L", "Dairy", "62", 40);
+        grocery("Brown Eggs (6)", "Dairy", "58", 30);
+        grocery("Basmati Rice 1kg", "Staples", "110", 25);
+        grocery("Toor Dal 500g", "Staples", "85", 25);
+        grocery("Tomatoes 500g", "Vegetables", "30", 50);
+        grocery("Onions 1kg", "Vegetables", "45", 50);
+        grocery("Bananas (dozen)", "Fruits", "60", 35);
+        grocery("Bread Loaf", "Bakery", "40", 20);
+
+        coupon("ZEST50", "50% off up to ₹100", Coupon.Type.PERCENT, "50", "100", "299");
+        coupon("FREEDEL", "Free delivery", Coupon.Type.FREE_DELIVERY, "0", null, "199");
+        coupon("WELCOME100", "₹100 off on first big order", Coupon.Type.FLAT, "100", null, "399");
+    }
+
+    /** Made-up restaurants, kept only as fixtures for the automated tests (and the plain dev profile). */
+    private void seedSampleRestaurants(String demoPassword) {
+        User owner = user("Tariq - Spice Garden", "spicegarden@zestora.local", "+91 98800 11223", demoPassword, Role.RESTAURANT_OWNER);
         Restaurant spice = restaurant(owner.getId(), "Spice Garden", "North Indian, Biryani, Tandoor, Mughlai", "4.60", 25, 35, 149, 400, false,
                 "Authentic North Indian curries, aromatic biryanis and tandoor breads");
         Restaurant coastal = restaurant(null, "Coastal Bites", "Coastal Seafood, Mangalorean", "4.80", 20, 30, 199, 500, false, "Fresh catch, Mangalorean style");
@@ -87,19 +105,6 @@ public class DevDataSeeder implements CommandLineRunner {
         food(coastal, "Fish Curry Meals", "Meals", "260", false, "Mangalorean fish curry with rice");
         food(coastal, "Prawn Ghee Roast", "Starters", "340", false, "Spicy ghee roast");
         food(biryani, "Bhatkali Mutton Biryani", "Biryani", "380", false, "Traditional Bhatkali style");
-
-        grocery("Fresh Milk 1L", "Dairy", "62", 40);
-        grocery("Brown Eggs (6)", "Dairy", "58", 30);
-        grocery("Basmati Rice 1kg", "Staples", "110", 25);
-        grocery("Toor Dal 500g", "Staples", "85", 25);
-        grocery("Tomatoes 500g", "Vegetables", "30", 50);
-        grocery("Onions 1kg", "Vegetables", "45", 50);
-        grocery("Bananas (dozen)", "Fruits", "60", 35);
-        grocery("Bread Loaf", "Bakery", "40", 20);
-
-        coupon("ZEST50", "50% off up to ₹100", Coupon.Type.PERCENT, "50", "100", "299");
-        coupon("FREEDEL", "Free delivery", Coupon.Type.FREE_DELIVERY, "0", null, "199");
-        coupon("WELCOME100", "₹100 off on first big order", Coupon.Type.FLAT, "100", null, "399");
     }
 
     private User user(String name, String email, String phone, String password, Role role) {

@@ -5,6 +5,7 @@ import AdminPage from './pages/admin/AdminPage';
 import { LoginPage, RegisterPage } from './pages/auth/AuthPages';
 import { GroceryPage, HomePage, RestaurantPage } from './pages/customer/Browse';
 import { CartPage, CheckoutPage } from './pages/customer/CartAndCheckout';
+import { AboutPage, ContactPage } from './pages/customer/InfoPages';
 import { OrderDetailPage, OrdersPage, SupportPage } from './pages/customer/Orders';
 import PartnerMenuPage from './pages/partner/PartnerMenuPage';
 import { PartnerOrdersPage } from './pages/partner/PartnerPages';
@@ -22,6 +23,8 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/restaurants/:id" element={<RestaurantPage />} />
         <Route path="/grocery" element={<GroceryPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />

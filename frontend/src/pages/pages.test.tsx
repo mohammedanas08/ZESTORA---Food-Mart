@@ -1,4 +1,4 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -269,5 +269,49 @@ describe('menus with facts the restaurant did not publish', () => {
     const card = logo.closest('a')!;
     expect(card).toHaveTextContent('Bhatkal');
     expect(card).not.toHaveTextContent('min');
+  });
+});
+
+describe('pure veg restaurant with no menu loaded yet', () => {
+  const udupi = { ...restaurants[0], id: 21, name: 'Udupi Deluxe \u2013 Pure Veg Restaurant', slug: 'udupi', cuisines: ['Udupi', 'Pure Veg'], vegOnly: true,
+    city: '', imageUrl: '/restaurants/udupi-deluxe-storefront.webp', deliveryMin: 0, deliveryMax: 0, minOrder: 0, reviewCount: 0 };
+
+  it('shows the Pure Veg badge and storefront photo on the card, and no invented location or delivery info', async () => {
+    mockApi({ 'POST /auth/refresh': noSession, 'GET /restaurants?vegOnly=false': () => ({ data: [udupi, restaurants[0]] }) });
+    renderApp(<HomePage />);
+    const card = (await screen.findByText(/Udupi Deluxe/)).closest('a')!;
+    expect(card).toHaveTextContent('Pure Veg');
+    expect(within(card).getByRole('img')).toHaveAttribute('src', '/restaurants/udupi-deluxe-storefront.webp');
+    expect(card).not.toHaveTextContent('min');
+    expect(card).not.toHaveTextContent('Bhatkal');
+    // a restaurant that is not pure veg gets no badge
+    expect(screen.getByText('Spice Garden').closest('a')).not.toHaveTextContent('Pure Veg');
+  });
+
+  it('uses the Pure veg only filter and the search box through the API', async () => {
+    const calls: string[] = [];
+    mockApi({
+      'POST /auth/refresh': noSession,
+      'GET /restaurants?vegOnly=false': () => ({ data: [udupi, restaurants[0]] }),
+      'GET /restaurants?vegOnly=true': () => { calls.push('veg'); return { data: [udupi] }; },
+      'GET /restaurants?vegOnly=false&q=udupi%20deluxe': () => { calls.push('search'); return { data: [udupi] }; },
+    });
+    renderApp(<HomePage />);
+    await screen.findByText('Spice Garden');
+    await userEvent.click(screen.getByLabelText('Pure veg only'));
+    await waitFor(() => expect(screen.queryByText('Spice Garden')).not.toBeInTheDocument());
+    expect(screen.getByText(/Udupi Deluxe/)).toBeInTheDocument();
+    await userEvent.click(screen.getByLabelText('Pure veg only'));
+    await userEvent.type(screen.getByLabelText('Search'), 'udupi deluxe');
+    await waitFor(() => expect(calls).toContain('search'));
+    expect(calls).toContain('veg');
+  });
+
+  it('explains that the menu is not added yet instead of showing an empty page', async () => {
+    mockApi({ 'POST /auth/refresh': noSession, 'GET /restaurants/1': () => ({ data: { restaurant: udupi, items: [] } }) });
+    renderApp(<Routes><Route path="/restaurants/:id" element={<RestaurantPage />} /></Routes>, '/restaurants/1');
+    expect(await screen.findByText(/menu has not been added yet/)).toBeInTheDocument();
+    expect(screen.getByText('Pure Veg')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /^Add / })).not.toBeInTheDocument();
   });
 });

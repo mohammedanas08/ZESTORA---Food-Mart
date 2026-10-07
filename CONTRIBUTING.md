@@ -18,4 +18,4 @@ cd frontend && npm run typecheck && npm test && npm run build
 CI runs the same checks. Keep `PROGRESS.md` up to date after meaningful changes.
 
 ## Demo data
-`mvn spring-boot:run -Dspring-boot.run.profiles=dev,bhatkal` seeds real places from OpenStreetMap with **sample** menus. Do not scrape Google Maps; use the official Places API with your own key if you need more places.
+`mvn spring-boot:run -Dspring-boot.run.profiles=dev,bhatkal` seeds the two real restaurants in `seed/curated-restaurants.json`. Add restaurants only with data you were given (names and prices exactly as supplied; leave unknown fields empty). Do not scrape Google Maps; use the official Places API with your own key.

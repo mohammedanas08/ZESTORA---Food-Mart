@@ -22,4 +22,4 @@ Rebuild backend in Spring Boot · PostgreSQL local via Docker for now (hosted DB
 Run backend tests with `cd backend && mvn test` (Docker Desktop must be running); frontend tests with `cd frontend && npm test`.
 Local dev Postgres runs on port **5433** (`backend/docker-compose.yml`) because 5432 is often taken by a local install.
 
-Bhatkal demo restaurants: `mvn spring-boot:run -Dspring-boot.run.profiles=dev,bhatkal` (places from OpenStreetMap, SAMPLE menus; logins in `backend/DEMO_ACCOUNTS.md`). Do not scrape Google Maps.
+Demo restaurants: `mvn spring-boot:run -Dspring-boot.run.profiles=dev,bhatkal` seeds ONLY Layali Arabia Restaurant, Udupi Deluxe and The Royal Olives Restaurant (`seed/curated-restaurants.json`; logins in `backend/DEMO_ACCOUNTS.md`). Never invent menu data or facts; leave unknown fields empty. Do not scrape Google Maps.

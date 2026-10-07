@@ -48,10 +48,10 @@ public record AppProperties(
 
     public record Dev(@DefaultValue("false") boolean seedDemoData,
                       @DefaultValue("false") boolean allowPaymentSimulation,
-                      /** Adds the real (OpenStreetMap) Bhatkal-area restaurants with sample menus. Dev only; off in tests. */
+                      /** Adds the hand-entered restaurants from seed/curated-restaurants.json. Dev only; off in tests. */
                       @DefaultValue("false") boolean seedBhatkal,
-                      /** Hides the six made-up sample restaurants so only the Bhatkal-area ones show. */
-                      @DefaultValue("false") boolean hideSampleRestaurants,
+                      /** The six made-up sample restaurants (used as fixtures by the tests). Off in the bhatkal profile. */
+                      @DefaultValue("true") boolean seedSampleRestaurants,
                       /** Password given to every seeded demo account. Comes from DEMO_PASSWORD; never hard-coded. */
                       String demoPassword) {}
 }

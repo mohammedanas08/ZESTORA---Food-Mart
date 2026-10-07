@@ -1,5 +1,5 @@
 {
-  "_source": "Menu transcribed by hand from the restaurant's own printed menu photos supplied by the project owner (2026-10-07). Prices are in INR exactly as printed. Fields the menu does not state are omitted (null price = ask the restaurant, null veg = unknown). Address, opening hours, rating, contact and delivery time were not available and are NOT filled in.",
+  "_source": "Menu transcribed by hand from the restaurant's own printed menu photos supplied by the project owner (2026-10-07). Prices are in INR exactly as printed. Fields the menu does not state are omitted (null price = ask the restaurant, null veg = unknown). Address, opening hours, rating, contact and delivery time were not available and are NOT filled in. Udupi Deluxe: the name, pure-veg status and storefront photo were supplied by the project owner; the menu (names and prices exactly as typed by the owner from the restaurant's menu, duplicates merged) was supplied as text. Address, town, phone, opening hours, rating and delivery info could not be verified and are left empty. Butter Scotch scoop has two different printed prices (100 / 110) so no price is stated. The Royal Olives Restaurant: the menu (names, prices, descriptions and 'Vegetarian' labels exactly as supplied by the project owner, unmarked items are non-veg by name or section) and the storefront photo were supplied by the owner. Address, phone, hours, rating and delivery info could not be verified and are left empty; the town comes from the menu wording ('Bhatkal Special').",
   "restaurants": [
     {
       "name": "Layali Arabia Restaurant",
@@ -1051,6 +1051,4003 @@
           "price": 250,
           "veg": null,
           "description": null,
+          "variants": [],
+          "addons": []
+        }
+      ]
+    },
+    {
+      "name": "Udupi Deluxe – Pure Veg Restaurant",
+      "slug": "udupi-deluxe-pure-veg-restaurant",
+      "city": "",
+      "cuisines": [
+        "South Indian",
+        "North Indian",
+        "Chinese",
+        "Ice Cream & Juices"
+      ],
+      "vegOnly": true,
+      "imageUrl": "/restaurants/udupi-deluxe-storefront.webp",
+      "minOrder": 0,
+      "deliveryMinutes": [
+        0,
+        0
+      ],
+      "ownerName": "Udupi Deluxe (demo owner)",
+      "ownerEmail": "udupi-deluxe-pure-veg-restaurant@zestora.local",
+      "menu": [
+        {
+          "name": "Idly (1)",
+          "category": "South Indian Breakfast",
+          "price": 25,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Idly (2)",
+          "category": "South Indian Breakfast",
+          "price": 35,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Idly (3)",
+          "category": "South Indian Breakfast",
+          "price": 60,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Rava Idly (1)",
+          "category": "South Indian Breakfast",
+          "price": 40,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Vada (1)",
+          "category": "South Indian Breakfast",
+          "price": 40,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Idly (1) Vada (1)",
+          "category": "South Indian Breakfast",
+          "price": 60,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Idly (2) Vada (1)",
+          "category": "South Indian Breakfast",
+          "price": 70,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Khara Bath",
+          "category": "Breakfast",
+          "price": 40,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kesari Bath",
+          "category": "Breakfast",
+          "price": 40,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chow Chow Bath",
+          "category": "Breakfast",
+          "price": 80,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Pulav",
+          "category": "Breakfast",
+          "price": 70,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Poori (3)",
+          "category": "Breakfast",
+          "price": 80,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Bajji / Pakoda / Bonda",
+          "category": "Breakfast",
+          "price": 50,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Bun's (1 Plate)",
+          "category": "Breakfast",
+          "price": 60,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Curd Vada",
+          "category": "Breakfast",
+          "price": 60,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Plain Dosa",
+          "category": "Dosa Varieties",
+          "price": 60,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Masala Dosa",
+          "category": "Dosa Varieties",
+          "price": 70,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Set Dosa",
+          "category": "Dosa Varieties",
+          "price": 70,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Palak Plain Dosa",
+          "category": "Dosa Varieties",
+          "price": 70,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Palak Masala Dosa",
+          "category": "Dosa Varieties",
+          "price": 80,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Onion Uttappa",
+          "category": "Dosa Varieties",
+          "price": 90,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Uttappa",
+          "category": "Dosa Varieties",
+          "price": 110,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Rava Dosa",
+          "category": "Dosa Varieties",
+          "price": 90,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Rava Masala Dosa",
+          "category": "Dosa Varieties",
+          "price": 100,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Rava Onion Dosa",
+          "category": "Dosa Varieties",
+          "price": 100,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Rava Onion Masala Dosa",
+          "category": "Dosa Varieties",
+          "price": 110,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Open Dosa",
+          "category": "Dosa Varieties",
+          "price": 90,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paper Plain Dosa",
+          "category": "Dosa Varieties",
+          "price": 100,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paper Masala Dosa",
+          "category": "Dosa Varieties",
+          "price": 110,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Vanilla",
+          "category": "Ice Cream Scoops",
+          "price": 100,
+          "veg": true,
+          "description": "Two scoops. Available 8:00 am to 10:00 pm.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Strawberry",
+          "category": "Ice Cream Scoops",
+          "price": 100,
+          "veg": true,
+          "description": "Two scoops. Available 8:00 am to 10:00 pm.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chocolate",
+          "category": "Ice Cream Scoops",
+          "price": 100,
+          "veg": true,
+          "description": "Two scoops. Available 8:00 am to 10:00 pm.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Pista",
+          "category": "Ice Cream Scoops",
+          "price": 100,
+          "veg": true,
+          "description": "Two scoops. Available 8:00 am to 10:00 pm.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Butter Scotch",
+          "category": "Ice Cream Scoops",
+          "price": null,
+          "veg": true,
+          "description": "Two scoops. Available 8:00 am to 10:00 pm. Price differs between the two printed lists (100 / 110): ask the restaurant.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mango",
+          "category": "Ice Cream Scoops",
+          "price": 110,
+          "veg": true,
+          "description": "Two scoops. Available 8:00 am to 10:00 pm.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Tuti Fruity",
+          "category": "Ice Cream Scoops",
+          "price": 110,
+          "veg": true,
+          "description": "Two scoops. Available 8:00 am to 10:00 pm.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Fig & Honey",
+          "category": "Ice Cream Scoops",
+          "price": 110,
+          "veg": true,
+          "description": "Two scoops. Available 8:00 am to 10:00 pm.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Black Current",
+          "category": "Ice Cream Scoops",
+          "price": 110,
+          "veg": true,
+          "description": "Two scoops. Available 8:00 am to 10:00 pm.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Gud Bud",
+          "category": "Spl. Ice Cream",
+          "price": 170,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Vanilla Nut Sundae",
+          "category": "Spl. Ice Cream",
+          "price": 160,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chocolate Sundae",
+          "category": "Spl. Ice Cream",
+          "price": 170,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Hot Chocolate Fudge",
+          "category": "Spl. Ice Cream",
+          "price": 170,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Honey Moon Spl.",
+          "category": "Spl. Ice Cream",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Wedding Spl.",
+          "category": "Spl. Ice Cream",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Golden King",
+          "category": "Spl. Ice Cream",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Raja Rani",
+          "category": "Spl. Ice Cream",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Tripple Sundae",
+          "category": "Spl. Ice Cream",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Banana Split",
+          "category": "Spl. Ice Cream",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "My Darling",
+          "category": "Spl. Ice Cream",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Titanic Spl.",
+          "category": "Spl. Ice Cream",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mango Queen",
+          "category": "Spl. Ice Cream",
+          "price": 190,
+          "veg": true,
+          "description": "Seasonal",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Vanilla Soda",
+          "category": "Ice Cream Soda",
+          "price": 100,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Strawberry Soda",
+          "category": "Ice Cream Soda",
+          "price": 100,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chocolate Soda",
+          "category": "Ice Cream Soda",
+          "price": 100,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Royal Falooda",
+          "category": "Falooda",
+          "price": 150,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kesar Falooda",
+          "category": "Falooda",
+          "price": 150,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Spl. Falooda",
+          "category": "Falooda",
+          "price": 170,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mineral Water",
+          "category": "Water",
+          "price": 20,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Jeera Rice/Ghee Rice",
+          "category": "Chinese Rice Specialties",
+          "price": 170,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Fried Rice",
+          "category": "Chinese Rice Specialties",
+          "price": 170,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Fried Rice",
+          "category": "Chinese Rice Specialties",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Schezwan Fried Rice",
+          "category": "Chinese Rice Specialties",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Singapore Fried Rice",
+          "category": "Chinese Rice Specialties",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Ginger Fried Rice",
+          "category": "Chinese Rice Specialties",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mushroom Fried Rice",
+          "category": "Chinese Rice Specialties",
+          "price": 195,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Garlic Chilly Fried Rice",
+          "category": "Chinese Rice Specialties",
+          "price": 195,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Schezwan Rice",
+          "category": "Chinese Rice Specialties",
+          "price": 210,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Babycorn Schezwan Rice",
+          "category": "Chinese Rice Specialties",
+          "price": 210,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mushroom Schezwan Rice",
+          "category": "Chinese Rice Specialties",
+          "price": 210,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mixed Fried Rice",
+          "category": "Chinese Rice Specialties",
+          "price": 210,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Peaking Fried Rice",
+          "category": "Chinese Rice Specialties",
+          "price": 210,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Hakka Noodles",
+          "category": "Chinese Noodles",
+          "price": 170,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Schezwan Noodles",
+          "category": "Chinese Noodles",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Schezwan Noodles",
+          "category": "Chinese Noodles",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mushroom Schezwan Noodles",
+          "category": "Chinese Noodles",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Noodles",
+          "category": "Chinese Noodles",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Garlic Chilly Noodles",
+          "category": "Chinese Noodles",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mushroom Noodles",
+          "category": "Chinese Noodles",
+          "price": 210,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Singapore Noodles",
+          "category": "Chinese Noodles",
+          "price": 210,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mixed Noodles",
+          "category": "Chinese Noodles",
+          "price": 210,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "American Chopsuey",
+          "category": "Chinese Noodles",
+          "price": 210,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chinese Chopsuey",
+          "category": "Chinese Noodles",
+          "price": 210,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Crispy Noodles",
+          "category": "Chinese Noodles",
+          "price": 210,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Roti",
+          "category": "Tandoori Items",
+          "price": 40,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Butter Roti",
+          "category": "Tandoori Items",
+          "price": 50,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Pudina / Methi Roti",
+          "category": "Tandoori Items",
+          "price": 55,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Naan",
+          "category": "Tandoori Items",
+          "price": 65,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Butter Naan",
+          "category": "Tandoori Items",
+          "price": 75,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Garlic Naan",
+          "category": "Tandoori Items",
+          "price": 90,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kulcha",
+          "category": "Tandoori Items",
+          "price": 90,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Butter Kulcha",
+          "category": "Tandoori Items",
+          "price": 45,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Lachha Paratha",
+          "category": "Tandoori Items",
+          "price": 55,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Butter Paratha",
+          "category": "Tandoori Items",
+          "price": 60,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Jamoon",
+          "category": "Sweets",
+          "price": 25,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Dry Jamoon",
+          "category": "Sweets",
+          "price": 30,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Carrot Halwa",
+          "category": "Sweets",
+          "price": 80,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Jamoon With Ice Cream",
+          "category": "Sweets",
+          "price": 70,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Butter Masala",
+          "category": "Paneer Special",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Mutter",
+          "category": "Paneer Special",
+          "price": 200,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Kurma",
+          "category": "Paneer Special",
+          "price": 200,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Shahi Kurma",
+          "category": "Paneer Special",
+          "price": 200,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Pepper Masala",
+          "category": "Paneer Special",
+          "price": 210,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Tikka Masala",
+          "category": "Paneer Special",
+          "price": 220,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Burji",
+          "category": "Paneer Special",
+          "price": 230,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Kolhapuri",
+          "category": "Paneer Special",
+          "price": 230,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Plain Palak",
+          "category": "Palak Preparation",
+          "price": 160,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Aloo Palak",
+          "category": "Palak Preparation",
+          "price": 170,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Palak Gobi",
+          "category": "Palak Preparation",
+          "price": 170,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Palak Paneer",
+          "category": "Palak Preparation",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Corn Palak",
+          "category": "Palak Preparation",
+          "price": 200,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kaju Palak Paneer",
+          "category": "Palak Preparation",
+          "price": 220,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Kadai",
+          "category": "Kadai Special",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kadai Gobi Mutter",
+          "category": "Kadai Special",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kadai Aloo Mutter",
+          "category": "Kadai Special",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kadai Paneer",
+          "category": "Kadai Special",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kadai Mushroom",
+          "category": "Kadai Special",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Kofta",
+          "category": "Kofta Special",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Malai Kofta",
+          "category": "Kofta Special",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Kofta",
+          "category": "Kofta Special",
+          "price": 200,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kadai Kofta",
+          "category": "Kofta Special",
+          "price": 200,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Dum Aloo Hyderabadi",
+          "category": "Kofta Special",
+          "price": 200,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Aloo Mutter",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 160,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Aloo Jeera Dry",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 160,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Aloo Gobi Masala",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 160,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Aloo Tikka Masala",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 170,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Bendi Masala",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 160,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Babycorn Masala",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 170,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Babycorn Green Masala",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 180,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Babycorn Mushroom Masala",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Babycorn Paneer But. Masa",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 210,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Channa Masala",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 160,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Capsicum Masala",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 160,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Corn Capsicum Masala",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 180,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Green Peas Masala",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 160,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kaju Paneer",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 220,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kaju Masala",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 220,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kaju Mutter",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 220,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Malai Mutter",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Methi Malai Mutter",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mushroom Tikka Masala",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mushroom Masala",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Navarathan Kurma",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Peas Gobi",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 160,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Kurma",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 170,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Curry",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 170,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Jai Puri",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 180,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Shahi Kurma",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Do Pyaza",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Pepper Masala",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Kheema",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Makhanwala",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Hydrabadi",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Kolhapuri",
+          "category": "North Indian Cuisine Ala-Carte",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Tikka (4 Pc)",
+          "category": "Tandoori Starter",
+          "price": 160,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Tikka (6 Pc)",
+          "category": "Tandoori Starter",
+          "price": 240,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mushroom Tikka",
+          "category": "Tandoori Starter",
+          "price": 220,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Hara Bara Kabab",
+          "category": "Tandoori Starter",
+          "price": 220,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Babycorn Tikka",
+          "category": "Tandoori Starter",
+          "price": 220,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Gobi Tikka / Aloo Tikka",
+          "category": "Tandoori Starter",
+          "price": 220,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Tomato Soup",
+          "category": "Chinese Soups",
+          "price": 70,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Clear Soup",
+          "category": "Chinese Soups",
+          "price": 80,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Sweet Corn Soup",
+          "category": "Chinese Soups",
+          "price": 85,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Sweet Corn Veg Soup",
+          "category": "Chinese Soups",
+          "price": 85,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Hot & Sour Soup",
+          "category": "Chinese Soups",
+          "price": 90,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Manchow Soup",
+          "category": "Chinese Soups",
+          "price": 90,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Spinach Soup",
+          "category": "Chinese Soups",
+          "price": 90,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Pepper Lemon Soup",
+          "category": "Chinese Soups",
+          "price": 90,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mushroom Soup",
+          "category": "Chinese Soups",
+          "price": 100,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Udupi Deluxe",
+          "category": "Chinese Starters",
+          "price": 140,
+          "veg": true,
+          "description": "Spl. Idly chilly dry",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Aloo Manchurian",
+          "category": "Chinese Starters",
+          "price": 140,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Aloo 65",
+          "category": "Chinese Starters",
+          "price": 140,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Aloo Pepper Dry",
+          "category": "Chinese Starters",
+          "price": 140,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Ball Manchurian Dry",
+          "category": "Chinese Starters",
+          "price": 150,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Ball 65",
+          "category": "Chinese Starters",
+          "price": 160,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Gobi Manchurian",
+          "category": "Chinese Starters",
+          "price": 120,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Gobi 65",
+          "category": "Chinese Starters",
+          "price": 130,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Gobi Chilly Dry",
+          "category": "Chinese Starters",
+          "price": 130,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Gobi Pepper Dry",
+          "category": "Chinese Starters",
+          "price": 130,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Babycorn Manchurian",
+          "category": "Chinese Starters",
+          "price": 150,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Babycorn 65",
+          "category": "Chinese Starters",
+          "price": 160,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Babycorn Chilly Dry",
+          "category": "Chinese Starters",
+          "price": 170,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Babycorn Pepper Dry",
+          "category": "Chinese Starters",
+          "price": 170,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Babycorn Crispy",
+          "category": "Chinese Starters",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Babycorn Mushroom Crispy",
+          "category": "Chinese Starters",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Manchurian",
+          "category": "Chinese Starters",
+          "price": 180,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer 65",
+          "category": "Chinese Starters",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Chilly Dry",
+          "category": "Chinese Starters",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Pepper Dry",
+          "category": "Chinese Starters",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Crispy",
+          "category": "Chinese Starters",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Coriander Chilly",
+          "category": "Chinese Starters",
+          "price": 210,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Satay",
+          "category": "Chinese Starters",
+          "price": 210,
+          "veg": true,
+          "description": "With peanut sauce",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mushroom Manchurian",
+          "category": "Chinese Starters",
+          "price": 160,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mushroom 65",
+          "category": "Chinese Starters",
+          "price": 170,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mushroom Chilly Dry",
+          "category": "Chinese Starters",
+          "price": 170,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mushroom Pepper Dry",
+          "category": "Chinese Starters",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mushroom Crispy",
+          "category": "Chinese Starters",
+          "price": 190,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Finger Chips",
+          "category": "Chinese Starters",
+          "price": 140,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Spring Roll",
+          "category": "Chinese Starters",
+          "price": 150,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mushroom Spring Roll",
+          "category": "Chinese Starters",
+          "price": 175,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Shangai Spring Roll",
+          "category": "Chinese Starters",
+          "price": 175,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Sizzler",
+          "category": "Chinese Starters",
+          "price": 270,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chinese Bhel",
+          "category": "Chinese Starters",
+          "price": 170,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Moosambi",
+          "category": "Fresh Fruit Juice",
+          "price": 100,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Orange",
+          "category": "Fresh Fruit Juice",
+          "price": 100,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Pineapple",
+          "category": "Fresh Fruit Juice",
+          "price": 100,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Grape",
+          "category": "Fresh Fruit Juice",
+          "price": 100,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Apple",
+          "category": "Fresh Fruit Juice",
+          "price": 110,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Water Melon",
+          "category": "Fresh Fruit Juice",
+          "price": 100,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Musk Melon",
+          "category": "Fresh Fruit Juice",
+          "price": 100,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Cocktail",
+          "category": "Fresh Fruit Juice",
+          "price": 110,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mango Juice",
+          "category": "Fresh Fruit Juice",
+          "price": 100,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Carrot Juice",
+          "category": "Fresh Fruit Juice",
+          "price": 110,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Dalam",
+          "category": "Fresh Fruit Juice",
+          "price": 120,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Fresh Lime Juice",
+          "category": "Fresh Fruit Juice",
+          "price": 60,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Fresh Lime Soda",
+          "category": "Fresh Fruit Juice",
+          "price": 60,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Ginger Lime Juice",
+          "category": "Fresh Fruit Juice",
+          "price": 60,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mint Lime Juice",
+          "category": "Fresh Fruit Juice",
+          "price": 60,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Banana Milkshake",
+          "category": "Milk Shakes",
+          "price": 110,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": [
+            {
+              "name": "Add ice cream",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "name": "Chikoo Milkshake",
+          "category": "Milk Shakes",
+          "price": 110,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": [
+            {
+              "name": "Add ice cream",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "name": "Venilla Milkshake",
+          "category": "Milk Shakes",
+          "price": 110,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": [
+            {
+              "name": "Add ice cream",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "name": "Strawberry Milkshake",
+          "category": "Milk Shakes",
+          "price": 110,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": [
+            {
+              "name": "Add ice cream",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "name": "Pista Milkshake",
+          "category": "Milk Shakes",
+          "price": 110,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": [
+            {
+              "name": "Add ice cream",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "name": "Chocolate Milkshake",
+          "category": "Milk Shakes",
+          "price": 110,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": [
+            {
+              "name": "Add ice cream",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "name": "Cold Badam Milk",
+          "category": "Milk Shakes",
+          "price": 110,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": [
+            {
+              "name": "Add ice cream",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "name": "Cold Coffee",
+          "category": "Milk Shakes",
+          "price": 110,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": [
+            {
+              "name": "Add ice cream",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "name": "Butter Scotch Milkshake",
+          "category": "Milk Shakes",
+          "price": 120,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": [
+            {
+              "name": "Add ice cream",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "name": "Apple Milkshake",
+          "category": "Milk Shakes",
+          "price": 120,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": [
+            {
+              "name": "Add ice cream",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "name": "Chocolate Milkshake With Nuts",
+          "category": "Milk Shakes",
+          "price": 130,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": [
+            {
+              "name": "Add ice cream",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "name": "Fresh Strawberry Milkshake",
+          "category": "Milk Shakes",
+          "price": 130,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": [
+            {
+              "name": "Add ice cream",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "name": "Fresh Mango Milkshake",
+          "category": "Milk Shakes",
+          "price": 130,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": [
+            {
+              "name": "Add ice cream",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "name": "Rose Milkshake",
+          "category": "Milk Shakes",
+          "price": 110,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": [
+            {
+              "name": "Add ice cream",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "name": "Butter Fruit Milkshake",
+          "category": "Milk Shakes",
+          "price": 120,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": [
+            {
+              "name": "Add ice cream",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "name": "Seethapal Milkshake",
+          "category": "Milk Shakes",
+          "price": 130,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": [
+            {
+              "name": "Add ice cream",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "name": "Black Current Milkshake",
+          "category": "Milk Shakes",
+          "price": 120,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": [
+            {
+              "name": "Add ice cream",
+              "price": 20
+            }
+          ]
+        },
+        {
+          "name": "Cold Coffee With Ice Cream",
+          "category": "Milk Shakes",
+          "price": 120,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Musk Melon Milkshake",
+          "category": "Milk Shakes",
+          "price": 120,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": [
+            {
+              "name": "Add ice cream",
+              "price": 20
+            }
+          ]
+        }
+      ],
+      "description": "Pure vegetarian restaurant. South Indian breakfast and dosas, North Indian and Chinese dishes, ice creams, juices and milk shakes."
+    },
+    {
+      "name": "The Royal Olives Restaurant",
+      "slug": "the-royal-olives-restaurant",
+      "city": "Bhatkal",
+      "cuisines": [
+        "North Indian",
+        "Chinese",
+        "Seafood",
+        "Biryani"
+      ],
+      "vegOnly": false,
+      "description": "Tandoori and North Indian dishes, Chinese starters, seafood, biryani, desserts, juices, milkshakes and mocktails.",
+      "imageUrl": "/restaurants/the-royal-olives-exterior.webp",
+      "minOrder": 0,
+      "deliveryMinutes": [
+        0,
+        0
+      ],
+      "ownerName": "The Royal Olives Restaurant (demo owner)",
+      "ownerEmail": "the-royal-olives-restaurant@zestora.local",
+      "menu": [
+        {
+          "name": "Chicken Manchow Soup",
+          "category": "Non Veg Soups",
+          "price": 156,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Hot And Sour Chicken Soup",
+          "category": "Non Veg Soups",
+          "price": 156,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Crab Meat Soup",
+          "category": "Non Veg Soups",
+          "price": 195,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Green Salad",
+          "category": "Salads",
+          "price": 130,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Carrot Cucumber Salad",
+          "category": "Salads",
+          "price": 130,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Tandoori Chicken Salad",
+          "category": "Salads",
+          "price": 195,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Tandoori Chicken Salad + Butter Naan",
+          "category": "Salads",
+          "price": 247,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Tandoori Chicken Salad + Butter Roti",
+          "category": "Salads",
+          "price": 241,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Al Faham Chicken",
+          "category": "Tandoori Starters",
+          "price": 324,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Tandoori Chicken",
+          "category": "Tandoori Starters",
+          "price": 324,
+          "veg": false,
+          "description": "Our Tandoori Chicken is marinated overnight in yogurt, ginger-garlic & traditional tandoor spices, then grilled for a smoky char. Juicy, mildly spicy and served with mint chutney & salad. Contains dairy; may contain traces of nuts. Prepared fresh on order.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Afghani Chicken",
+          "category": "Tandoori Starters",
+          "price": 351,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Jojo Kebab",
+          "category": "Tandoori Starters",
+          "price": 273,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Afghani Chicken Tikka",
+          "category": "Tandoori Starters",
+          "price": 247,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Achari Chicken Tikka",
+          "category": "Tandoori Starters",
+          "price": 215,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Malai Chicken Tikka",
+          "category": "Tandoori Starters",
+          "price": 247,
+          "veg": false,
+          "description": "Crafted the Royal Olives way, our Malai Chicken Tikka features premium chicken marinated in fresh cream, cashew paste, mild spices & a hint of white pepper, then gently char-grilled for a buttery melt-in-mouth finish. Subtle, elegant, luxurious. Served with mint chutney. Contains dairy & nuts. Prepared fresh on order.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Hariyali Chicken Tikka",
+          "category": "Tandoori Starters",
+          "price": 208,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Alishan Chicken Tikka",
+          "category": "Tandoori Starters",
+          "price": 247,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Aslam Chicken Tikka",
+          "category": "Tandoori Starters",
+          "price": 241,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Chilli Milli Kabab",
+          "category": "Tandoori Starters",
+          "price": 234,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Banjara Kabab",
+          "category": "Tandoori Starters",
+          "price": 208,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Kastoori Kabab",
+          "category": "Tandoori Starters",
+          "price": 208,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Makhmali Kabab",
+          "category": "Tandoori Starters",
+          "price": 208,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Seekh Kabab",
+          "category": "Tandoori Starters",
+          "price": 208,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Cheese Garlic Kaba",
+          "category": "Tandoori Starters",
+          "price": 247,
+          "veg": false,
+          "description": "Our Chicken Cheese Garlic Kabab is juicy minced chicken blended with creamy cheese, fresh garlic & hand-ground spices, charcoal-grilled to a golden, gooey inside and smoky outside. Rich, melty, irresistibly garlicky. Served with mint dip. Contains dairy & gluten. Prepared fresh on order.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Olives Special Chicken Kabab",
+          "category": "Tandoori Starters",
+          "price": 273,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Pepper Roast",
+          "category": "South Indian Starters",
+          "price": 364,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Ghee Roast",
+          "category": "South Indian Starters",
+          "price": 389,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Butter Chilli Fry Chicken",
+          "category": "South Indian Starters",
+          "price": 389,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Kebab",
+          "category": "South Indian Starters",
+          "price": 364,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Varval",
+          "category": "South Indian Starters",
+          "price": 364,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Chilli Dry",
+          "category": "Veg Starters",
+          "price": 312,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Manchurian",
+          "category": "Veg Starters",
+          "price": 312,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Gobi Manchurian",
+          "category": "Veg Starters",
+          "price": 259,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Gobi Chilli Dry",
+          "category": "Veg Starters",
+          "price": 234,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Gobi 65",
+          "category": "Veg Starters",
+          "price": 234,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mushroom Manchurian",
+          "category": "Veg Starters",
+          "price": 234,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mushroom Chilli",
+          "category": "Veg Starters",
+          "price": 273,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Baby Corn Manchurian",
+          "category": "Veg Starters",
+          "price": 286,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Baby Corn Chilli",
+          "category": "Veg Starters",
+          "price": 286,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Manchurian",
+          "category": "Veg Starters",
+          "price": 247,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Fried Crispy",
+          "category": "Veg Starters",
+          "price": 234,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Tikka",
+          "category": "Veg Starters",
+          "price": 364,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Hariyali Tikka",
+          "category": "Veg Starters",
+          "price": 364,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Malai Tikka",
+          "category": "Veg Starters",
+          "price": 364,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mushroom Tikka",
+          "category": "Veg Starters",
+          "price": 312,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mutton Pepper Roast",
+          "category": "Non Veg Starters",
+          "price": 519,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mutton Ghee Roast",
+          "category": "Non Veg Starters",
+          "price": 519,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mutton Varval",
+          "category": "Non Veg Starters",
+          "price": 519,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mutton Oyster",
+          "category": "Non Veg Starters",
+          "price": 519,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Prawns Pepper Garlic",
+          "category": "Non Veg Starters",
+          "price": 519,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Prawns Oyster",
+          "category": "Non Veg Starters",
+          "price": 519,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Prawns Butter Garlic",
+          "category": "Non Veg Starters",
+          "price": 519,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Prawns Lemon Chilli Garlic",
+          "category": "Non Veg Starters",
+          "price": 519,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Prawns Ghee Roast",
+          "category": "Non Veg Starters",
+          "price": 519,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Prawns Masala Fry",
+          "category": "Non Veg Starters",
+          "price": 519,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Prawns Tawa Fry",
+          "category": "Non Veg Starters",
+          "price": 519,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Prawns Rava Fry",
+          "category": "Non Veg Starters",
+          "price": 519,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Tandoori Prawns",
+          "category": "Non Veg Starters",
+          "price": 519,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Squid Ghee Roast",
+          "category": "Non Veg Starters",
+          "price": 481,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Squid Masala Fry",
+          "category": "Non Veg Starters",
+          "price": 481,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Squid Pepper Garlic",
+          "category": "Non Veg Starters",
+          "price": 488,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Squid Butter Garlic",
+          "category": "Non Veg Starters",
+          "price": 481,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Crab Ghee Roast",
+          "category": "Non Veg Starters",
+          "price": 481,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Crab Masala Fry",
+          "category": "Non Veg Starters",
+          "price": 481,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mutton Butter Chilli Fry",
+          "category": "Non Veg Starters",
+          "price": 519,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mutton Barra Kabab",
+          "category": "Non Veg Starters",
+          "price": 909,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Oyster Chicken",
+          "category": "Chinese Starters",
+          "price": 389,
+          "veg": false,
+          "description": "Our Oyster Chicken is a hot wok-tossed stir-fry of tender chicken glazed in savory oyster sauce with garlic, crunchy veggies & a hint of pepper. Bold, glossy, umami-packed—fair warning: it’s addictive. Served with rice or noodles. Contains soy & gluten. Prepared fresh on order.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Thaibu Chicken",
+          "category": "Chinese Starters",
+          "price": 389,
+          "veg": false,
+          "description": "Our Thaibu Chicken is succulent chicken slow-cooked in a fiery, aromatic coastal masala with curry leaves, roasted spices & a splash of tangy heat that hits all the right cravings. Juicy, bold, dangerously addictive—you’ve been warned. Best with neer dosa or rice. Contains dairy; may contain nuts. Prepared fresh on order.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Lemon Chicken Garlic",
+          "category": "Chinese Starters",
+          "price": 389,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Hunan Chicken",
+          "category": "Chinese Starters",
+          "price": 389,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Spinach Chicken",
+          "category": "Chinese Starters",
+          "price": 389,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken 65",
+          "category": "Chinese Starters",
+          "price": 364,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chilli Chicken",
+          "category": "Chinese Starters",
+          "price": 364,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Dragon Chicken",
+          "category": "Chinese Starters",
+          "price": 389,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Manchurian",
+          "category": "Chinese Starters",
+          "price": 364,
+          "veg": false,
+          "description": "Our Chicken Manchurian features crispy battered chicken wok-tossed in a fiery garlic-soy-chilli sauce with onions & spring greens. Glossy, spicy-sweet and dangerously moreish—perfect with fried rice or noodles. Contains soy, gluten & eggs. Prepared fresh on order.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Crispy Chicken",
+          "category": "Chinese Starters",
+          "price": 364,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Shanghai Chicken",
+          "category": "Chinese Starters",
+          "price": 389,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Drums Of Heaven",
+          "category": "Chinese Starters",
+          "price": 389,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Lollipop",
+          "category": "Chinese Starters",
+          "price": 364,
+          "veg": false,
+          "description": "Our Chicken Lollipop is the fastest mover on our menu—crispy-fried, spice-marinated chicken wings tossed in a bold Indo-Chinese glaze with garlic, chilli & spring onions. Hot, crunchy, gone-in-seconds good. Served with tangy dip. Contains soy & gluten. Prepared fresh on order.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Palak Paneer",
+          "category": "Veg Main Course",
+          "price": 312,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Tikka Masala",
+          "category": "Veg Main Course",
+          "price": 312,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Butter Masala",
+          "category": "Veg Main Course",
+          "price": 312,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kadai Paneer",
+          "category": "Veg Main Course",
+          "price": 312,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mixed Veg Curry",
+          "category": "Veg Main Course",
+          "price": 273,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kadai Veg",
+          "category": "Veg Main Course",
+          "price": 286,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mushroom Masala",
+          "category": "Veg Main Course",
+          "price": 286,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kadai Mushroom",
+          "category": "Veg Main Course",
+          "price": 286,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kaju Masala",
+          "category": "Veg Main Course",
+          "price": 312,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Dal Tadka",
+          "category": "Veg Main Course",
+          "price": 208,
+          "veg": true,
+          "description": "Our Dal Tadka is comfort turned crave—slow-simmered yellow lentils finished with a sizzling tempering of ghee, garlic, cumin, red chilli & desi spices poured live on top for that irresistible aroma. Simple, soulful and surprisingly addictive. Best with jeera rice or roti. Contains dairy. Prepared fresh on order.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Dal Fry",
+          "category": "Veg Main Course",
+          "price": 208,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Tikka Masala",
+          "category": "Non Veg Main Course",
+          "price": 389,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Butter Chicken",
+          "category": "Non Veg Main Course",
+          "price": 389,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kadai Chicken",
+          "category": "Non Veg Main Course",
+          "price": 351,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kubera Chicken",
+          "category": "Non Veg Main Course",
+          "price": 351,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Murgh Lababdar",
+          "category": "Non Veg Main Course",
+          "price": 389,
+          "veg": false,
+          "description": "Our Bhatkal Special Murgh Lababdar features juicy chicken simmered in a rich, velvety tomato-cashew gravy with butter, fresh cream & roasted spices—deep, smoky and mildly sweet-spicy, just like Bhatkal loves it. Best with naan or kulcha. Contains dairy & nuts. Prepared fresh on order.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Pepper Masala",
+          "category": "Non Veg Main Course",
+          "price": 351,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Rara",
+          "category": "Non Veg Main Course",
+          "price": 389,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Hyderabadi",
+          "category": "Non Veg Main Course",
+          "price": 338,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mutton Rogan Josh",
+          "category": "Non Veg Main Course",
+          "price": 455,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mutton Bhuna",
+          "category": "Non Veg Main Course",
+          "price": 455,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mutton Kadai",
+          "category": "Non Veg Main Course",
+          "price": 455,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mutton Korma",
+          "category": "Non Veg Main Course",
+          "price": 455,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Plain Naan",
+          "category": "Breads",
+          "price": 46,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Butter Naan",
+          "category": "Breads",
+          "price": 52,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Garlic Butter Naan",
+          "category": "Breads",
+          "price": 65,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Cheese Garlic Naan",
+          "category": "Breads",
+          "price": 78,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Cheese Garlic Chilli Naan",
+          "category": "Breads",
+          "price": 78,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Butter Kulcha",
+          "category": "Breads",
+          "price": 52,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Plain Roti",
+          "category": "Breads",
+          "price": 39,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Butter Roti",
+          "category": "Breads",
+          "price": 46,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Laccha Paratha",
+          "category": "Breads",
+          "price": 59,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Steamed Rice",
+          "category": "Rice",
+          "price": 124,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Ghee Rice",
+          "category": "Rice",
+          "price": 195,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Jeera Rice",
+          "category": "Rice",
+          "price": 156,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Curd Rice",
+          "category": "Rice",
+          "price": 195,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Pulao",
+          "category": "Rice",
+          "price": 208,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Pulao",
+          "category": "Rice",
+          "price": 286,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kaju Pulao",
+          "category": "Rice",
+          "price": 286,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Dal Khichdi",
+          "category": "Rice",
+          "price": 221,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mutton Mandi",
+          "category": "Rice",
+          "price": 519,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Biryani",
+          "category": "Biryani",
+          "price": 208,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Dum Biryani",
+          "category": "Biryani",
+          "price": 312,
+          "veg": false,
+          "description": "Our Chicken Dum Biryani is slow-cooked on dum with fragrant basmati rice, tender marinated chicken, fried onions, mint, saffron & house spices. Medium-spicy and sealed for maximum aroma. Served with raita & salan. Contains dairy; may contain nuts. Prepared fresh on order.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mutton Dum Biryani",
+          "category": "Biryani",
+          "price": 364,
+          "veg": false,
+          "description": "Our Mutton Dum Biryani is slow-cooked on dum with fragrant basmati rice, tender marinated mutton, caramelized onions, mint, saffron & signature spices. Rich, aromatic and medium-spicy. Served with raita & salan. Contains dairy; may contain nuts. Prepared fresh on order.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Prawns Biryani",
+          "category": "Biryani",
+          "price": 519,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Fried Rice",
+          "category": "Veg Fried Rice",
+          "price": 195,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Schezwan Fried Rice",
+          "category": "Veg Fried Rice",
+          "price": 208,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mushroom Fried Rice",
+          "category": "Veg Fried Rice",
+          "price": 234,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Paneer Fried Rice",
+          "category": "Veg Fried Rice",
+          "price": 286,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Fried Rice",
+          "category": "Non Veg Fried Rice",
+          "price": 247,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Chilli Garlic Fried Rice",
+          "category": "Non Veg Fried Rice",
+          "price": 259,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Schezwan Fried Rice",
+          "category": "Non Veg Fried Rice",
+          "price": 259,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Triple Fried Rice",
+          "category": "Non Veg Fried Rice",
+          "price": 338,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Prawns Fried Rice",
+          "category": "Non Veg Fried Rice",
+          "price": 338,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Hakka Noodles",
+          "category": "Veg Noodles",
+          "price": 208,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Veg Schezwan Noodles",
+          "category": "Veg Noodles",
+          "price": 221,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Hakka Noodles",
+          "category": "Non Veg Noodles",
+          "price": 247,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Schezwan Noodles",
+          "category": "Non Veg Noodles",
+          "price": 259,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Hong Kong Noodles",
+          "category": "Non Veg Noodles",
+          "price": 286,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Prawns Noodles",
+          "category": "Non Veg Noodles",
+          "price": 389,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "French Fries",
+          "category": "Snacks",
+          "price": 130,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Squid Koliwada",
+          "category": "Snacks",
+          "price": 488,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Masala Papad",
+          "category": "Accompaniment",
+          "price": 59,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kenz Elaneer Payasam",
+          "category": "Desserts",
+          "price": 195,
+          "veg": true,
+          "description": "Our best-selling Kenz Elaneer Payasam is a silky slow-cooked dessert made with fresh tender coconut pulp, coconut milk, milk, jaggery & a touch of ghee-roasted nuts. Light, aromatic and irresistibly refreshing—people order it twice for a reason. Contains dairy & nuts. Prepared fresh.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Fruit Salad",
+          "category": "Desserts",
+          "price": 195,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Vanilla Ice Cream",
+          "category": "Ice Creams",
+          "price": 98,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Strawberry Ice Cream",
+          "category": "Ice Creams",
+          "price": 98,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chocolate Ice Cream",
+          "category": "Ice Creams",
+          "price": 98,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Blackcurrant Ice Cream",
+          "category": "Ice Creams",
+          "price": 98,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Butterscotch Ice Cream",
+          "category": "Ice Creams",
+          "price": 98,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mango Ice Cream",
+          "category": "Ice Creams",
+          "price": 98,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Pista Ice Cream",
+          "category": "Ice Creams",
+          "price": 156,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Anjeer Delight Ice Cream",
+          "category": "Ice Creams",
+          "price": 156,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Shahi Nuts Ice Cream",
+          "category": "Ice Creams",
+          "price": 156,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Arabian Delight Ice Cream",
+          "category": "Ice Creams",
+          "price": 156,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Royal Falooda",
+          "category": "Ice Creams",
+          "price": 194,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Royal Gadbad",
+          "category": "Ice Creams",
+          "price": 194,
+          "veg": true,
+          "description": "Our Royal Gudbud is Bhatkal’s legendary layered dessert—vanilla, strawberry & mango ice cream stacked with fresh fruits, jelly, nuts & silky falooda, finished with a royal drizzle of rose syrup. A colourful crunch-and-cream celebration in a glass. Contains dairy & nuts. Prepared fresh.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Watermelon Juice",
+          "category": "Fresh Juices",
+          "price": 130,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Pomegranate Juice",
+          "category": "Fresh Juices",
+          "price": 156,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Orange Juice",
+          "category": "Fresh Juices",
+          "price": 156,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mosambi Juice",
+          "category": "Fresh Juices",
+          "price": 156,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Pineapple Juice",
+          "category": "Fresh Juices",
+          "price": 143,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mirchi Citrus Juice",
+          "category": "Fresh Juices",
+          "price": 156,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Lime Juice",
+          "category": "Fresh Juices",
+          "price": 78,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mint Lime Juice",
+          "category": "Fresh Juices",
+          "price": 78,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Ginger Pineapple Juice",
+          "category": "Fresh Juices",
+          "price": 143,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Blueberry Smoothie",
+          "category": "Smoothies",
+          "price": 182,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Strawberry Smoothie",
+          "category": "Smoothies",
+          "price": 182,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mango Smoothie",
+          "category": "Smoothies",
+          "price": 182,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Litchi Smoothie",
+          "category": "Smoothies",
+          "price": 182,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Nutella Milkshake",
+          "category": "Milkshakes",
+          "price": 182,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "KitKat Milkshake",
+          "category": "Milkshakes",
+          "price": 182,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Ferrero Rocher Milkshake",
+          "category": "Milkshakes",
+          "price": 221,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Oreo Milkshake",
+          "category": "Milkshakes",
+          "price": 182,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chocolate Milkshake",
+          "category": "Milkshakes",
+          "price": 169,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Dark Chocolate Milskhake",
+          "category": "Milkshakes",
+          "price": 169,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Tenders Coconut Milkshake",
+          "category": "Milkshakes",
+          "price": 195,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Litchi Milkshake",
+          "category": "Milkshakes",
+          "price": 195,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Strawberry Milkshake",
+          "category": "Milkshakes",
+          "price": 195,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Nescafe Cold Coffee Ice Cream",
+          "category": "Milkshakes",
+          "price": 195,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Apple Milkshake",
+          "category": "Milkshakes",
+          "price": 169,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Hazelnut Milkshake",
+          "category": "Milkshakes",
+          "price": 182,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kiwi Delight Mocktail",
+          "category": "Mocktails",
+          "price": 143,
+          "veg": true,
+          "description": "Non Alcoholic",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kokam Lemonate Mocktail",
+          "category": "Mocktails",
+          "price": 143,
+          "veg": true,
+          "description": "Non Alcoholic",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Cranberry Refresher Mocktail",
+          "category": "Mocktails",
+          "price": 143,
+          "veg": true,
+          "description": "Non Alcoholic",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Blue Lagoon Mocktail",
+          "category": "Mocktails",
+          "price": 143,
+          "veg": true,
+          "description": "Non Alcoholic",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Blue Berry Blast Mockatil",
+          "category": "Mocktails",
+          "price": 143,
+          "veg": true,
+          "description": "Non Alcoholic",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Ampanha Mocktail",
+          "category": "Mocktails",
+          "price": 143,
+          "veg": true,
+          "description": "Non Alcoholic",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Ginger Fizz Mocktail",
+          "category": "Mocktails",
+          "price": 59,
+          "veg": true,
+          "description": "Non Alcoholic",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Watermelon Cranberry Mocktail",
+          "category": "Mocktails",
+          "price": 143,
+          "veg": true,
+          "description": "Non Alcoholic",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Cucumber Cooler Mocktail",
+          "category": "Mocktails",
+          "price": 143,
+          "veg": true,
+          "description": "Non Alcoholic",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Peach Bellini Mocktail",
+          "category": "Mocktails",
+          "price": 143,
+          "veg": true,
+          "description": "Non Alcoholic",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Passion Fruit Mojito",
+          "category": "Mojitos",
+          "price": 143,
+          "veg": true,
+          "description": "Non Alcoholic",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Virgin Mojito",
+          "category": "Mojitos",
+          "price": 143,
+          "veg": true,
+          "description": "Non Alcoholic",
           "variants": [],
           "addons": []
         }

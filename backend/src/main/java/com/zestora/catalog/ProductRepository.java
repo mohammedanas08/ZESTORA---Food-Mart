@@ -10,7 +10,10 @@ import java.util.Collection;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    List<Product> findByRestaurantIdOrderByCategoryAscNameAsc(Long restaurantId);
+    /** A restaurant's menu in its own order (the order the dishes were added), not alphabetical. */
+    List<Product> findByRestaurantIdOrderByIdAsc(Long restaurantId);
+
+    long countByRestaurantId(Long restaurantId);
 
     @Query("""
             select p from Product p

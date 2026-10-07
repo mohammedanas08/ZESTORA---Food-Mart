@@ -17,38 +17,47 @@ export function CartPage() {
   if (cart.lines.length === 0) {
     return (
       <div className="py-16 text-center">
-        <p className="mb-4 text-stone-500">Your cart is empty.</p>
-        <Link className="btn-primary" to="/">Browse restaurants</Link>
+        <p className="font-display text-3xl font-semibold">Your cart is empty.</p>
+        <p className="mb-6 mt-2 text-stone-500">Pick something delicious from a local kitchen.</p>
+        <Link className="btn-primary px-7 py-3" to="/">Browse restaurants</Link>
       </div>
     );
   }
   return (
     <>
       <PageTitle sub={`From ${cart.sourceName}`}>Your cart</PageTitle>
-      <ul className="divide-y divide-stone-200 rounded-xl border border-stone-200 bg-white">
-        {cart.lines.map((l) => (
-          <li key={l.key} className="flex flex-col gap-3 p-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <p className="font-semibold">{l.name}</p>
-              <p className="text-xs text-stone-500">{[l.variantName, ...l.addonNames, l.notes].filter(Boolean).join(' · ')}</p>
-              <p className="text-sm">{money(l.unitPrice)} each</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <button className="btn-outline px-3" aria-label={`Decrease ${l.name}`} onClick={() => cart.setQuantity(l.key, l.quantity - 1)}>−</button>
-              <span className="w-6 text-center">{l.quantity}</span>
-              <button className="btn-outline px-3" aria-label={`Increase ${l.name}`} onClick={() => cart.setQuantity(l.key, l.quantity + 1)}>+</button>
-              <button className="ml-auto inline-flex min-h-[44px] items-center px-2 text-sm text-red-600 underline" onClick={() => cart.remove(l.key)}>Remove</button>
-            </div>
-          </li>
-        ))}
-      </ul>
-      <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-lg font-bold">Subtotal {money(cart.subtotal)}</p>
-        <button className="btn-primary w-full sm:w-auto" onClick={() => navigate(user ? '/checkout' : '/login', { state: { from: '/checkout' } })}>
-          {user ? 'Checkout' : 'Log in to checkout'}
-        </button>
+      <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
+        <ul className="space-y-3">
+          {cart.lines.map((l) => (
+            <li key={l.key} className="flex flex-col gap-3 rounded-3xl border border-stone-200/70 bg-white p-4 shadow-soft sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex min-w-0 items-center gap-3">
+                {l.imageUrl && <img src={l.imageUrl} alt="" loading="lazy" className="h-16 w-16 shrink-0 rounded-full object-cover" />}
+                <div className="min-w-0">
+                  <p className="font-semibold">{l.name}</p>
+                  <p className="text-xs text-stone-500">{[l.variantName, ...l.addonNames, l.notes].filter(Boolean).join(' · ')}</p>
+                  <p className="text-sm text-stone-600">{money(l.unitPrice)} each</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="inline-flex items-center gap-1 rounded-full bg-brand-light p-1">
+                  <button className="h-9 w-9 rounded-full bg-white text-lg leading-none text-brand shadow-sm" aria-label={`Decrease ${l.name}`} onClick={() => cart.setQuantity(l.key, l.quantity - 1)}>−</button>
+                  <span className="w-7 text-center font-semibold">{l.quantity}</span>
+                  <button className="h-9 w-9 rounded-full bg-brand text-lg leading-none text-white shadow-sm" aria-label={`Increase ${l.name}`} onClick={() => cart.setQuantity(l.key, l.quantity + 1)}>+</button>
+                </div>
+                <button className="ml-auto inline-flex min-h-[44px] items-center px-2 text-sm text-stone-500 underline hover:text-red-600" onClick={() => cart.remove(l.key)}>Remove</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <aside className="card h-fit space-y-3 lg:sticky lg:top-24">
+          <h2 className="font-display text-xl font-semibold">Order summary</h2>
+          <p className="flex items-baseline justify-between text-lg font-bold"><span>Subtotal</span><span>{money(cart.subtotal)}</span></p>
+          <button className="btn-primary w-full py-3" onClick={() => navigate(user ? '/checkout' : '/login', { state: { from: '/checkout' } })}>
+            {user ? 'Checkout' : 'Log in to checkout'}
+          </button>
+          <p className="text-xs text-stone-500">Delivery, taxes and fees are calculated at checkout. Final prices are always confirmed by the server.</p>
+        </aside>
       </div>
-      <p className="mt-2 text-xs text-stone-500">Delivery, taxes and fees are calculated at checkout. Final prices are always confirmed by the server.</p>
     </>
   );
 }
@@ -110,7 +119,7 @@ export function CheckoutPage() {
       <form id="checkout-form" onSubmit={submit} className="grid gap-6 md:grid-cols-[1fr_320px]">
         <div className="space-y-4">
           <section className="card space-y-3">
-            <h2 className="font-bold">Delivery address</h2>
+            <h2 className="font-display text-xl font-semibold">Delivery address</h2>
             <Field label="Street / building"><input className="input" required value={addr.street} onChange={(e) => setAddr({ ...addr, street: e.target.value })} /></Field>
             <div className="grid grid-cols-2 gap-3">
               <Field label="Area"><input className="input" value={addr.area} onChange={(e) => setAddr({ ...addr, area: e.target.value })} /></Field>
@@ -121,7 +130,7 @@ export function CheckoutPage() {
           </section>
 
           <section className="card space-y-3">
-            <h2 className="font-bold">Coupon</h2>
+            <h2 className="font-display text-xl font-semibold">Coupon</h2>
             <div className="flex gap-2">
               <input className="input" placeholder="Enter code" aria-label="Coupon code" value={code} onChange={(e) => setCode(e.target.value.toUpperCase())} />
               <button type="button" className="btn-outline" onClick={() => code && applyCoupon(code)}>Apply</button>
@@ -130,7 +139,7 @@ export function CheckoutPage() {
             {applied && <p className="text-sm text-green-700">{applied.code} applied, you save {money(applied.discount)}</p>}
             <div className="flex flex-wrap gap-2">
               {coupons.data?.map((c) => (
-                <button type="button" key={c.code} className="inline-flex min-h-[40px] items-center rounded-full border border-dashed border-brand px-3 text-xs text-brand-dark" onClick={() => applyCoupon(c.code)} title={c.description}>
+                <button type="button" key={c.code} className="inline-flex min-h-[40px] items-center rounded-full border border-dashed border-brand bg-brand-light/50 px-3 text-xs font-semibold text-brand-dark" onClick={() => applyCoupon(c.code)} title={c.description}>
                   {c.code}
                 </button>
               ))}
@@ -153,8 +162,8 @@ export function CheckoutPage() {
           </section>
         </div>
 
-        <aside className="card h-fit space-y-1 text-sm">
-          <h2 className="mb-2 font-bold">Bill (estimate)</h2>
+        <aside className="card h-fit space-y-1 text-sm md:sticky md:top-24">
+          <h2 className="mb-2 font-display text-xl font-semibold">Bill (estimate)</h2>
           <Row l="Items" v={bill.subtotal} />
           {bill.packagingFee > 0 && <Row l="Packaging" v={bill.packagingFee} />}
           <Row l="Delivery" v={bill.deliveryFee} free />
@@ -162,7 +171,7 @@ export function CheckoutPage() {
           <Row l="GST (5%)" v={bill.tax} />
           {bill.tip > 0 && <Row l="Rider tip" v={bill.tip} />}
           {bill.discount > 0 && <Row l="Discount" v={-bill.discount} />}
-          <div className="mt-2 flex justify-between border-t pt-2 text-base font-bold"><span>Total</span><span>{money(bill.total)}</span></div>
+          <div className="mt-3 flex items-baseline justify-between border-t border-stone-200 pt-3 text-xl font-bold text-brand"><span>Total</span><span>{money(bill.total)}</span></div>
           <p className="pt-1 text-xs text-stone-500">The server confirms the exact amount when you place the order.</p>
           {place.error ? <ErrorBox error={place.error} /> : null}
           <button className="btn-primary mt-2 hidden w-full md:inline-flex" disabled={place.isPending}>{place.isPending ? 'Placing order…' : 'Place order'}</button>
@@ -170,7 +179,7 @@ export function CheckoutPage() {
       </form>
 
       {/* Phones: the total and the main action stay reachable while scrolling the long form. */}
-      <div className="fixed inset-x-0 bottom-0 z-30 flex items-center gap-3 border-t border-stone-200 bg-white px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 md:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-30 flex items-center gap-3 border-t border-stone-200 bg-white/95 px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 md:hidden">
         <div className="min-w-0">
           <p className="text-xs text-stone-500">Total (estimate)</p>
           <p className="text-lg font-bold leading-tight">{money(bill.total)}</p>

@@ -10,6 +10,8 @@ import java.util.Optional;
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     Optional<Restaurant> findByOwnerId(Long ownerId);
 
+    Optional<Restaurant> findBySlug(String slug);
+
     @Query("""
             select r from Restaurant r
             where r.active = true

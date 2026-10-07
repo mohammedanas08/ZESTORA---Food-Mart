@@ -34,3 +34,9 @@ does this proxying (`frontend/vite.config.ts`). Terminate HTTPS at the proxy and
 - [ ] Razorpay webhook configured and tested with a test payment
 - [ ] Database backups and monitoring enabled; health check: `GET /actuator/health`
 - [ ] Demo accounts and the `bhatkal` profile were never used against this database
+
+## 4. Vercel (web app only)
+Vercel serves the static `frontend/` build (root directory `frontend`, build `npm run build`, output `dist`; `frontend/vercel.json` provides the single-page-app fallback).
+It cannot run the Spring Boot API, so host the jar elsewhere (any Java 21 host) and point Vercel at it by adding a rewrite for `/api/(.*)` to `https://<api-host>/api/$1` in `frontend/vercel.json`.
+Vercel rewrites do not carry WebSockets, so live order updates (`/ws`) need the API on a domain the browser can reach directly, or both behind one reverse proxy as in section 2.
+Supabase: the direct host `db.<ref>.supabase.co` is IPv6-only; from IPv4-only hosts use the pooler (session mode, port 5432, user `postgres.<ref>`) in `DATABASE_URL`/`DATABASE_USERNAME`, with `?sslmode=require`.
