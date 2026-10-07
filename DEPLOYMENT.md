@@ -62,3 +62,7 @@ Use `backend/Dockerfile` on any container host (Render, Railway, Fly.io, Koyeb..
    - `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`
    - `ADMIN_EMAIL`, `ADMIN_PASSWORD` for the first start only, then delete them
 4. In `frontend/vercel.json` add `{ "source": "/api/:path*", "destination": "https://<railway-domain>/api/:path*" }` before the catch-all rewrite, then redeploy Vercel.
+
+## 8. Running production without Razorpay (demo only)
+Set `ALLOW_PAYMENT_SIMULATION=true` instead of the Razorpay keys. The checkout then shows the "Simulate successful payment" button and **anyone can mark an order paid without paying**.
+Use it only while there are no real customers; set the Razorpay keys and delete the variable before taking real orders. The API logs a warning at start-up while it is on.

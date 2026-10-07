@@ -2,6 +2,6 @@
 zestora:
   dev:
     seed-demo-data: false
-    allow-payment-simulation: false
+    allow-payment-simulation: ${ALLOW_PAYMENT_SIMULATION:false}   # DEMO ONLY: true lets anyone mark an order paid without paying
   cookie:
     secure: true

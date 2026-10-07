@@ -43,7 +43,10 @@ public class PaymentController {
         @Bean
         PaymentGateway paymentGateway(AppProperties props) {
             if (props.razorpay().configured()) return new RazorpayGateway(props.razorpay());
-            if (props.dev().allowPaymentSimulation()) return new MockGateway();
+            if (props.dev().allowPaymentSimulation()) {
+                org.slf4j.LoggerFactory.getLogger(PaymentController.class).warn("PAYMENT SIMULATION IS ON: orders can be marked paid without real payment. Set Razorpay keys and remove ALLOW_PAYMENT_SIMULATION before taking real orders.");
+                return new MockGateway();
+            }
             throw new IllegalStateException("RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET are required when payment simulation is disabled");
         }
     }
