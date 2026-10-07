@@ -55,6 +55,9 @@ zestora:
     key-id: ${RAZORPAY_KEY_ID:}
     key-secret: ${RAZORPAY_KEY_SECRET:}
     webhook-secret: ${RAZORPAY_WEBHOOK_SECRET:}
+  admin:                                   # first-admin bootstrap, see AdminBootstrap; leave empty normally
+    email: ${ADMIN_EMAIL:}
+    password: ${ADMIN_PASSWORD:}
   cloudinary:
     cloud-name: ${CLOUDINARY_CLOUD_NAME:}
     api-key: ${CLOUDINARY_API_KEY:}

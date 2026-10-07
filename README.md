@@ -84,6 +84,7 @@ they are real environment variables on the host. The full annotated list is in [
 | `CORS_ALLOWED_ORIGINS`, `COOKIE_SECURE` | Web origin(s) and secure cookies (`true` in production) |
 | `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`, `RAZORPAY_WEBHOOK_SECRET` | Payments. Empty in development = simulator. **Required in production** |
 | `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` | Signed image uploads |
+| `ADMIN_EMAIL`, `ADMIN_PASSWORD` | Creates the first admin on an empty production database (remove after the first start) |
 | `SPRING_PROFILES_ACTIVE` | `dev` (default), `dev,bhatkal`, or `prod` |
 
 ## Tests
@@ -104,7 +105,7 @@ seed data (each restaurant's menu is checked against what was supplied).
    To copy only the three restaurants, their menus and owner logins from your local database to an **empty** hosted one, use
    [`backend/scripts/transfer-restaurants.sh`](backend/scripts/transfer-restaurants.sh); it reads the password from the environment and
    copies no customers, orders or payments.
-2. **API:** `cd backend && mvn -DskipTests package`, then `SPRING_PROFILES_ACTIVE=prod java -jar target/zestora-backend-*.jar` with the variables above.
+2. **API:** a `backend/Dockerfile` is included for container hosts, or `cd backend && mvn -DskipTests package`, then `SPRING_PROFILES_ACTIVE=prod java -jar target/zestora-backend-*.jar` with the variables above.
    The `prod` profile has no demo data and no payment simulator, and refuses to start without payment keys.
 3. **Web app:** `cd frontend && npm run build`, then serve `frontend/dist` from a static host. For Vercel the root directory is `frontend`
    (`vercel.json` supplies the SPA fallback). Route `/api` (and `/ws`) to the API on the same domain; see [DEPLOYMENT.md](DEPLOYMENT.md).
