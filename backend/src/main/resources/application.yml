@@ -19,6 +19,7 @@ spring:
       ddl-auto: validate          # schema is owned by Flyway, never by Hibernate
     properties:
       hibernate.jdbc.time_zone: UTC
+      hibernate.default_batch_fetch_size: 100   # load lazy collections for many rows in one query (fixes N+1 on menus)
   flyway:
     enabled: true
     locations: classpath:db/migration

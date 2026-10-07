@@ -70,3 +70,7 @@ Use it only while there are no real customers; set the Razorpay keys and delete 
 ## 9. Rider account
 Set `RIDER_EMAIL` and `RIDER_PASSWORD` (at least 12 characters, optional `RIDER_NAME`) in the API's environment and start it. A rider with an online delivery profile is created if the email does not exist yet.
 The vehicle details are left empty. Remove `RIDER_PASSWORD` afterwards; the account keeps working.
+
+## 10. Performance notes
+The API (Railway, Singapore) and the database (Supabase, Mumbai) are in different places, so every SQL statement pays a network round trip.
+Loading a 193-dish menu used to run 388 statements (about 25 s live); `hibernate.default_batch_fetch_size: 100` brings it to 6. Keep the API and the database in the closest regions you can.
