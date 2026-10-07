@@ -22,7 +22,7 @@ export default function ProductModal({
 
   const variant = product.variants.find((v) => v.id === variantId);
   const chosenAddons = product.addons.filter((a) => addonIds.includes(a.id));
-  const unit = (variant?.price ?? product.price) + chosenAddons.reduce((s, a) => s + a.price, 0);
+  const unit = (variant?.price ?? product.price ?? 0) + chosenAddons.reduce((s, a) => s + a.price, 0);
 
   const toggle = (id: number) => setAddonIds((cur) => (cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id]));
 

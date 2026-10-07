@@ -266,11 +266,16 @@ def main():
         "Created by the `bhatkal` seed profile. Each restaurant owner signs in at the app with the email below and the",
         "`DEMO_PASSWORD` from your `backend/.env`, and lands on the kitchen console (orders + menu).",
         "The emails are fake (`@zestora.local`); nothing is sent to any real business.",
-        "Places come from OpenStreetMap (c) OpenStreetMap contributors, ODbL. **Menus and prices are samples.**", "",
+        "Places come from OpenStreetMap (c) OpenStreetMap contributors, ODbL. **Menus and prices are samples**, except rows marked (real menu).", "",
         "| Restaurant | Town | Menu type | Email |", "|---|---|---|---|",
     ]
     for r in restaurants:
         lines.append(f"| {r['name']} | {r['city']} | {r['cuisines'][0]} | `{r['ownerEmail']}` |")
+    # Hand-curated restaurants (real menus transcribed from the restaurant's own menu) live in their own file.
+    curated = os.path.join(os.path.dirname(OUT), "curated-restaurants.json")
+    if os.path.exists(curated):
+        for r in json.load(io.open(curated, encoding="utf-8"))["restaurants"]:
+            lines.append(f"| {r['name']} | {r['city']} | {', '.join(r['cuisines'])} (real menu) | `{r['ownerEmail']}` |")
     lines += ["", "Local development only. Never run the `bhatkal` profile against a production database."]
     with io.open(ACCOUNTS_MD, "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")

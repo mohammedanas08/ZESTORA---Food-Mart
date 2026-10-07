@@ -29,7 +29,10 @@ mvn spring-boot:run -Dspring-boot.run.profiles=dev,bhatkal
 Adds 13 real places around Bhatkal (Bhatkal, Murdeshwar, Byndoor, Honnavar) from OpenStreetMap, each with a restaurant-owner login, and hides the six
 made-up sample restaurants. Logins are listed in [`DEMO_ACCOUNTS.md`](DEMO_ACCOUNTS.md). It is additive and safe to restart (existing owners are skipped).
 **The menus and prices are samples chosen by restaurant type; OpenStreetMap has no menus.** Place data: (c) OpenStreetMap contributors, ODbL.
-Regenerate or extend the list with `python scripts/generate_bhatkal_seed.py` (fetches from the Overpass API).
+A second file, `src/main/resources/seed/curated-restaurants.json`, holds **hand-entered restaurants with real menus** (currently Layali Arabia Restaurant,
+transcribed from its printed menu). Unknown facts are left out, never invented: a missing price means "ask the restaurant" (the item shows and cannot be ordered),
+a missing `veg` means unknown (no veg/non-veg dot). To add another restaurant, copy its entry format; `SeedDataTest` checks every entry.
+Regenerate or extend the OpenStreetMap list with `python scripts/generate_bhatkal_seed.py` (fetches from the Overpass API).
 The tests do not use this profile.
 
 ### Demo logins (dev profile only: never seeded in production)

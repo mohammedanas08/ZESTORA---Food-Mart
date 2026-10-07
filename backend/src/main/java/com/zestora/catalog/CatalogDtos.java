@@ -23,11 +23,11 @@ public final class CatalogDtos {
     public record OptionDto(Long id, String name, BigDecimal price) {}
 
     public record ProductDto(Long id, Long restaurantId, String name, String description, String category,
-                             BigDecimal price, String imageUrl, boolean veg, boolean available, boolean grocery,
+                             BigDecimal price, String imageUrl, Boolean veg, boolean available, boolean grocery,
                              Integer stock, int prepMinutes, List<OptionDto> variants, List<OptionDto> addons) {
         public static ProductDto of(Product p) {
             return new ProductDto(p.getId(), p.getRestaurantId(), p.getName(), p.getDescription(), p.getCategory(),
-                    p.getPrice(), p.getImageUrl(), p.isVeg(), p.isAvailable(), p.isGrocery(), p.getStock(), p.getPrepMinutes(),
+                    p.getPrice(), p.getImageUrl(), p.getVeg(), p.isAvailable(), p.isGrocery(), p.getStock(), p.getPrepMinutes(),
                     p.getVariants().stream().map(v -> new OptionDto(v.getId(), v.getName(), v.getPrice())).toList(),
                     p.getAddons().stream().map(a -> new OptionDto(a.getId(), a.getName(), a.getPrice())).toList());
         }
@@ -35,7 +35,7 @@ public final class CatalogDtos {
 
     public record RestaurantMenuDto(RestaurantDto restaurant, List<ProductDto> items) {}
 
-    public record ProductUpdateRequest(@DecimalMin("0.0") @Digits(integer = 8, fraction = 2) BigDecimal price,
+    public record ProductUpdateRequest(@DecimalMin("0.01") @Digits(integer = 8, fraction = 2) BigDecimal price,
                                        Boolean available,
                                        @Min(1) @Max(240) Integer prepMinutes,
                                        @Size(max = 500) String imageUrl) {}
@@ -43,7 +43,7 @@ public final class CatalogDtos {
     public record ProductCreateRequest(@NotBlank @Size(max = 160) String name,
                                        @Size(max = 500) String description,
                                        @Size(max = 80) String category,
-                                       @NotNull @DecimalMin("0.0") @Digits(integer = 8, fraction = 2) BigDecimal price,
+                                       @NotNull @DecimalMin("0.01") @Digits(integer = 8, fraction = 2) BigDecimal price,
                                        @Size(max = 500) String imageUrl,
                                        boolean veg,
                                        @Min(1) @Max(240) Integer prepMinutes) {}

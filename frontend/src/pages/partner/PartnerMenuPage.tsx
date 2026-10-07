@@ -50,12 +50,12 @@ export default function PartnerMenuPage() {
                 className="input w-24 shrink-0"
                 inputMode="decimal"
                 aria-label={`Price of ${p.name}`}
-                value={editing[p.id] ?? String(p.price)}
+                value={editing[p.id] ?? (p.price == null ? '' : String(p.price))}
                 onChange={(e) => setEditing({ ...editing, [p.id]: e.target.value })}
               />
               <button
                 className="btn-outline whitespace-nowrap"
-                disabled={editing[p.id] === undefined || Number(editing[p.id]) === Number(p.price) || Number.isNaN(Number(editing[p.id]))}
+                disabled={editing[p.id] === undefined || Number(editing[p.id]) === Number(p.price) || !(Number(editing[p.id]) > 0)}
                 onClick={() => update.mutate({ id: p.id, price: Number(editing[p.id]) }, { onSuccess: () => setEditing(({ [p.id]: _drop, ...rest }) => rest) })}
               >
                 Save
@@ -63,7 +63,7 @@ export default function PartnerMenuPage() {
               <button className={`${p.available ? 'btn-outline' : 'btn-primary'} ml-auto whitespace-nowrap sm:ml-0`} onClick={() => update.mutate({ id: p.id, available: !p.available })}>
                 {p.available ? 'Sold out' : 'Back in stock'}
               </button>
-              <span className="hidden text-sm text-stone-500 sm:inline">{money(p.price)}</span>
+              <span className="hidden text-sm text-stone-500 sm:inline">{p.price == null ? 'no price' : money(p.price)}</span>
             </div>
           </li>
         ))}

@@ -33,7 +33,8 @@ export function StatusBadge({ status }: { status: OrderStatus }) {
   return <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${COLORS[status]}`}>{STATUS_LABEL[status]}</span>;
 }
 
-export function VegDot({ veg }: { veg: boolean }) {
+export function VegDot({ veg }: { veg?: boolean | null }) {
+  if (veg == null) return null; // unknown: do not claim either way
   return (
     <span
       title={veg ? 'Vegetarian' : 'Non-vegetarian'}

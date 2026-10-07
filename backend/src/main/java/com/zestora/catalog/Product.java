@@ -21,9 +21,11 @@ public class Product {
     private String name;
     private String description;
     private String category;
+    /** null = no listed price ("seasonal" / ask the restaurant). Such an item cannot be ordered. */
     private BigDecimal price;
     private String imageUrl;
-    private boolean veg = true;
+    /** null = not known (the menu does not say). */
+    private Boolean veg;
     private boolean available = true;
     private boolean grocery;
     /** Grocery stock; null means unlimited (food items). */

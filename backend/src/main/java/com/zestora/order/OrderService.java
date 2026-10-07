@@ -96,6 +96,9 @@ public class OrderService {
         for (ItemRequest ir : req.items()) {
             Product p = byId.get(ir.productId());
             if (!p.isAvailable()) throw ApiException.conflict(p.getName() + " is currently unavailable");
+            if (p.getPrice() == null && ir.variantId() == null) {
+                throw ApiException.conflict(p.getName() + " has no listed price yet. Please ask the restaurant.");
+            }
             BigDecimal unit = p.getPrice();
             String variantName = null;
             if (ir.variantId() != null) {

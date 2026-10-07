@@ -1,0 +1,1060 @@
+{
+  "_source": "Menu transcribed by hand from the restaurant's own printed menu photos supplied by the project owner (2026-10-07). Prices are in INR exactly as printed. Fields the menu does not state are omitted (null price = ask the restaurant, null veg = unknown). Address, opening hours, rating, contact and delivery time were not available and are NOT filled in.",
+  "restaurants": [
+    {
+      "name": "Layali Arabia Restaurant",
+      "slug": "layali-arabia-restaurant",
+      "city": "Bhatkal",
+      "cuisines": [
+        "Arabian",
+        "Asian",
+        "Fast food",
+        "Seafood"
+      ],
+      "vegOnly": false,
+      "description": "Arabian and Asian dishes, shawarma, broasted chicken, seafood, fresh juices, mojitos and desserts.",
+      "imageUrl": "/restaurants/layali-arabia-logo.webp",
+      "minOrder": 0,
+      "deliveryMinutes": [
+        0,
+        0
+      ],
+      "ownerName": "Layali Arabia Restaurant (demo owner)",
+      "ownerEmail": "layali-arabia-restaurant@zestora.local",
+      "menu": [
+        {
+          "name": "Teriyaki Chicken",
+          "category": "Asian Cuisine Starters (Non-Veg)",
+          "price": 330,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kung Pao Chicken",
+          "category": "Asian Cuisine Starters (Non-Veg)",
+          "price": 330,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Kung Pao Cigar Roll",
+          "category": "Asian Cuisine Starters (Non-Veg)",
+          "price": 250,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Korean Fried Chicken",
+          "category": "Asian Cuisine Starters (Non-Veg)",
+          "price": 310,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken 95",
+          "category": "Asian Cuisine Starters (Non-Veg)",
+          "price": 410,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Shishtaouk",
+          "category": "Asian Cuisine Starters (Non-Veg)",
+          "price": 330,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Dragon Chicken",
+          "category": "Asian Cuisine Starters (Non-Veg)",
+          "price": 310,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Teriyaki Wing",
+          "category": "Asian Cuisine Starters (Non-Veg)",
+          "price": 300,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Smokey Chicken",
+          "category": "Asian Cuisine Starters (Non-Veg)",
+          "price": 470,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chinese Sizzler",
+          "category": "Asian Cuisine Starters (Non-Veg)",
+          "price": 510,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Chilli Dry",
+          "category": "Asian Cuisine Starters (Non-Veg)",
+          "price": 230,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Pepper Dry",
+          "category": "Asian Cuisine Starters (Non-Veg)",
+          "price": 250,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Drums of Heaven",
+          "category": "Asian Cuisine Starters (Non-Veg)",
+          "price": 270,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Manchurian Dry",
+          "category": "Asian Cuisine Starters (Non-Veg)",
+          "price": 250,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Lolipop",
+          "category": "Asian Cuisine Starters (Non-Veg)",
+          "price": 250,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Crispy Chicken",
+          "category": "Asian Cuisine Starters (Non-Veg)",
+          "price": 310,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken 65",
+          "category": "Asian Cuisine Starters (Non-Veg)",
+          "price": 200,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mutton Ghee Roast",
+          "category": "Asian Cuisine Starters (Non-Veg)",
+          "price": 500,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mutton Pepper Dry",
+          "category": "Asian Cuisine Starters (Non-Veg)",
+          "price": 490,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mutton Chilli",
+          "category": "Asian Cuisine Starters (Non-Veg)",
+          "price": 490,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mutton Manchurian",
+          "category": "Asian Cuisine Starters (Non-Veg)",
+          "price": 490,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "French Fries",
+          "category": "Fries & Snacks",
+          "price": 90,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Peri Peri French Fries",
+          "category": "Fries & Snacks",
+          "price": 100,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Popcorn",
+          "category": "Fries & Snacks",
+          "price": 170,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Strips",
+          "category": "Fries & Snacks",
+          "price": 210,
+          "veg": false,
+          "description": null,
+          "variants": [
+            {
+              "name": "6 pc",
+              "price": 210
+            },
+            {
+              "name": "12 pc",
+              "price": 420
+            }
+          ],
+          "addons": []
+        },
+        {
+          "name": "Nuggets",
+          "category": "Fries & Snacks",
+          "price": 130,
+          "veg": null,
+          "description": null,
+          "variants": [
+            {
+              "name": "6 pc",
+              "price": 130
+            },
+            {
+              "name": "12 pc",
+              "price": 240
+            }
+          ],
+          "addons": []
+        },
+        {
+          "name": "Broasted Chicken",
+          "category": "Broasted",
+          "price": 100,
+          "veg": false,
+          "description": null,
+          "variants": [
+            {
+              "name": "1 pc",
+              "price": 100
+            },
+            {
+              "name": "3 pcs",
+              "price": 270
+            },
+            {
+              "name": "6 pcs",
+              "price": 520
+            },
+            {
+              "name": "9 pcs",
+              "price": 750
+            },
+            {
+              "name": "12 pcs",
+              "price": 990
+            }
+          ],
+          "addons": []
+        },
+        {
+          "name": "Zinger Burger",
+          "category": "Classic Bites",
+          "price": 130,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Hot Dog",
+          "category": "Classic Bites",
+          "price": 150,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chicken Wrap",
+          "category": "Classic Bites",
+          "price": 130,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Macroni Masala Pasta",
+          "category": "Classic Bites",
+          "price": 240,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Macroni Cheese Creamy Sauce Pasta",
+          "category": "Classic Bites",
+          "price": 280,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Green Salad",
+          "category": "Salad",
+          "price": 70,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Tokyo Salad",
+          "category": "Salad",
+          "price": 160,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Russian Salad",
+          "category": "Salad",
+          "price": 190,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Arabian Fattoush Salad",
+          "category": "Salad",
+          "price": 180,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Brocolli Almond Soup",
+          "category": "Soup",
+          "price": 170,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Asian Clear Soup",
+          "category": "Soup",
+          "price": 120,
+          "veg": null,
+          "description": null,
+          "variants": [
+            {
+              "name": "Veg",
+              "price": 120
+            },
+            {
+              "name": "Chicken",
+              "price": 140
+            }
+          ],
+          "addons": []
+        },
+        {
+          "name": "Tom Yum Soup",
+          "category": "Soup",
+          "price": 100,
+          "veg": null,
+          "description": null,
+          "variants": [
+            {
+              "name": "Veg",
+              "price": 100
+            },
+            {
+              "name": "Chicken",
+              "price": 120
+            },
+            {
+              "name": "Seafood",
+              "price": 170
+            }
+          ],
+          "addons": []
+        },
+        {
+          "name": "Tomato Basil Soup",
+          "category": "Soup",
+          "price": 100,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Hot & Sour Soup",
+          "category": "Soup",
+          "price": 90,
+          "veg": null,
+          "description": null,
+          "variants": [
+            {
+              "name": "Veg",
+              "price": 90
+            },
+            {
+              "name": "Chicken",
+              "price": 110
+            }
+          ],
+          "addons": []
+        },
+        {
+          "name": "Creamy Soup",
+          "category": "Soup",
+          "price": 90,
+          "veg": null,
+          "description": null,
+          "variants": [
+            {
+              "name": "Veg",
+              "price": 90
+            },
+            {
+              "name": "Chicken",
+              "price": 130
+            },
+            {
+              "name": "Seafood",
+              "price": 160
+            }
+          ],
+          "addons": []
+        },
+        {
+          "name": "Himalaya Thukpa Soup",
+          "category": "Soup",
+          "price": 100,
+          "veg": null,
+          "description": null,
+          "variants": [
+            {
+              "name": "Veg",
+              "price": 100
+            },
+            {
+              "name": "Chicken",
+              "price": 160
+            },
+            {
+              "name": "Seafood",
+              "price": 180
+            }
+          ],
+          "addons": []
+        },
+        {
+          "name": "Manchow Soup",
+          "category": "Soup",
+          "price": 90,
+          "veg": null,
+          "description": null,
+          "variants": [
+            {
+              "name": "Veg",
+              "price": 90
+            },
+            {
+              "name": "Chicken",
+              "price": 110
+            }
+          ],
+          "addons": []
+        },
+        {
+          "name": "Lemon Coriander Soup",
+          "category": "Soup",
+          "price": 120,
+          "veg": null,
+          "description": null,
+          "variants": [
+            {
+              "name": "Veg",
+              "price": 120
+            },
+            {
+              "name": "Chicken",
+              "price": 130
+            }
+          ],
+          "addons": []
+        },
+        {
+          "name": "Sea Food Soup",
+          "category": "Soup",
+          "price": 180,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Plate Shawarma",
+          "category": "Shawarma",
+          "price": 130,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Meat Plate Shawarma",
+          "category": "Shawarma",
+          "price": 180,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Meat Roll",
+          "category": "Shawarma",
+          "price": 120,
+          "veg": false,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Shawarma Roll",
+          "category": "Shawarma",
+          "price": 90,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Cheese Roll Shawarma",
+          "category": "Shawarma",
+          "price": 140,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Crab Ghee Roast",
+          "category": "Sea Food",
+          "price": null,
+          "veg": false,
+          "description": "Seasonal: the menu lists no price. Ask the restaurant.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Crab Masala",
+          "category": "Sea Food",
+          "price": null,
+          "veg": false,
+          "description": "Seasonal: the menu lists no price. Ask the restaurant.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Prawns Ghee Roast",
+          "category": "Sea Food",
+          "price": null,
+          "veg": false,
+          "description": "Seasonal: the menu lists no price. Ask the restaurant.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Prawns Tawa",
+          "category": "Sea Food",
+          "price": null,
+          "veg": false,
+          "description": "Seasonal: the menu lists no price. Ask the restaurant.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Prawns Butter Fry",
+          "category": "Sea Food",
+          "price": null,
+          "veg": false,
+          "description": "Seasonal: the menu lists no price. Ask the restaurant.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Prawns Masala",
+          "category": "Sea Food",
+          "price": null,
+          "veg": false,
+          "description": "Seasonal: the menu lists no price. Ask the restaurant.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Squid Ghee Roast",
+          "category": "Sea Food",
+          "price": null,
+          "veg": false,
+          "description": "Seasonal: the menu lists no price. Ask the restaurant.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Squid Tawa",
+          "category": "Sea Food",
+          "price": null,
+          "veg": false,
+          "description": "Seasonal: the menu lists no price. Ask the restaurant.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Squid Butter Fry",
+          "category": "Sea Food",
+          "price": null,
+          "veg": false,
+          "description": "Seasonal: the menu lists no price. Ask the restaurant.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Squid Masala",
+          "category": "Sea Food",
+          "price": null,
+          "veg": false,
+          "description": "Seasonal: the menu lists no price. Ask the restaurant.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Shanghai Pepper Prawns",
+          "category": "Sea Food",
+          "price": null,
+          "veg": false,
+          "description": "Seasonal: the menu lists no price. Ask the restaurant.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Prawns Shashlik",
+          "category": "Sea Food",
+          "price": null,
+          "veg": false,
+          "description": "Seasonal: the menu lists no price. Ask the restaurant.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Prawns Butter Garlic",
+          "category": "Sea Food",
+          "price": null,
+          "veg": false,
+          "description": "Seasonal: the menu lists no price. Ask the restaurant.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Chilli Garlic Prawns",
+          "category": "Sea Food",
+          "price": null,
+          "veg": false,
+          "description": "Seasonal: the menu lists no price. Ask the restaurant.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Squid Butter Garlic",
+          "category": "Sea Food",
+          "price": null,
+          "veg": false,
+          "description": "Seasonal: the menu lists no price. Ask the restaurant.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Squid Golden Fried",
+          "category": "Sea Food",
+          "price": null,
+          "veg": false,
+          "description": "Seasonal: the menu lists no price. Ask the restaurant.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Prawns Golden Fried",
+          "category": "Sea Food",
+          "price": null,
+          "veg": false,
+          "description": "Seasonal: the menu lists no price. Ask the restaurant.",
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Gudbud",
+          "category": "Desserts & Ice Cream",
+          "price": 120,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Special Gudbud",
+          "category": "Desserts & Ice Cream",
+          "price": 160,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mini Gudbud",
+          "category": "Desserts & Ice Cream",
+          "price": 80,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Italian Delight",
+          "category": "Desserts & Ice Cream",
+          "price": 150,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Banana Split",
+          "category": "Desserts & Ice Cream",
+          "price": 190,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Fruit Salad with Ice Cream",
+          "category": "Desserts & Ice Cream",
+          "price": 80,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Dry Fruit with Ice Cream",
+          "category": "Desserts & Ice Cream",
+          "price": 120,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Choco Fantasy",
+          "category": "Desserts & Ice Cream",
+          "price": 160,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Arabian Drizzle",
+          "category": "Desserts & Ice Cream",
+          "price": 150,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Meridian Foster",
+          "category": "Desserts & Ice Cream",
+          "price": 150,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Layali Special",
+          "category": "Desserts & Ice Cream",
+          "price": 200,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Papaya",
+          "category": "Fresh Juice",
+          "price": 70,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Anar",
+          "category": "Fresh Juice",
+          "price": 90,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Apple",
+          "category": "Fresh Juice",
+          "price": 75,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mango",
+          "category": "Fresh Juice",
+          "price": 75,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Orange",
+          "category": "Fresh Juice",
+          "price": 70,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Pineapple",
+          "category": "Fresh Juice",
+          "price": 75,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Shamam",
+          "category": "Fresh Juice",
+          "price": 80,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Watermelon",
+          "category": "Fresh Juice",
+          "price": 60,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mosambi",
+          "category": "Fresh Juice",
+          "price": 70,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Fresh Lime",
+          "category": "Fresh Juice",
+          "price": 35,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mint Lime",
+          "category": "Fresh Juice",
+          "price": 40,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Ginger Lime",
+          "category": "Fresh Juice",
+          "price": 40,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Lime Soda",
+          "category": "Fresh Juice",
+          "price": 40,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Virgin Mojito",
+          "category": "Mojito",
+          "price": 90,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Watermelon Mojito",
+          "category": "Mojito",
+          "price": 90,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Blueberry Mojito",
+          "category": "Mojito",
+          "price": 90,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Blue Curacao Mojito",
+          "category": "Mojito",
+          "price": 90,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Passion Fruit Mojito",
+          "category": "Mojito",
+          "price": 90,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Lemonade Mojito",
+          "category": "Mojito",
+          "price": 90,
+          "veg": true,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Mint Lime (Mojito Bar)",
+          "category": "Mojito Bar",
+          "price": 220,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Saudi Champagne",
+          "category": "Mojito Bar",
+          "price": 250,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Blue Lime Champagne",
+          "category": "Mojito Bar",
+          "price": 230,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        },
+        {
+          "name": "Layali Arabia Special Champagne",
+          "category": "Mojito Bar",
+          "price": 250,
+          "veg": null,
+          "description": null,
+          "variants": [],
+          "addons": []
+        }
+      ]
+    }
+  ]
+}

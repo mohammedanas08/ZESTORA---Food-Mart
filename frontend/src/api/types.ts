@@ -49,9 +49,11 @@ export interface Product {
   name: string;
   description?: string;
   category?: string;
-  price: number;
+  /** null = the menu lists no price (ask the restaurant); such an item cannot be ordered. */
+  price?: number | null;
   imageUrl?: string;
-  veg: boolean;
+  /** null = not known. */
+  veg?: boolean | null;
   available: boolean;
   grocery: boolean;
   stock?: number | null;

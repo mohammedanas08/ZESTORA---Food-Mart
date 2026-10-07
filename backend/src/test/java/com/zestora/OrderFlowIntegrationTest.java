@@ -45,6 +45,7 @@ class OrderFlowIntegrationTest {
     }
 
     @Autowired MockMvc mvc;
+    @Autowired com.zestora.catalog.ProductRepository productRepo;
     @Autowired ObjectMapper json;
 
     private static final String EVE_PASSWORD = TestSecrets.random(12);
@@ -274,5 +275,26 @@ class OrderFlowIntegrationTest {
         long fish = productId("Fish Curry Meals");                                                       // Coastal Bites, not Spice Garden
         send(put("/api/v1/partner/products/" + fish), owner(), "{\"price\":1}", 403);
         send(put("/api/v1/partner/products/" + butter), customer(), "{\"price\":1}", 403);
+    }
+    @Test @Order(16)
+    void anItemWithoutAListedPriceIsShownButCanNeverBeOrdered() throws Exception {
+        long restaurantId = getJson("/api/v1/partner/restaurant", owner(), 200).at("/data/restaurant/id").asLong();
+        com.zestora.catalog.Product crab = new com.zestora.catalog.Product();
+        crab.setRestaurantId(restaurantId);
+        crab.setName("Seasonal Crab Test");
+        crab.setCategory("Sea Food");
+        crab.setPrice(null);          // the menu says "seasonal": no price, no veg flag
+        productRepo.save(crab);
+
+        JsonNode item = null;
+        for (JsonNode i : body(mvc.perform(get("/api/v1/restaurants/" + restaurantId)).andReturn()).at("/data/items"))
+            if (i.get("name").asText().equals("Seasonal Crab Test")) item = i;
+        assertThat(item).isNotNull();
+        assertThat(item.has("price")).as("no price is invented").isFalse();
+        assertThat(item.has("veg")).as("no veg status is invented").isFalse();
+
+        JsonNode err = send(post("/api/v1/orders"), customer(),
+                "{\"items\":[{\"productId\":" + item.get("id").asLong() + ",\"quantity\":1}]," + ADDRESS + "}", 409);
+        assertThat(err.at("/error/message").asText()).contains("no listed price");
     }
 }

@@ -226,3 +226,48 @@ describe('order tracker', () => {
     expect(screen.getByText(/Out of stock/)).toBeInTheDocument();
   });
 });
+
+describe('menus with facts the restaurant did not publish', () => {
+  const open = (items: unknown[], restaurant = restaurants[0]) =>
+    mockApi({ 'POST /auth/refresh': noSession, 'GET /restaurants/1': () => ({ data: { restaurant, items } }) });
+  const renderMenu = () => renderApp(<Routes><Route path="/restaurants/:id" element={<RestaurantPage />} /></Routes>, '/restaurants/1');
+
+  it('shows "Price on request" and blocks ordering when no price is listed (the API omits null fields)', async () => {
+    open([product({ name: 'Crab Masala', price: undefined, veg: undefined })]);
+    renderMenu();
+    expect(await screen.findByText('Price on request')).toBeInTheDocument();
+    const add = screen.getByRole('button', { name: 'Add Crab Masala' });
+    expect(add).toBeDisabled();
+    expect(add).toHaveTextContent('Ask restaurant');
+  });
+
+  it('draws no veg / non-veg dot when the menu does not say, and the right dot when it does', async () => {
+    open([
+      product({ id: 1, name: 'Mystery Dish', veg: undefined }),
+      product({ id: 2, name: 'Green Salad', veg: true }),
+      product({ id: 3, name: 'Chicken 65', veg: false }),
+    ]);
+    renderMenu();
+    await screen.findByText('Mystery Dish');
+    expect(screen.getAllByTitle('Vegetarian')).toHaveLength(1);
+    expect(screen.getAllByTitle('Non-vegetarian')).toHaveLength(1);
+  });
+
+  it('prices a multi-option dish "onwards" from its cheapest variant', async () => {
+    open([product({ name: 'Tom Yum Soup', price: 100, variants: [{ id: 1, name: 'Veg', price: 100 }, { id: 2, name: 'Chicken', price: 120 }] })]);
+    renderMenu();
+    expect(await screen.findByText(/₹100/)).toHaveTextContent('onwards');
+  });
+
+  it('shows the logo and hides delivery time / minimum order that are unknown', async () => {
+    const layali = { ...restaurants[0], id: 9, name: 'Layali Arabia Restaurant', imageUrl: '/restaurants/layali-arabia-logo.webp', deliveryMin: 0, deliveryMax: 0, minOrder: 0, reviewCount: 0, cuisines: ['Arabian'] };
+    mockApi({ 'POST /auth/refresh': noSession, 'GET /restaurants?vegOnly=false': () => ({ data: [layali, { ...restaurants[0], id: 2, name: 'Spice Garden' }] }) });
+    renderApp(<HomePage />);
+    const logo = await screen.findByAltText('Layali Arabia Restaurant logo');
+    expect(logo).toHaveAttribute('src', '/restaurants/layali-arabia-logo.webp');
+    expect(screen.getAllByRole('img')).toHaveLength(1); // the restaurant without a logo shows none
+    const card = logo.closest('a')!;
+    expect(card).toHaveTextContent('Bhatkal');
+    expect(card).not.toHaveTextContent('min');
+  });
+});

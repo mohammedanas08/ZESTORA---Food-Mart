@@ -3,7 +3,7 @@
 Created by the `bhatkal` seed profile. Each restaurant owner signs in at the app with the email below and the
 `DEMO_PASSWORD` from your `backend/.env`, and lands on the kitchen console (orders + menu).
 The emails are fake (`@zestora.local`); nothing is sent to any real business.
-Places come from OpenStreetMap (c) OpenStreetMap contributors, ODbL. **Menus and prices are samples.**
+Places come from OpenStreetMap (c) OpenStreetMap contributors, ODbL. **Menus and prices are samples**, except rows marked (real menu).
 
 | Restaurant | Town | Menu type | Email |
 |---|---|---|---|
@@ -20,5 +20,6 @@ Places come from OpenStreetMap (c) OpenStreetMap contributors, ODbL. **Menus and
 | ARM Machalee Restaurant | Honnavar | Coastal seafood | `arm-machalee-restaurant-honnavar@zestora.local` |
 | Shiv Sagar Restaurant | Honnavar | Udupi / South Indian | `shiv-sagar-restaurant-honnavar@zestora.local` |
 | Kamat Restaurant | Honnavar | Udupi / South Indian | `kamat-restaurant-honnavar@zestora.local` |
+| Layali Arabia Restaurant | Bhatkal | Arabian, Asian, Fast food, Seafood (real menu) | `layali-arabia-restaurant@zestora.local` |
 
 Local development only. Never run the `bhatkal` profile against a production database.
