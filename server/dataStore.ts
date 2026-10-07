@@ -479,7 +479,9 @@ class ZestoraStore {
     if (order.status === newStatus) return { success: true, order };
 
     const allowed = validTransitions[order.status];
-    if (allowed && !allowed.includes(newStatus) && newStatus !== 'CANCELLED') {
+    const cancelBlocked = ['PICKED_UP', 'ON_THE_WAY', 'ARRIVING', 'DELIVERED', 'CANCELLED', 'REFUND_PENDING', 'REFUNDED'];
+    const cancelOk = newStatus === 'CANCELLED' && !cancelBlocked.includes(order.status);
+    if (allowed && !allowed.includes(newStatus) && !cancelOk) {
       return {
         success: false,
         message: `Illegal status transition from ${order.status} to ${newStatus}`,

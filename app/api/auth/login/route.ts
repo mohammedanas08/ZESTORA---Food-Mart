@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { SESSION_COOKIE, ROLE_HINT_COOKIE, signSession, sessionCookieOptions, roleHintCookieOptions } from '@/server/session';
 import { zestoraStore } from '@/server/dataStore';
 import { verifyPassword, sanitizeUser } from '@/server/passwordUtils';
 
@@ -59,19 +60,8 @@ export async function POST(request: Request) {
     });
 
     // --- Set HTTP cookies for session (used by middleware and auth helpers) ---
-    response.cookies.set('zestora_token', matchedUser.id, {
-      path: '/',
-      httpOnly: false, // readable by middleware (Edge runtime)
-      maxAge: 60 * 60 * 24 * 7, // 7 days
-      sameSite: 'lax',
-    });
-
-    response.cookies.set('zestora_role', userRole, {
-      path: '/',
-      httpOnly: false,
-      maxAge: 60 * 60 * 24 * 7,
-      sameSite: 'lax',
-    });
+    response.cookies.set(SESSION_COOKIE, signSession(matchedUser.id, userRole), sessionCookieOptions);
+    response.cookies.set(ROLE_HINT_COOKIE, userRole, roleHintCookieOptions);
 
     return response;
   } catch (error: any) {

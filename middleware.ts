@@ -5,7 +5,7 @@ import type { NextRequest } from 'next/server';
 // Zestora Role-Based Access Control Middleware
 //
 // SECURITY RULES:
-// 1. Role is ALWAYS read from server-set cookies — never from client headers.
+// 1. Role is ALWAYS read from the HMAC-signed httpOnly session token — never from a plain cookie or header.
 // 2. /admin/* pages require ADMIN or SUPER_ADMIN role.
 // 3. /api/v1/admin/* and /api/admin/* endpoints require ADMIN role.
 // 4. Customer-facing protected pages require any valid session.
@@ -13,22 +13,52 @@ import type { NextRequest } from 'next/server';
 // 6. Authenticated CUSTOMERs trying /admin are redirected to /.
 // ─────────────────────────────────────────────────────────────────────────────
 
-function getSessionFromRequest(request: NextRequest): {
+// Edge-runtime verification of the HMAC-signed session token (Web Crypto).
+// Mirrors server/session.ts — the role is taken from the SIGNED token, never from a plain cookie.
+async function verifyToken(token: string | undefined): Promise<{ sub: string; role: string } | null> {
+  if (!token) return null;
+  const [payload, sig] = token.split('.');
+  if (!payload || !sig) return null;
+  const secret = process.env.SESSION_SECRET && process.env.SESSION_SECRET.length >= 32
+    ? process.env.SESSION_SECRET
+    : process.env.NODE_ENV === 'production'
+      ? null
+      : 'dev-only-insecure-session-secret-change-me';
+  if (!secret) return null;
+  const key = await crypto.subtle.importKey(
+    'raw', new TextEncoder().encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']
+  );
+  const mac = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(payload));
+  const expected = Array.from(new Uint8Array(mac)).map((b) => b.toString(16).padStart(2, '0')).join('');
+  if (expected.length !== sig.length) return null;
+  let diff = 0;
+  for (let i = 0; i < expected.length; i++) diff |= expected.charCodeAt(i) ^ sig.charCodeAt(i);
+  if (diff !== 0) return null;
+  try {
+    const b64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+    const data = JSON.parse(atob(b64));
+    if (typeof data.exp !== 'number' || data.exp < Date.now() / 1000) return null;
+    return { sub: data.sub, role: data.role };
+  } catch {
+    return null;
+  }
+}
+
+async function getSessionFromRequest(request: NextRequest): Promise<{
   token: string | null;
   role: string | null;
-} {
-  const token = request.cookies.get('zestora_token')?.value || null;
-  const role = request.cookies.get('zestora_role')?.value || null;
-  return { token, role };
+}> {
+  const session = await verifyToken(request.cookies.get('zestora_token')?.value);
+  return session ? { token: session.sub, role: session.role } : { token: null, role: null };
 }
 
 function isAdminRole(role: string | null): boolean {
   return role === 'ADMIN' || role === 'SUPER_ADMIN';
 }
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const { token, role } = getSessionFromRequest(request);
+  const { token, role } = await getSessionFromRequest(request);
 
   // ── 1. PROTECT ADMIN API ROUTES (/api/admin/* and /api/v1/admin/*) ──────────
   if (
@@ -77,6 +107,25 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // ── 2b. PROTECT PARTNER DASHBOARDS ──────────────────────────────────────────
+  const partnerPaths: Array<[string, string[]]> = [
+    ['/restaurant-dashboard', ['RESTAURANT_OWNER', 'RESTAURANT_MANAGER', 'ADMIN', 'SUPER_ADMIN']],
+    ['/delivery-dashboard', ['DELIVERY_PARTNER', 'ADMIN', 'SUPER_ADMIN']],
+  ];
+  for (const [base, roles] of partnerPaths) {
+    if (pathname === base || pathname.startsWith(base + '/')) {
+      if (!token) {
+        const loginUrl = new URL('/login', request.url);
+        loginUrl.searchParams.set('redirect', pathname);
+        return NextResponse.redirect(loginUrl);
+      }
+      if (!role || !roles.includes(role)) {
+        return NextResponse.redirect(new URL('/', request.url));
+      }
+      return NextResponse.next();
+    }
+  }
+
   // ── 3. PROTECT CUSTOMER-ONLY PAGES ─────────────────────────────────────────
   const customerProtectedPaths = [
     '/checkout',
@@ -120,6 +169,11 @@ export const config = {
     // Admin pages
     '/admin',
     '/admin/:path*',
+    // Partner dashboards
+    '/restaurant-dashboard',
+    '/restaurant-dashboard/:path*',
+    '/delivery-dashboard',
+    '/delivery-dashboard/:path*',
     // Admin APIs
     '/api/admin/:path*',
     '/api/v1/admin/:path*',

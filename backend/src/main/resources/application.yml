@@ -1,0 +1,64 @@
+spring:
+  application:
+    name: zestora-backend
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+  datasource:
+    # Default: the local Docker database (backend/docker-compose.yml, port 5433).
+    # Hosted later, e.g. Supabase direct connection:
+    # jdbc:postgresql://db.<project-ref>.supabase.co:5432/postgres?sslmode=require
+    # If you must use the transaction pooler (port 6543) add &prepareThreshold=0
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5433/zestora}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:postgres}
+    hikari:
+      maximum-pool-size: ${DB_POOL_SIZE:10}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate          # schema is owned by Flyway, never by Hibernate
+    properties:
+      hibernate.jdbc.time_zone: UTC
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  jackson:
+    default-property-inclusion: non_null
+
+server:
+  port: ${PORT:8080}
+  forward-headers-strategy: framework
+  error:
+    include-message: never
+    include-stacktrace: never
+
+management:
+  endpoints.web.exposure.include: health,info
+  endpoint.health.show-details: never
+
+zestora:
+  jwt:
+    secret: ${JWT_SECRET:}                 # REQUIRED, min 32 chars (no default on purpose)
+    access-ttl-minutes: 15
+    refresh-ttl-days: 14
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:5173}
+  cookie:
+    secure: ${COOKIE_SECURE:false}         # true in production (HTTPS)
+  pricing:
+    delivery-fee: 40
+    free-delivery-threshold: 499
+    platform-fee: 5
+    packaging-fee: 15
+    gst-rate: 0.05
+    commission-rate: 0.20
+  razorpay:
+    key-id: ${RAZORPAY_KEY_ID:}
+    key-secret: ${RAZORPAY_KEY_SECRET:}
+    webhook-secret: ${RAZORPAY_WEBHOOK_SECRET:}
+  cloudinary:
+    cloud-name: ${CLOUDINARY_CLOUD_NAME:}
+    api-key: ${CLOUDINARY_API_KEY:}
+    api-secret: ${CLOUDINARY_API_SECRET:}
+  rate-limit:
+    auth-per-minute: 10

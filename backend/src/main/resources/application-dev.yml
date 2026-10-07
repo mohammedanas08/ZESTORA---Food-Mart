@@ -1,0 +1,10 @@
+# Dev profile: seeds demo data, allows the payment simulator, relaxed logging.
+zestora:
+  dev:
+    seed-demo-data: true
+    allow-payment-simulation: true
+  jwt:
+    secret: ${JWT_SECRET:dev-only-jwt-secret-change-me-0123456789abcdef}
+logging:
+  level:
+    com.zestora: DEBUG

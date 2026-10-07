@@ -28,43 +28,31 @@ export default function AdminProtectedRoute({ children }: AdminProtectedRoutePro
   const [status, setStatus] = useState<'checking' | 'authorized' | 'unauthorized'>('checking');
 
   useEffect(() => {
-    // Read role from server-set cookie (not from React state which hydrates async)
-    const cookieRole =
-      typeof document !== 'undefined'
-        ? document.cookie
-            .split('; ')
-            .find((row) => row.startsWith('zestora_role='))
-            ?.split('=')[1]
-        : null;
-
-    const cookieToken =
-      typeof document !== 'undefined'
-        ? document.cookie
-            .split('; ')
-            .find((row) => row.startsWith('zestora_token='))
-            ?.split('=')[1]
-        : null;
-
-    const effectiveRole = cookieRole || currentRole;
-    const isLoggedIn = !!cookieToken;
-
-    if (!isLoggedIn) {
-      // Not authenticated at all
-      router.replace(`/login?redirect=${encodeURIComponent(pathname)}`);
-      setStatus('unauthorized');
-      return;
-    }
-
-    if (effectiveRole !== 'ADMIN' && effectiveRole !== 'SUPER_ADMIN') {
-      // Authenticated as non-admin (e.g. CUSTOMER) → redirect to home
-      router.replace('/');
-      setStatus('unauthorized');
-      return;
-    }
-
-    // Valid admin session
-    setStatus('authorized');
-  }, [currentRole, isAuthenticated, pathname, router]);
+    // The session token is httpOnly, so ask the server who we are (role comes from the verified session).
+    let cancelled = false;
+    fetch('/api/auth/me')
+      .then((r) => r.json())
+      .then((d) => {
+        if (cancelled) return;
+        if (!d.authenticated || !d.user) {
+          router.replace(`/login?redirect=${encodeURIComponent(pathname)}`);
+          setStatus('unauthorized');
+        } else if (d.user.role !== 'ADMIN' && d.user.role !== 'SUPER_ADMIN') {
+          router.replace('/');
+          setStatus('unauthorized');
+        } else {
+          setStatus('authorized');
+        }
+      })
+      .catch(() => {
+        if (cancelled) return;
+        router.replace('/login');
+        setStatus('unauthorized');
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [pathname, router]);
 
   if (status === 'checking') {
     return (

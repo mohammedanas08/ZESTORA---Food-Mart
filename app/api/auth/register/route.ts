@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { SESSION_COOKIE, ROLE_HINT_COOKIE, signSession, sessionCookieOptions, roleHintCookieOptions } from '@/server/session';
 import { zestoraStore } from '@/server/dataStore';
 import { hashPassword, sanitizeUser } from '@/server/passwordUtils';
 import { User } from '@/types';
@@ -70,19 +71,8 @@ export async function POST(request: Request) {
     });
 
     // --- Set session cookies ---
-    response.cookies.set('zestora_token', newUser.id, {
-      path: '/',
-      httpOnly: false,
-      maxAge: 60 * 60 * 24 * 7,
-      sameSite: 'lax',
-    });
-
-    response.cookies.set('zestora_role', 'CUSTOMER', {
-      path: '/',
-      httpOnly: false,
-      maxAge: 60 * 60 * 24 * 7,
-      sameSite: 'lax',
-    });
+    response.cookies.set(SESSION_COOKIE, signSession(newUser.id, 'CUSTOMER'), sessionCookieOptions);
+    response.cookies.set(ROLE_HINT_COOKIE, 'CUSTOMER', roleHintCookieOptions);
 
     return response;
   } catch (error: any) {

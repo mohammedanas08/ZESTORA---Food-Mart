@@ -1,39 +1,25 @@
 import { NextResponse } from 'next/server';
 import { zestoraStore } from '@/server/dataStore';
-import { getAuthenticatedUser } from '@/server/auth';
+import { getAuthenticatedUser, canViewOrder, unauthorized } from '@/server/auth';
 
 export async function GET(request: Request) {
   try {
     const authUser = getAuthenticatedUser(request);
+    if (!authUser) return unauthorized();
+
     const { searchParams } = new URL(request.url);
     const restaurantId = searchParams.get('restaurantId');
     const status = searchParams.get('status');
 
-    let orders = zestoraStore.getOrders();
+    // Scope to what this role is allowed to see (customer: own, restaurant: own, rider: open/assigned, admin: all).
+    let orders = zestoraStore.getOrders().filter((o) => canViewOrder(authUser, o));
 
-    // CUSTOMER DATA ISOLATION:
-    // If the authenticated user is a CUSTOMER, strictly return only their own orders!
-    if (authUser && authUser.role === 'CUSTOMER') {
-      orders = orders.filter((o) => o.customerId === authUser.id);
-    } else {
-      const customerId = searchParams.get('customerId');
-      if (customerId) {
-        orders = orders.filter((o) => o.customerId === customerId);
-      }
-    }
+    const customerId = searchParams.get('customerId');
+    if (customerId) orders = orders.filter((o) => o.customerId === customerId);
+    if (restaurantId) orders = orders.filter((o) => o.restaurantId === restaurantId);
+    if (status) orders = orders.filter((o) => o.status === status);
 
-    if (restaurantId) {
-      orders = orders.filter((o) => o.restaurantId === restaurantId);
-    }
-    if (status) {
-      orders = orders.filter((o) => o.status === status);
-    }
-
-    return NextResponse.json({
-      success: true,
-      data: orders,
-      total: orders.length,
-    });
+    return NextResponse.json({ success: true, data: orders, total: orders.length });
   } catch (error: any) {
     return NextResponse.json(
       { success: false, message: error.message || 'Failed to fetch orders' },

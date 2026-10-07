@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { zestoraStore } from '@/server/dataStore';
+import { getAuthenticatedUser, canViewOrder, unauthorized, forbidden } from '@/server/auth';
 
 export async function POST(request: Request) {
   try {
@@ -20,6 +21,15 @@ export async function POST(request: Request) {
         { status: 404 }
       );
     }
+
+    const authUser = getAuthenticatedUser(request);
+    if (!authUser) return unauthorized();
+    if (!canViewOrder(authUser, order)) return forbidden('You do not have access to this order.');
+    // Demo-only endpoint: marks an order as paid WITHOUT a real payment. Disabled in production.
+    if (process.env.NODE_ENV === 'production' || process.env.ALLOW_PAYMENT_SIMULATION === 'false') {
+      return forbidden('Payment simulation is disabled.');
+    }
+    if (order.customerId !== authUser.id) return forbidden('Only the order owner can simulate payment.');
 
     const testPaymentId = `pay_test_${Date.now().toString(36)}_${Math.floor(1000 + Math.random() * 9000)}`;
 

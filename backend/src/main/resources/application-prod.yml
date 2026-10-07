@@ -1,0 +1,7 @@
+# Prod profile: no seed data, no payment simulator. JWT_SECRET, DATABASE_*, RAZORPAY_* must come from the environment.
+zestora:
+  dev:
+    seed-demo-data: false
+    allow-payment-simulation: false
+  cookie:
+    secure: true

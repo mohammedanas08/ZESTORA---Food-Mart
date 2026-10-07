@@ -1,4 +1,5 @@
 import { Restaurant, Product, GroceryStore, ServiceArea, Coupon, User, Order } from '@/types';
+import { hashPassword } from './passwordUtils';
 
 export const SEED_USERS: User[] = [
   {
@@ -7,7 +8,7 @@ export const SEED_USERS: User[] = [
     email: 'customer@zestora.com',
     phone: '+91 98765 43210',
     role: 'CUSTOMER',
-    passwordHash: 'hashed:customer123', // plaintext equivalent: customer123
+    passwordHash: hashPassword('customer123'),
     avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
   },
   {
@@ -16,7 +17,7 @@ export const SEED_USERS: User[] = [
     email: 'admin@zestora.com',
     phone: '+91 90000 00001',
     role: 'ADMIN',
-    passwordHash: 'hashed:admin123', // plaintext equivalent: admin123
+    passwordHash: hashPassword('admin123'),
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80',
   },
   {
@@ -25,7 +26,7 @@ export const SEED_USERS: User[] = [
     email: 'spicegarden@zestora.local',
     phone: '+91 98800 11223',
     role: 'RESTAURANT_OWNER',
-    passwordHash: 'hashed:rest123',
+    passwordHash: hashPassword('rest123'),
     avatar: 'https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=150&auto=format&fit=crop&q=80',
   },
   {
@@ -34,7 +35,7 @@ export const SEED_USERS: User[] = [
     email: 'rahul.rider@zestora.local',
     phone: '+91 94488 55667',
     role: 'DELIVERY_PARTNER',
-    passwordHash: 'hashed:rider123',
+    passwordHash: hashPassword('rider123'),
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
   },
 ];

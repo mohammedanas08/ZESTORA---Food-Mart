@@ -2,7 +2,6 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { CartItem, CartPricing, Coupon, Address, Role, User } from '@/types';
-import { SEED_USERS } from '@/server/seedData';
 
 interface LoginResult {
   success: boolean;
@@ -90,12 +89,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         .find((r) => r.startsWith('zestora_role='))
         ?.split('=')[1] as Role | undefined;
 
-      const cookieToken = document.cookie
-        .split('; ')
-        .find((r) => r.startsWith('zestora_token='))
-        ?.split('=')[1];
-
-      if (cookieToken && cookieRole) {
+      // The signed session token is httpOnly (unreadable by scripts). The role cookie is only a UI hint;
+      // the server re-verifies the real session on every request and via /api/auth/me below.
+      if (cookieRole) {
         // Try to restore user from localStorage cache
         const cachedUser = localStorage.getItem('zestora_user');
         if (cachedUser) {
@@ -105,14 +101,16 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           setCurrentRole(cookieRole);
           setIsAuthenticated(true);
         } else {
-          // Fallback: find from seed data by token
-          const seedUser = SEED_USERS.find((u) => u.id === cookieToken);
-          if (seedUser) {
-            const { passwordHash, ...safeUser } = seedUser as any;
-            setCurrentUser({ ...safeUser, role: cookieRole });
-            setCurrentRole(cookieRole);
-            setIsAuthenticated(true);
-          }
+          fetch('/api/auth/me')
+            .then((r) => r.json())
+            .then((d) => {
+              if (d.authenticated && d.user) {
+                setCurrentUser(d.user);
+                setCurrentRole(d.user.role);
+                setIsAuthenticated(true);
+              }
+            })
+            .catch(() => {});
         }
       }
     } catch {

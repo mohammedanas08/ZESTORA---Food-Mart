@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { zestoraStore } from '@/server/dataStore';
+import { getAuthenticatedUser, canViewOrder, unauthorized, forbidden } from '@/server/auth';
 import { razorpayService } from '@/server/services/razorpayService';
 
 export async function POST(request: Request) {
@@ -21,6 +22,10 @@ export async function POST(request: Request) {
         { status: 404 }
       );
     }
+
+    const authUser = getAuthenticatedUser(request);
+    if (!authUser) return unauthorized();
+    if (!canViewOrder(authUser, order)) return forbidden('You do not have access to this order.');
 
     // Authoritative calculation from server-side order totalAmount
     // Never trust frontend-supplied amounts!

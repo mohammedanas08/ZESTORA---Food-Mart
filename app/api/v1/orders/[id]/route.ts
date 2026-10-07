@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { zestoraStore } from '@/server/dataStore';
-import { getAuthenticatedUser } from '@/server/auth';
+import { getAuthenticatedUser, canViewOrder, checkOrderTransition, unauthorized, forbidden } from '@/server/auth';
 
 export async function GET(
   request: Request,
@@ -16,17 +16,9 @@ export async function GET(
       );
     }
 
-    // IDOR Protection: If requester is a customer, verify ownership
-    if (authUser && authUser.role === 'CUSTOMER' && order.customerId !== authUser.id) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: 'Forbidden',
-          message: 'HTTP 403 FORBIDDEN: You do not have permission to view another customer\'s order.',
-        },
-        { status: 403 }
-      );
-    }
+    if (!authUser) return unauthorized();
+    // IDOR protection: only people involved in the order (or admins) may view it.
+    if (!canViewOrder(authUser, order)) return forbidden("You do not have permission to view this order.");
 
     return NextResponse.json({ success: true, data: order });
   } catch (error: any) {
@@ -42,6 +34,9 @@ export async function PATCH(
   { params }: { params: { id: string } }
 ) {
   try {
+    const authUser = getAuthenticatedUser(request);
+    if (!authUser) return unauthorized();
+
     const body = await request.json();
     const { status, note, rejectionReason } = body;
 
@@ -51,6 +46,13 @@ export async function PATCH(
         { status: 400 }
       );
     }
+
+    const existing = zestoraStore.getOrderById(params.id);
+    if (!existing) {
+      return NextResponse.json({ success: false, message: 'Order not found' }, { status: 404 });
+    }
+    const denied = checkOrderTransition(authUser, existing, status);
+    if (denied) return forbidden(denied);
 
     const result = zestoraStore.updateOrderStatus(params.id, status, note, rejectionReason);
 

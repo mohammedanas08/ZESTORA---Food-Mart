@@ -7,7 +7,7 @@ This guide describes how to deploy the Zestora food delivery and quick-commerce 
 ## 1. Prerequisites
 
 - **Node.js**: v18.17.0+ or v20+
-- **PostgreSQL Database**: v14+ (hosted on Supabase, Neon, AWS RDS, or Railway)
+- **PostgreSQL Database**: v14+ (local Docker PostgreSQL for development; hosted on Supabase, Neon, AWS RDS, or Railway later)
 - **Environment Configuration**: Set up according to `.env.example`
 
 ---
