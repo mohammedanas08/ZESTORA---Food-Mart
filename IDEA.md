@@ -78,5 +78,5 @@ average order value · rider utilisation · cancellation rate · rating (food / 
 - Regulatory: FSSAI for partners, GST invoicing, rider labour rules.
 
 ## Current state
-A working Next.js prototype covers the four actors with demo data. See `PROGRESS.md` for status and
-`ARCHITECTURE.md` for the design and the target production stack.
+A working Spring Boot API and React web app cover all four actors (customer, restaurant, rider, admin) with demo data around Bhatkal.
+See `PROGRESS.md` for status and `ARCHITECTURE.md` for the design.

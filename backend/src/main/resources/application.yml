@@ -9,8 +9,8 @@ spring:
     # jdbc:postgresql://db.<project-ref>.supabase.co:5432/postgres?sslmode=require
     # If you must use the transaction pooler (port 6543) add &prepareThreshold=0
     url: ${DATABASE_URL:jdbc:postgresql://localhost:5433/zestora}
-    username: ${DATABASE_USERNAME:postgres}
-    password: ${DATABASE_PASSWORD:postgres}
+    username: ${DATABASE_USERNAME}          # no default: set it in backend/.env (dev) or the environment (prod)
+    password: ${DATABASE_PASSWORD}          # no default, same
     hikari:
       maximum-pool-size: ${DB_POOL_SIZE:10}
   jpa:
@@ -51,7 +51,6 @@ zestora:
     platform-fee: 5
     packaging-fee: 15
     gst-rate: 0.05
-    commission-rate: 0.20
   razorpay:
     key-id: ${RAZORPAY_KEY_ID:}
     key-secret: ${RAZORPAY_KEY_SECRET:}

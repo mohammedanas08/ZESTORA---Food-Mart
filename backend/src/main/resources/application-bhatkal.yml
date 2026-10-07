@@ -1,0 +1,7 @@
+# Combine with dev:  mvn spring-boot:run -Dspring-boot.run.profiles=dev,bhatkal
+# Adds real Bhatkal-area restaurants (OpenStreetMap) with SAMPLE menus and owner logins (see backend/DEMO_ACCOUNTS.md).
+# Local development only: never use against a production database.
+zestora:
+  dev:
+    seed-bhatkal: true
+    hide-sample-restaurants: true

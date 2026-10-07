@@ -1,13 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState, type FormEvent } from 'react';
 import { api } from '../../api/client';
-import type { AdminMetrics, AuditEntry, Coupon, Order, Role, User } from '../../api/types';
+import type { AdminMetrics, AuditEntry, Coupon, Order, Restaurant, Role, User } from '../../api/types';
 import { useAuth } from '../../auth/AuthContext';
 import { ErrorBox, Field, PageTitle, Spinner, StatusBadge } from '../../components/ui';
 import { dateTime, money } from '../../lib/format';
 import { useStompTopic } from '../../realtime/useStompTopic';
 
-const TABS = ['Overview', 'Orders', 'Users', 'Coupons', 'Audit log'] as const;
+const TABS = ['Overview', 'Orders', 'Users', 'Partners', 'Coupons', 'Audit log'] as const;
 type Tab = (typeof TABS)[number];
 
 export default function AdminPage() {
@@ -15,14 +15,15 @@ export default function AdminPage() {
   return (
     <>
       <PageTitle sub="Platform control centre">Admin</PageTitle>
-      <div className="mb-4 flex flex-wrap gap-2" role="tablist">
+      <div className="-mx-4 mb-4 flex gap-2 overflow-x-auto px-4 pb-1" role="tablist">
         {TABS.map((t) => (
-          <button key={t} role="tab" aria-selected={tab === t} className={tab === t ? 'btn-primary' : 'btn-outline'} onClick={() => setTab(t)}>{t}</button>
+          <button key={t} role="tab" aria-selected={tab === t} className={`shrink-0 ${tab === t ? 'btn-primary' : 'btn-outline'}`} onClick={() => setTab(t)}>{t}</button>
         ))}
       </div>
       {tab === 'Overview' && <Overview />}
       {tab === 'Orders' && <Orders />}
       {tab === 'Users' && <Users />}
+      {tab === 'Partners' && <Partners />}
       {tab === 'Coupons' && <Coupons />}
       {tab === 'Audit log' && <Audit />}
     </>
@@ -119,8 +120,123 @@ function Users() {
         {create.error ? <ErrorBox error={create.error} /> : null}
         {create.isSuccess && <p className="text-sm text-green-700">Account created.</p>}
         <button className="btn-primary w-full" disabled={create.isPending}>Create</button>
-        <p className="text-xs text-stone-500">Link a restaurant owner to a restaurant, or add a rider profile, with the admin API (`POST /admin/restaurants`, `/admin/riders`).</p>
+        <p className="text-xs text-stone-500">After creating a restaurant owner or rider, finish onboarding under the Partners tab.</p>
       </form>
+    </div>
+  );
+}
+
+/** Onboarding: link a restaurant-staff account to a new restaurant, and give a rider account its rider profile. */
+export function Partners() {
+  const qc = useQueryClient();
+  const users = useQuery({ queryKey: ['admin-users-all'], queryFn: () => api<User[]>('/admin/users?size=100') });
+  const restaurants = useQuery({ queryKey: ['restaurants', '', false], queryFn: () => api<Restaurant[]>('/restaurants?vegOnly=false') });
+
+  const owners = users.data?.filter((u) => u.role === 'RESTAURANT_OWNER' || u.role === 'RESTAURANT_MANAGER') ?? [];
+  const riders = users.data?.filter((u) => u.role === 'DELIVERY_PARTNER') ?? [];
+
+  const [r, setR] = useState({ ownerUserId: '', name: '', cuisines: '', description: '', vegOnly: false, commissionPct: '20' });
+  const createRestaurant = useMutation({
+    mutationFn: () =>
+      api<number>('/admin/restaurants', {
+        method: 'POST',
+        body: {
+          ownerUserId: Number(r.ownerUserId),
+          name: r.name,
+          cuisines: r.cuisines || undefined,
+          description: r.description || undefined,
+          vegOnly: r.vegOnly,
+          commissionRate: Number(r.commissionPct) / 100,
+        },
+      }),
+    onSuccess: () => {
+      setR({ ownerUserId: '', name: '', cuisines: '', description: '', vegOnly: false, commissionPct: '20' });
+      qc.invalidateQueries({ queryKey: ['restaurants'] });
+    },
+  });
+
+  const [d, setD] = useState({ userId: '', vehicleType: '', vehicleNumber: '' });
+  const createRider = useMutation({
+    mutationFn: () =>
+      api<number>('/admin/riders', {
+        method: 'POST',
+        body: { userId: Number(d.userId), vehicleType: d.vehicleType || undefined, vehicleNumber: d.vehicleNumber || undefined },
+      }),
+    onSuccess: () => setD({ userId: '', vehicleType: '', vehicleNumber: '' }),
+  });
+
+  if (users.isLoading) return <Spinner />;
+  if (users.error) return <ErrorBox error={users.error} />;
+
+  return (
+    <div className="grid gap-6 lg:grid-cols-2">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          createRestaurant.mutate();
+        }}
+        className="card h-fit space-y-3"
+        aria-label="Add restaurant"
+      >
+        <h2 className="font-bold">Add a restaurant</h2>
+        <p className="text-xs text-stone-500">First create the owner under Users (role RESTAURANT_OWNER), then link them here.</p>
+        <Field label="Owner account">
+          <select className="input" required value={r.ownerUserId} onChange={(e) => setR({ ...r, ownerUserId: e.target.value })}>
+            <option value="">Select an owner…</option>
+            {owners.map((u) => (
+              <option key={u.id} value={u.id}>{u.name} ({u.email})</option>
+            ))}
+          </select>
+        </Field>
+        <Field label="Restaurant name"><input className="input" required maxLength={150} value={r.name} onChange={(e) => setR({ ...r, name: e.target.value })} /></Field>
+        <Field label="Cuisines (comma separated)"><input className="input" value={r.cuisines} onChange={(e) => setR({ ...r, cuisines: e.target.value })} placeholder="Biryani, Coastal" /></Field>
+        <Field label="Description"><input className="input" maxLength={500} value={r.description} onChange={(e) => setR({ ...r, description: e.target.value })} /></Field>
+        <div className="grid grid-cols-2 gap-3">
+          <Field label="Commission %"><input className="input" inputMode="decimal" required value={r.commissionPct} onChange={(e) => setR({ ...r, commissionPct: e.target.value })} /></Field>
+          <label className="flex items-end gap-2 pb-2 text-sm"><input type="checkbox" checked={r.vegOnly} onChange={(e) => setR({ ...r, vegOnly: e.target.checked })} /> Pure veg</label>
+        </div>
+        {createRestaurant.error ? <ErrorBox error={createRestaurant.error} /> : null}
+        {createRestaurant.isSuccess && <p className="text-sm text-green-700">Restaurant created. The owner can now sign in and add a menu.</p>}
+        <button className="btn-primary w-full" disabled={createRestaurant.isPending}>Create restaurant</button>
+      </form>
+
+      <div className="space-y-6">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            createRider.mutate();
+          }}
+          className="card space-y-3"
+          aria-label="Add rider profile"
+        >
+          <h2 className="font-bold">Create a rider profile</h2>
+          <p className="text-xs text-stone-500">Create the account under Users (role DELIVERY_PARTNER) first.</p>
+          <Field label="Rider account">
+            <select className="input" required value={d.userId} onChange={(e) => setD({ ...d, userId: e.target.value })}>
+              <option value="">Select a rider…</option>
+              {riders.map((u) => (
+                <option key={u.id} value={u.id}>{u.name} ({u.email})</option>
+              ))}
+            </select>
+          </Field>
+          <div className="grid grid-cols-2 gap-3">
+            <Field label="Vehicle"><input className="input" value={d.vehicleType} onChange={(e) => setD({ ...d, vehicleType: e.target.value })} placeholder="Scooter" /></Field>
+            <Field label="Number plate"><input className="input" value={d.vehicleNumber} onChange={(e) => setD({ ...d, vehicleNumber: e.target.value })} /></Field>
+          </div>
+          {createRider.error ? <ErrorBox error={createRider.error} /> : null}
+          {createRider.isSuccess && <p className="text-sm text-green-700">Rider profile created.</p>}
+          <button className="btn-primary w-full" disabled={createRider.isPending}>Create rider profile</button>
+        </form>
+
+        <section className="card">
+          <h2 className="mb-2 font-bold">Restaurants ({restaurants.data?.length ?? 0})</h2>
+          <ul className="divide-y text-sm">
+            {restaurants.data?.map((x) => (
+              <li key={x.id} className="flex justify-between py-1.5"><span>{x.name}</span><span className="text-stone-500">{x.open ? 'open' : 'closed'}</span></li>
+            ))}
+          </ul>
+        </section>
+      </div>
     </div>
   );
 }

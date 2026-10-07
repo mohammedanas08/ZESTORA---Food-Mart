@@ -1,12 +1,13 @@
-# Local PostgreSQL for development. A hosted database can be used later by setting DATABASE_URL.
+# Local PostgreSQL for development. Credentials come from backend/.env (copy backend/.env.example).
+# A hosted database can be used later by setting DATABASE_URL, DATABASE_USERNAME and DATABASE_PASSWORD instead.
 services:
   db:
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: zestora
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ${POSTGRES_DB:-zestora}
+      POSTGRES_USER: ${DATABASE_USERNAME:?Set DATABASE_USERNAME in backend/.env}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:?Set DATABASE_PASSWORD in backend/.env}
     ports: ["5433:5432"]   # 5433 so it does not clash with a local PostgreSQL on 5432
-    volumes: [zestora-pg:/var/lib/postgresql/data]
+    volumes: [zestora-db-data:/var/lib/postgresql/data]
 volumes:
-  zestora-pg:
+  zestora-db-data:

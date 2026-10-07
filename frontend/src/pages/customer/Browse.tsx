@@ -32,10 +32,14 @@ export function HomePage() {
           <Link key={r.id} to={`/restaurants/${r.id}`} className="card block transition hover:shadow-md">
             <div className="flex items-start justify-between">
               <h2 className="text-lg font-bold">{r.name}</h2>
-              <span className="rounded bg-green-600 px-1.5 py-0.5 text-xs font-bold text-white">★ {Number(r.rating).toFixed(1)}</span>
+              {r.reviewCount > 0 ? (
+                <span className="rounded bg-green-600 px-1.5 py-0.5 text-xs font-bold text-white">★ {Number(r.rating).toFixed(1)}</span>
+              ) : (
+                <span className="rounded bg-stone-200 px-1.5 py-0.5 text-xs font-bold text-stone-600">New</span>
+              )}
             </div>
             <p className="text-sm text-stone-500">{r.cuisines.join(' • ')}</p>
-            <p className="mt-2 text-sm">{r.deliveryMin}–{r.deliveryMax} min · {r.costForTwo ? `${money(r.costForTwo)} for two` : ''}</p>
+            <p className="mt-2 text-sm">{r.city} · {r.deliveryMin}–{r.deliveryMax} min{r.costForTwo ? ` · ${money(r.costForTwo)} for two` : ''}</p>
             {!r.open && <p className="mt-1 text-sm font-semibold text-red-600">Currently closed</p>}
           </Link>
         ))}

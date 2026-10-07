@@ -76,10 +76,10 @@ export default function RiderPage() {
               <p className="text-sm"><span className="font-semibold">Pickup:</span> {o.restaurantName}</p>
               <p className="text-sm"><span className="font-semibold">Drop:</span> {o.customerName} · {o.address.street}, {o.address.area} {o.address.city}</p>
               {o.address.instructions && <p className="text-sm text-stone-500">Note: {o.address.instructions}</p>}
-              {o.customerPhone && <a className="text-sm text-brand underline" href={`tel:${o.customerPhone}`}>Call customer</a>}
+              {o.customerPhone && <a className="btn-outline w-full" href={`tel:${o.customerPhone}`}>Call customer</a>}
               <p className="text-sm">Earning: {money(o.deliveryFee + o.tip)} {o.paymentMethod === 'COD' && <strong className="text-red-600"> · Collect {money(o.total)}</strong>}</p>
               {finishing && (
-                <input className="input" inputMode="numeric" maxLength={4} placeholder="Customer's 4-digit code" aria-label="Delivery code" value={otp[o.id] ?? ''} onChange={(e) => setOtp({ ...otp, [o.id]: e.target.value })} />
+                <input className="input" inputMode="numeric" autoComplete="one-time-code" maxLength={4} placeholder="Customer's 4-digit code" aria-label="Delivery code" value={otp[o.id] ?? ''} onChange={(e) => setOtp({ ...otp, [o.id]: e.target.value })} />
               )}
               {next && (
                 <button className="btn-primary w-full" disabled={advance.isPending || (finishing && (otp[o.id] ?? '').length !== 4)} onClick={() => advance.mutate({ id: o.id, status: next.to, otp: finishing ? otp[o.id] : undefined })}>

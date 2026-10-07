@@ -20,7 +20,7 @@ declare global {
 let loading: Promise<void> | null = null;
 
 /** Loads Razorpay's checkout.js once, only when a real payment is about to start. */
-export function loadRazorpay(): Promise<void> {
+function loadRazorpay(): Promise<void> {
   if (window.Razorpay) return Promise.resolve();
   if (!loading) {
     loading = new Promise<void>((resolve, reject) => {

@@ -72,7 +72,7 @@ export function refreshSession(): Promise<AuthResponse | null> {
   return refreshing;
 }
 
-export interface RequestOptions {
+interface RequestOptions {
   method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
   body?: unknown;
   /** Skip the refresh-and-retry behaviour (used by the auth endpoints themselves). */

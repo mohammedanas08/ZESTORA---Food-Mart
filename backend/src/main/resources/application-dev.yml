@@ -1,10 +1,13 @@
 # Dev profile: seeds demo data, allows the payment simulator, relaxed logging.
+# Secrets are NOT in this file: they come from backend/.env (copy backend/.env.example) or real environment variables.
+spring:
+  config:
+    import: optional:file:./.env[.properties]
 zestora:
   dev:
     seed-demo-data: true
     allow-payment-simulation: true
-  jwt:
-    secret: ${JWT_SECRET:dev-only-jwt-secret-change-me-0123456789abcdef}
+    demo-password: ${DEMO_PASSWORD:}       # one shared password for every seeded demo account
 logging:
   level:
     com.zestora: DEBUG

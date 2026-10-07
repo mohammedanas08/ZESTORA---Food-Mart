@@ -11,6 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -37,9 +39,15 @@ class OrderFlowIntegrationTest {
     @ServiceConnection
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
 
+    @DynamicPropertySource
+    static void secrets(DynamicPropertyRegistry registry) {
+        TestSecrets.register(registry);
+    }
+
     @Autowired MockMvc mvc;
     @Autowired ObjectMapper json;
 
+    private static final String EVE_PASSWORD = TestSecrets.random(12);
     private final Map<String, String> tokens = new HashMap<>();
     private Long orderId;
     private String otp;
@@ -59,10 +67,10 @@ class OrderFlowIntegrationTest {
         return t;
     }
 
-    private String customer() throws Exception { return login("customer@zestora.com", "customer123"); }
-    private String admin() throws Exception { return login("admin@zestora.com", "admin123"); }
-    private String owner() throws Exception { return login("spicegarden@zestora.local", "rest123"); }
-    private String rider() throws Exception { return login("rahul.rider@zestora.local", "rider123"); }
+    private String customer() throws Exception { return login("customer@zestora.com", TestSecrets.DEMO_PASSWORD); }
+    private String admin() throws Exception { return login("admin@zestora.com", TestSecrets.DEMO_PASSWORD); }
+    private String owner() throws Exception { return login("spicegarden@zestora.local", TestSecrets.DEMO_PASSWORD); }
+    private String rider() throws Exception { return login("rahul.rider@zestora.local", TestSecrets.DEMO_PASSWORD); }
 
     private MockHttpServletRequestBuilder auth(MockHttpServletRequestBuilder b, String token) {
         return b.header("Authorization", "Bearer " + token);
@@ -112,7 +120,7 @@ class OrderFlowIntegrationTest {
     @Test @Order(3)
     void registrationCannotEscalateRole() throws Exception {
         JsonNode res = body(mvc.perform(post("/api/v1/auth/register").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"name\":\"Eve\",\"email\":\"eve@example.com\",\"password\":\"password123\",\"role\":\"SUPER_ADMIN\"}"))
+                .content("{\"name\":\"Eve\",\"email\":\"eve@example.com\",\"password\":\"" + EVE_PASSWORD + "\",\"role\":\"SUPER_ADMIN\"}"))
                 .andExpect(status().isOk()).andReturn());
         assertThat(res.at("/data/user/role").asText()).isEqualTo("CUSTOMER");
         assertThat(res.toString()).doesNotContain("passwordHash");
@@ -246,7 +254,7 @@ class OrderFlowIntegrationTest {
     @Test @Order(14)
     void refreshTokenRotatesAndReuseRevokesTheSession() throws Exception {
         MvcResult login = mvc.perform(post("/api/v1/auth/login").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"email\":\"eve@example.com\",\"password\":\"password123\"}")).andExpect(status().isOk()).andReturn();
+                .content("{\"email\":\"eve@example.com\",\"password\":\"" + EVE_PASSWORD + "\"}")).andExpect(status().isOk()).andReturn();
         var cookie = login.getResponse().getCookie("zestora_refresh");
         assertThat(cookie).isNotNull();
         assertThat(cookie.isHttpOnly()).isTrue();

@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 
 @Service
 public class PaymentService {
@@ -136,6 +135,6 @@ public class PaymentService {
 
     private String publicKey() {
         String k = props.razorpay().keyId();
-        return k == null || k.isBlank() ? "rzp_test_mock" : k;
+        return k == null ? "" : k;
     }
 }

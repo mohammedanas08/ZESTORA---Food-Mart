@@ -27,7 +27,7 @@ export function CartPage() {
       <PageTitle sub={`From ${cart.sourceName}`}>Your cart</PageTitle>
       <ul className="divide-y divide-stone-200 rounded-xl border border-stone-200 bg-white">
         {cart.lines.map((l) => (
-          <li key={l.key} className="flex items-center justify-between gap-3 p-3">
+          <li key={l.key} className="flex flex-col gap-3 p-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="font-semibold">{l.name}</p>
               <p className="text-xs text-stone-500">{[l.variantName, ...l.addonNames, l.notes].filter(Boolean).join(' · ')}</p>
@@ -37,14 +37,14 @@ export function CartPage() {
               <button className="btn-outline px-3" aria-label={`Decrease ${l.name}`} onClick={() => cart.setQuantity(l.key, l.quantity - 1)}>−</button>
               <span className="w-6 text-center">{l.quantity}</span>
               <button className="btn-outline px-3" aria-label={`Increase ${l.name}`} onClick={() => cart.setQuantity(l.key, l.quantity + 1)}>+</button>
-              <button className="text-sm text-red-600 underline" onClick={() => cart.remove(l.key)}>Remove</button>
+              <button className="ml-auto inline-flex min-h-[44px] items-center px-2 text-sm text-red-600 underline" onClick={() => cart.remove(l.key)}>Remove</button>
             </div>
           </li>
         ))}
       </ul>
-      <div className="mt-4 flex items-center justify-between">
+      <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-lg font-bold">Subtotal {money(cart.subtotal)}</p>
-        <button className="btn-primary" onClick={() => navigate(user ? '/checkout' : '/login', { state: { from: '/checkout' } })}>
+        <button className="btn-primary w-full sm:w-auto" onClick={() => navigate(user ? '/checkout' : '/login', { state: { from: '/checkout' } })}>
           {user ? 'Checkout' : 'Log in to checkout'}
         </button>
       </div>
@@ -105,9 +105,9 @@ export function CheckoutPage() {
   };
 
   return (
-    <>
+    <div className="pb-20 md:pb-0">
       <PageTitle sub={`From ${cart.sourceName}`}>Checkout</PageTitle>
-      <form onSubmit={submit} className="grid gap-6 md:grid-cols-[1fr_320px]">
+      <form id="checkout-form" onSubmit={submit} className="grid gap-6 md:grid-cols-[1fr_320px]">
         <div className="space-y-4">
           <section className="card space-y-3">
             <h2 className="font-bold">Delivery address</h2>
@@ -130,7 +130,7 @@ export function CheckoutPage() {
             {applied && <p className="text-sm text-green-700">{applied.code} applied, you save {money(applied.discount)}</p>}
             <div className="flex flex-wrap gap-2">
               {coupons.data?.map((c) => (
-                <button type="button" key={c.code} className="rounded-full border border-dashed border-brand px-3 py-1 text-xs text-brand-dark" onClick={() => applyCoupon(c.code)} title={c.description}>
+                <button type="button" key={c.code} className="inline-flex min-h-[40px] items-center rounded-full border border-dashed border-brand px-3 text-xs text-brand-dark" onClick={() => applyCoupon(c.code)} title={c.description}>
                   {c.code}
                 </button>
               ))}
@@ -165,10 +165,21 @@ export function CheckoutPage() {
           <div className="mt-2 flex justify-between border-t pt-2 text-base font-bold"><span>Total</span><span>{money(bill.total)}</span></div>
           <p className="pt-1 text-xs text-stone-500">The server confirms the exact amount when you place the order.</p>
           {place.error ? <ErrorBox error={place.error} /> : null}
-          <button className="btn-primary mt-2 w-full" disabled={place.isPending}>{place.isPending ? 'Placing order…' : 'Place order'}</button>
+          <button className="btn-primary mt-2 hidden w-full md:inline-flex" disabled={place.isPending}>{place.isPending ? 'Placing order…' : 'Place order'}</button>
         </aside>
       </form>
-    </>
+
+      {/* Phones: the total and the main action stay reachable while scrolling the long form. */}
+      <div className="fixed inset-x-0 bottom-0 z-30 flex items-center gap-3 border-t border-stone-200 bg-white px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 md:hidden">
+        <div className="min-w-0">
+          <p className="text-xs text-stone-500">Total (estimate)</p>
+          <p className="text-lg font-bold leading-tight">{money(bill.total)}</p>
+        </div>
+        <button type="submit" form="checkout-form" className="btn-primary ml-auto flex-1" disabled={place.isPending}>
+          {place.isPending ? 'Placing…' : `Place order · ${money(bill.total)}`}
+        </button>
+      </div>
+    </div>
   );
 }
 

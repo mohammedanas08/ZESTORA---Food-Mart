@@ -12,6 +12,7 @@ import com.zestora.user.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,10 +22,10 @@ import java.math.BigDecimal;
 /**
  * Demo data for local development ONLY (zestora.dev.seed-demo-data=true, enabled by the "dev" profile).
  * It never runs in production, and it only seeds an empty database.
- * Demo logins: customer@zestora.com / customer123, admin@zestora.com / admin123,
- *              spicegarden@zestora.local / rest123, rahul.rider@zestora.local / rider123
+ * Every demo account uses the password from the DEMO_PASSWORD environment variable (backend/.env).
  */
 @Component
+@Order(1)
 public class DevDataSeeder implements CommandLineRunner {
     private static final Logger log = LoggerFactory.getLogger(DevDataSeeder.class);
     private static final String IMG = "https://images.unsplash.com/";
@@ -52,12 +53,13 @@ public class DevDataSeeder implements CommandLineRunner {
     @Transactional
     public void run(String... args) {
         if (!props.dev().seedDemoData() || users.count() > 0) return;
+        String demoPassword = DemoPasswords.require(props);
         log.warn("Seeding DEMO data (dev profile). Do not use this profile in production.");
 
-        user("Anas Ahmed", "customer@zestora.com", "+91 98765 43210", "customer123", Role.CUSTOMER);
-        user("Zestora Admin", "admin@zestora.com", "+91 90000 00001", "admin123", Role.SUPER_ADMIN);
-        User owner = user("Tariq - Spice Garden", "spicegarden@zestora.local", "+91 98800 11223", "rest123", Role.RESTAURANT_OWNER);
-        User rider = user("Rahul Naik", "rahul.rider@zestora.local", "+91 94488 55667", "rider123", Role.DELIVERY_PARTNER);
+        user("Anas Ahmed", "customer@zestora.com", "+91 98765 43210", demoPassword, Role.CUSTOMER);
+        user("Zestora Admin", "admin@zestora.com", "+91 90000 00001", demoPassword, Role.SUPER_ADMIN);
+        User owner = user("Tariq - Spice Garden", "spicegarden@zestora.local", "+91 98800 11223", demoPassword, Role.RESTAURANT_OWNER);
+        User rider = user("Rahul Naik", "rahul.rider@zestora.local", "+91 94488 55667", demoPassword, Role.DELIVERY_PARTNER);
 
         DeliveryPartner dp = new DeliveryPartner();
         dp.setUserId(rider.getId());

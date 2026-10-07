@@ -29,8 +29,7 @@ public record AppProperties(
             @DefaultValue("499") BigDecimal freeDeliveryThreshold,
             @DefaultValue("5") BigDecimal platformFee,
             @DefaultValue("15") BigDecimal packagingFee,
-            @DefaultValue("0.05") BigDecimal gstRate,
-            @DefaultValue("0.20") BigDecimal commissionRate) {}
+            @DefaultValue("0.05") BigDecimal gstRate) {}
 
     public record Razorpay(String keyId, String keySecret, String webhookSecret) {
         public boolean configured() {
@@ -47,5 +46,12 @@ public record AppProperties(
 
     public record RateLimit(@DefaultValue("10") int authPerMinute) {}
 
-    public record Dev(@DefaultValue("false") boolean seedDemoData, @DefaultValue("false") boolean allowPaymentSimulation) {}
+    public record Dev(@DefaultValue("false") boolean seedDemoData,
+                      @DefaultValue("false") boolean allowPaymentSimulation,
+                      /** Adds the real (OpenStreetMap) Bhatkal-area restaurants with sample menus. Dev only; off in tests. */
+                      @DefaultValue("false") boolean seedBhatkal,
+                      /** Hides the six made-up sample restaurants so only the Bhatkal-area ones show. */
+                      @DefaultValue("false") boolean hideSampleRestaurants,
+                      /** Password given to every seeded demo account. Comes from DEMO_PASSWORD; never hard-coded. */
+                      String demoPassword) {}
 }

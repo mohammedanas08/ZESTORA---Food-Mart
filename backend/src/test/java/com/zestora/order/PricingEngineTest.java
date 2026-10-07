@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class PricingEngineTest {
     private final PricingEngine engine = new PricingEngine(new AppProperties(null, null, null,
             new AppProperties.Pricing(new BigDecimal("40"), new BigDecimal("499"), new BigDecimal("5"), new BigDecimal("15"),
-                    new BigDecimal("0.05"), new BigDecimal("0.20")), null, null, null, null));
+                    new BigDecimal("0.05")), null, null, null, null));
 
     private static BigDecimal bd(String s) { return new BigDecimal(s); }
 

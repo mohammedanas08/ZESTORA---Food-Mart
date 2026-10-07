@@ -1,5 +1,6 @@
 package com.zestora.security;
 
+import com.zestora.TestSecrets;
 import com.zestora.config.AppProperties;
 import com.zestora.user.Role;
 import com.zestora.user.User;
@@ -9,6 +10,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class JwtServiceTest {
+    private static final String SECRET = TestSecrets.random(32);
+
     private static JwtService service(String secret, long ttlMinutes) {
         var props = new AppProperties(new AppProperties.Jwt(secret, ttlMinutes, 14), null, null, null, null, null, null, null);
         var s = new JwtService(props);
@@ -26,7 +29,7 @@ class JwtServiceTest {
 
     @Test
     void roundTripKeepsIdAndRole() {
-        JwtService s = service("0123456789abcdef0123456789abcdef", 15);
+        JwtService s = service(SECRET, 15);
         AuthUser parsed = s.parse(s.createAccessToken(user())).orElseThrow();
         assertThat(parsed.id()).isEqualTo(7L);
         assertThat(parsed.role()).isEqualTo(Role.RESTAURANT_OWNER);
@@ -34,7 +37,7 @@ class JwtServiceTest {
 
     @Test
     void tamperedTokenIsRejected() {
-        JwtService s = service("0123456789abcdef0123456789abcdef", 15);
+        JwtService s = service(SECRET, 15);
         String token = s.createAccessToken(user());
         String[] parts = token.split("\\.");
         // swap in a forged payload claiming ADMIN but keep the old signature
@@ -46,13 +49,13 @@ class JwtServiceTest {
 
     @Test
     void tokenSignedWithAnotherKeyIsRejected() {
-        String token = service("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 15).createAccessToken(user());
-        assertThat(service("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", 15).parse(token)).isEmpty();
+        String token = service(TestSecrets.random(32), 15).createAccessToken(user());
+        assertThat(service(TestSecrets.random(32), 15).parse(token)).isEmpty();
     }
 
     @Test
     void expiredTokenIsRejected() {
-        JwtService s = service("0123456789abcdef0123456789abcdef", -1);
+        JwtService s = service(SECRET, -1);
         assertThat(s.parse(s.createAccessToken(user()))).isEmpty();
     }
 

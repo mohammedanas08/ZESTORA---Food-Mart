@@ -9,7 +9,7 @@ One app, four experiences chosen by the signed-in role:
 | Visitor / Customer | `/` restaurants, `/restaurants/:id`, `/grocery`, `/cart`, `/checkout`, `/orders`, `/orders/:id` (live tracking, pay, cancel, review), `/support` |
 | Restaurant owner / manager | `/partner` (live kitchen orders), `/partner/menu` (prices, sold-out, add dish, open/close) |
 | Rider | `/rider` (online toggle, assigned jobs, pickup → delivered with the customer's 4-digit code) |
-| Admin / Super admin | `/admin` (overview, orders, users + staff creation, coupons, audit log) |
+| Admin / Super admin | `/admin` (overview, orders, users + staff creation, partners onboarding, coupons, audit log) |
 
 ## Run
 ```bash
@@ -23,8 +23,13 @@ npm run dev
 Vite proxies `/api` and `/ws` to `http://localhost:8080` (override with `VITE_BACKEND_URL`), so the browser only talks to one origin
 in development; no CORS setup is needed and the `SameSite=Strict` refresh cookie works.
 
-Demo logins (backend dev profile): `customer@zestora.com / customer123`, `spicegarden@zestora.local / rest123`,
-`rahul.rider@zestora.local / rider123`, `admin@zestora.com / admin123`.
+Demo logins (backend dev profile): `customer@zestora.com`, `spicegarden@zestora.local`, `rahul.rider@zestora.local`, `admin@zestora.com`
+(and the restaurant owners in `../backend/DEMO_ACCOUNTS.md`), all with the `DEMO_PASSWORD` from `../backend/.env`.
+
+## Configuration
+The browser app holds **no secrets**: Razorpay's public key id comes from the backend at payment time, and everything else is server side.
+`frontend/.env.example` documents the only setting, `VITE_BACKEND_URL` (dev proxy target). Never put secrets in `VITE_*` variables:
+they are bundled into the public JavaScript.
 
 ## Scripts
 `npm run dev` · `npm run build` (typecheck + production build) · `npm test` · `npm run typecheck`
@@ -42,10 +47,17 @@ Demo logins (backend dev profile): `customer@zestora.com / customer123`, `spiceg
   backend. Without server keys (dev) it offers a "simulate payment" button instead.
 - **Route guards** (`RequireRole`) are only for convenience; the backend enforces every permission.
 
-## Tests (33)
+## Phone layout
+Below 768px the top nav is replaced by a fixed bottom tab bar (`Layout.tsx`): customers get Food / Grocery / Cart (with count) / Orders / Help,
+kitchen staff get Orders / Menu, riders and admins are single-screen so they have none. Checkout hides the tab bar and shows a sticky
+total + "Place order" bar instead. Buttons and inputs are at least 44px tall on phones, inputs use 16px text so iOS Safari does not zoom,
+and the bars respect the notch / home-indicator safe areas. Tested in the dev browser at 375px (every route, all roles) and 768px.
+Still worth checking on real devices.
+
+## Tests (42)
 `src/api/client.test.ts` (refresh/retry, in-memory token), `src/cart/CartContext.test.tsx`, `src/lib/pricing.test.ts`
-(same numbers as the backend), `src/pages/pages.test.tsx` (guards, login, browse, checkout payload, order page, tracker).
+(same numbers as the backend), `src/pages/pages.test.tsx` (guards, login, browse, checkout payload, order page, tracker),
+`src/pages/admin/AdminPartners.test.tsx` (owner/rider onboarding), `src/components/Layout.test.tsx` (role-based mobile tabs).
 
 ## Not built yet
-Maps / live rider position on a map (provider undecided), push notifications, admin UI for linking owners to restaurants and creating
-rider profiles (API exists), PDF invoices, refunds UI, Kannada/Urdu translations, PWA install for the rider app.
+Maps / live rider position on a map (provider undecided), push notifications, Cloudinary photo upload widget, PDF invoices, refunds UI, Kannada/Urdu translations, PWA install for the rider app.

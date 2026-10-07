@@ -66,7 +66,7 @@ describe('login', () => {
       '/login',
     );
     await userEvent.type(await screen.findByLabelText('Email'), 'o@z.com');
-    await userEvent.type(screen.getByLabelText('Password'), 'rest12345');
+    await userEvent.type(screen.getByLabelText('Password'), 'a-test-password');
     await userEvent.click(screen.getByRole('button', { name: 'Log in' }));
     expect(await screen.findByText('kitchen home')).toBeInTheDocument();
   });

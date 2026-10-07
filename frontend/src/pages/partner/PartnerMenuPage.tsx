@@ -45,23 +45,23 @@ export default function PartnerMenuPage() {
         {items.map((p: Product) => (
           <li key={p.id} className="flex flex-wrap items-center justify-between gap-3 p-3">
             <div className="flex items-center gap-2"><VegDot veg={p.veg} /><span className={p.available ? 'font-semibold' : 'text-stone-400 line-through'}>{p.name}</span><span className="text-xs text-stone-500">{p.category}</span></div>
-            <div className="flex items-center gap-2">
+            <div className="flex w-full items-center gap-2 sm:w-auto">
               <input
-                className="input w-24"
+                className="input w-24 shrink-0"
                 inputMode="decimal"
                 aria-label={`Price of ${p.name}`}
                 value={editing[p.id] ?? String(p.price)}
                 onChange={(e) => setEditing({ ...editing, [p.id]: e.target.value })}
               />
               <button
-                className="btn-outline"
+                className="btn-outline whitespace-nowrap"
                 disabled={editing[p.id] === undefined || Number(editing[p.id]) === Number(p.price) || Number.isNaN(Number(editing[p.id]))}
                 onClick={() => update.mutate({ id: p.id, price: Number(editing[p.id]) }, { onSuccess: () => setEditing(({ [p.id]: _drop, ...rest }) => rest) })}
               >
-                Save price
+                Save
               </button>
-              <button className={p.available ? 'btn-outline' : 'btn-primary'} onClick={() => update.mutate({ id: p.id, available: !p.available })}>
-                {p.available ? 'Mark sold out' : 'Back in stock'}
+              <button className={`${p.available ? 'btn-outline' : 'btn-primary'} ml-auto whitespace-nowrap sm:ml-0`} onClick={() => update.mutate({ id: p.id, available: !p.available })}>
+                {p.available ? 'Sold out' : 'Back in stock'}
               </button>
               <span className="hidden text-sm text-stone-500 sm:inline">{money(p.price)}</span>
             </div>

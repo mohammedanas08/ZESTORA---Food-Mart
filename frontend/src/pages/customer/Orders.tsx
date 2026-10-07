@@ -112,7 +112,7 @@ export function OrderDetailPage() {
           </div>
           <p className="mt-3 text-stone-500">Deliver to: {order.address.street}{order.address.area ? `, ${order.address.area}` : ''}, {order.address.city} {order.address.pincode}</p>
           <p className="mt-1 text-stone-500">Payment: {order.paymentMethod} · {order.paymentStatus}</p>
-          <Link className="mt-3 inline-block text-brand underline" to="/support">Need help with this order?</Link>
+          <Link className="mt-2 inline-flex min-h-[44px] items-center text-brand underline" to="/support">Need help with this order?</Link>
         </section>
       </div>
     </>

@@ -2,59 +2,18 @@
 
 This document has two parts:
 
-- **Part A — Current architecture** (what exists in the repo today: Next.js prototype).
-- **Part B — Target architecture** (the planned production stack: React + Java Spring Boot, etc.).
+- **Part A — Product design**: actors, the order workflow, the order state machine and the pricing rules.
+- **Part B — System architecture**: the Spring Boot + React design, with "as built" notes at the end (sections 13 and 14).
+
+(The first prototype, a Next.js app with an in-memory store, has been removed; it is in git history before the cleanup commit.)
 
 Status of implementation is tracked in `PROGRESS.md`; the product idea is in `IDEA.md`.
 
 ---
 
-# PART A — CURRENT ARCHITECTURE (Next.js prototype)
+# PART A — PRODUCT DESIGN
 
-## 1. Overview
-
-```
-                        ┌────────────────────────────────────────────┐
-                        │              Browser (4 actors)            │
-                        │ Customer · Restaurant · Rider · Admin      │
-                        └──────────────────┬─────────────────────────┘
-                                           │ HTTP (cookies), polling 3–4 s
-                        ┌──────────────────▼─────────────────────────┐
-                        │            Next.js 14 (App Router)         │
-                        │  middleware.ts  → page/API route guards    │
-                        │  app/**/page.tsx → UI (React, Tailwind)    │
-                        │  app/api/**     → REST route handlers      │
-                        └──────────────────┬─────────────────────────┘
-                                           │
-                 ┌─────────────────────────┼───────────────────────────┐
-                 ▼                         ▼                           ▼
-        server/auth.ts          server/dataStore.ts          server/services/
-        (cookie → user,         (in-memory singleton:        razorpayService.ts
-         requireAdmin, IDOR)     orders, users, menu,        (create order, HMAC
-                                 coupons, riders, audit)      verify, webhook)
-                                           │
-                                           ▼   (not connected yet)
-                                prisma/schema.prisma → PostgreSQL
-```
-
-### Repository layout
-```
-app/                  pages + API routes
-  page.tsx, restaurants/, grocery/, checkout/, orders/, my-orders/, favorites/, offers/, support/, profile/
-  login/, signup/
-  restaurant-dashboard/   delivery-dashboard/   admin/
-  api/auth/*  api/orders  api/products  api/admin/*  api/payments/*
-  api/v1/{restaurants,products,orders,coupons,delivery,reviews,support,admin/metrics}
-components/           Navbar, CartDrawer, FoodCustomizationModal, LocationModal, Footer, AdminProtectedRoute
-lib/                  cartContext.tsx (cart + pricing + auth state), utils.ts
-server/               auth.ts, dataStore.ts, passwordUtils.ts, seedData.ts, services/razorpayService.ts
-prisma/schema.prisma  production schema (not wired up)
-types/index.ts        shared TypeScript models
-middleware.ts         route protection
-tests/run-tests.js    test script
-```
-
-## 2. Actors and roles
+## 1. Actors and roles
 
 | Actor | Role value | Entry point | Main capabilities |
 |---|---|---|---|
@@ -65,7 +24,7 @@ tests/run-tests.js    test script
 | Admin | `ADMIN` / `SUPER_ADMIN` | `/admin` | Metrics, users, products, coupons, audit |
 | Support agent / grocery manager | `SUPPORT_AGENT`, `GROCERY_MANAGER` | — | Defined in schema, no UI yet |
 
-## 3. End-to-end workflow: User → Restaurant → Rider → Admin
+## 2. End-to-end workflow: User → Restaurant → Rider → Admin
 
 ```mermaid
 sequenceDiagram
@@ -127,7 +86,7 @@ sequenceDiagram
 2. Watches GMV, commission, active orders/drivers/restaurants.
 3. Creates coupons, manages products/users, reviews audit logs and support tickets.
 
-## 4. Order lifecycle (state machine)
+## 3. Order lifecycle (state machine)
 
 ```mermaid
 stateDiagram-v2
@@ -160,7 +119,7 @@ cancellation after `PREPARING` carries a kitchen-compensation policy.
 | PLACED/CONFIRMED→CANCELLED(customer) | Order's customer |
 | Any→CANCELLED (override), refunds | Admin |
 
-## 5. Pricing engine (server-authoritative)
+## 4. Pricing engine (server-authoritative)
 
 ```
 Total = Subtotal + Packaging(₹15 food / ₹0 grocery) + Delivery(₹40, free if subtotal ≥ ₹499)
@@ -170,43 +129,9 @@ Coupons are validated on the server (min order, validity, max cap). Examples: `Z
 `FREEDEL` (free delivery, min ₹199), `WELCOME100` (₹100 off, min ₹399).
 The payment amount is read from the stored order, never from the client.
 
-## 6. Authentication & authorization (current)
-
-| Piece | Current behaviour | Problem |
-|---|---|---|
-| Login | `POST /api/auth/login` checks `hashed:<plaintext>` | Not hashed |
-| Session | cookies `zestora_token` (= user id) and `zestora_role`, `httpOnly:false` | Forgeable |
-| Page guard | `middleware.ts` reads cookies; guards `/admin`, customer pages, auth pages | Trusts cookie role; restaurant/delivery pages unguarded |
-| API guard | `requireAuth`, `requireAdmin`, `requireCustomerOrAdmin` in `server/auth.ts` | Not applied to every route |
-| IDOR | Customers filtered to own orders when logged in | Guests see all orders on list endpoint |
-
-Target fix is Part B §7.
-
-## 7. Payments (current)
-
-```
-Customer ─▶ POST /api/payments/create ─▶ razorpayService.createOrder (amount from stored order)
-        ◀─ razorpayOrderId, qrString, keyId
-Customer pays ─▶ Razorpay ─▶ POST /api/payments/razorpay/webhook (HMAC verified)
-Client also calls POST /api/payments/verify (HMAC of orderId|paymentId)
-GET /api/payments/[orderId]/status  ← polled every 4 s by the payment page
-POST /api/payments/simulate         ← demo only: marks order PAID  (must be disabled in production)
-```
-
-## 8. Data model (Prisma schema, not yet connected)
-
-Domains: IAM (User, Account, Session) · Restaurants & menus · Grocery & inventory/stock reservation ·
-Orders (Order, OrderItem, OrderStatusHistory, CancellationDetail) · Logistics (DeliveryPartner, Vehicle,
-DeliveryAssignment, RiderLocationLog) · Promotions (Coupon, CouponUsage, OfferBanner, SurgeConfig) ·
-Reviews & support · Audit (AuditLog, TaxInvoice). See `DATABASE.md`.
-
-## 9. Known limitations of Part A
-In-memory persistence, polling instead of push, simulated tracking, weak auth, unconnected DB, tests that don't
-import real code. Full list in `PROGRESS.md` §4.
-
 ---
 
-# PART B — TARGET ARCHITECTURE (production stack)
+# PART B — SYSTEM ARCHITECTURE
 
 **Stack:** React (TypeScript) · Java + Spring Boot · PostgreSQL (or MySQL) · Spring Data JPA/Hibernate · REST ·
 Spring Security + JWT · WebSocket · Razorpay/Stripe · Google Maps/Mapbox · Cloudinary/S3 · Maven ·
@@ -329,7 +254,7 @@ Standard envelope `{success, data, error:{code,message}}`, pagination, OpenAPI d
 
 ## 6. Order state machine (backend)
 
-Implement as an explicit `OrderStateMachine` (enum transitions + allowed-actor map from Part A §4) invoked by
+Implement as an explicit `OrderStateMachine` (enum transitions + allowed-actor map from Part A §3) invoked by
 `OrderService`; illegal transition → `409 Conflict`; every change writes `OrderStatusHistory` + `AuditLog` and
 publishes a WebSocket event. Use optimistic locking (`@Version`) on `Order` to stop two actors racing.
 
@@ -361,17 +286,7 @@ Rider locations are kept in Redis (GEO) and sampled to `RiderLocationLog` for hi
 - **Images:** client requests a signed upload from the backend, uploads straight to Cloudinary/S3, backend stores only the URL + public id; transform to WebP/thumbnails.
 - **Notifications:** order events → `NotificationService` → FCM push, SMS (OTP/status), email (invoice).
 
-## 10. Migration path from the prototype
-
-1. Freeze the prototype API contract (`API.md`) as the spec.
-2. Port `DATABASE.md`/`schema.prisma` to JPA entities + Flyway migrations (PostgreSQL).
-3. Re-implement pricing, coupon and state-machine logic in Java with unit tests that reuse the numbers from `tests/run-tests.js`.
-4. Build auth + RBAC first, then catalog → orders → payments → delivery → admin.
-5. Port React pages from Next.js to a Vite/CRA React SPA (or keep Next.js as the front-end only and point it at Spring Boot).
-6. Switch polling to WebSocket; add maps and media.
-7. Remove the in-memory store and demo endpoints.
-
-## 11. Testing strategy
+## 10. Testing strategy
 
 | Layer | Tools | What |
 |---|---|---|
@@ -381,7 +296,7 @@ Rider locations are kept in Redis (GEO) and sampled to `RiderLocationLog` for hi
 | Frontend | React Testing Library + MSW | Cart, checkout, role guards, order tracker |
 | E2E (later) | Playwright | Customer → restaurant → rider → admin full journey |
 
-## 12. Deployment
+## 11. Deployment
 
 - Docker images for backend and frontend; `docker-compose` for local (app, PostgreSQL, Redis).
 - Environments: `dev` (simulate payments allowed), `staging`, `prod`.
@@ -389,11 +304,11 @@ Rider locations are kept in Redis (GEO) and sampled to `RiderLocationLog` for hi
 - CI: Maven build + tests, frontend lint/test/build, Docker publish; CD to staging on merge, manual approval to prod.
 - Observability: structured logs, Actuator health/metrics, error tracking (Sentry), uptime alerts, nightly DB backups.
 
-## 13. Decisions (2026-10-07)
+## 12. Decisions (2026-10-07)
 Java Spring Boot rebuild · PostgreSQL (local Docker for now, hosted later) · Razorpay · Cloudinary · food + grocery in v1 · **maps provider still open**
 (Google Maps or Mapbox). See `PROGRESS.md` section 7.
 
-## 14. As built (`backend/`)
+## 13. As built (`backend/`)
 
 The implemented backend is a modular monolith, one package per module under `com.zestora`:
 `config` · `common` (ApiResponse, exceptions, audit) · `security` (JWT, filters, rate limit) · `user` · `auth` ·
@@ -409,7 +324,7 @@ Differences from the plan above:
 - Refresh tokens are stored hashed in PostgreSQL (not Redis); rate limiting is in-memory.
 - Details, endpoints and env variables are in `backend/README.md`.
 
-## 15. React client as built (`frontend/`)
+## 14. React client as built (`frontend/`)
 
 ```
 src/

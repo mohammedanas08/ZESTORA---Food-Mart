@@ -1,80 +1,36 @@
-# Zestora Production Deployment Guide
+# Zestora Deployment Guide
 
-This guide describes how to deploy the Zestora food delivery and quick-commerce platform to cloud environments such as Vercel, AWS, or Docker/Kubernetes with a PostgreSQL database.
+Zestora is two deployables plus a PostgreSQL database:
 
----
+| Piece | What to run | Notes |
+|---|---|---|
+| Database | Managed PostgreSQL 14+ (Supabase, Neon, AWS RDS, Railway...) | Flyway creates and upgrades the schema on startup |
+| API | `backend/` Spring Boot jar on Java 21 | `mvn -DskipTests package` then `java -jar backend/target/zestora-backend-*.jar` |
+| Web app | `frontend/` static files | `npm ci && npm run build`, serve `frontend/dist` from any static host / CDN |
 
-## 1. Prerequisites
+Development uses local Docker PostgreSQL instead (see `README.md`). No hosting has been chosen yet.
 
-- **Node.js**: v18.17.0+ or v20+
-- **PostgreSQL Database**: v14+ (local Docker PostgreSQL for development; hosted on Supabase, Neon, AWS RDS, or Railway later)
-- **Environment Configuration**: Set up according to `.env.example`
+## 1. API environment variables (production)
+Set these as real environment variables on the host. **Never commit them.** The full list with notes is in `backend/.env.example`.
 
----
+| Variable | Required | Notes |
+|---|---|---|
+| `SPRING_PROFILES_ACTIVE` | yes | `prod`: no demo data, no payment simulator, secure cookies, `.env` is not read |
+| `DATABASE_URL` / `DATABASE_USERNAME` / `DATABASE_PASSWORD` | yes | JDBC URL and credentials of the managed database |
+| `JWT_SECRET` | yes | >= 32 random characters (`openssl rand -hex 48`); the app will not start without it |
+| `RAZORPAY_KEY_ID` / `RAZORPAY_KEY_SECRET` / `RAZORPAY_WEBHOOK_SECRET` | yes | The app will not start in prod without payment keys. Point Razorpay's webhook at `https://<api>/api/v1/payments/razorpay/webhook` |
+| `CORS_ALLOWED_ORIGINS` | yes | The web app's origin(s), comma separated |
+| `CLOUDINARY_CLOUD_NAME` / `CLOUDINARY_API_KEY` / `CLOUDINARY_API_SECRET` | for image uploads | |
 
-## 2. Environment Variables
+## 2. Web app and the API
+The browser calls `/api` and `/ws` on its own origin. Serve both under one domain (reverse proxy `/api` and `/ws` to the Spring Boot
+service, everything else to the static files). That keeps the `SameSite=Strict` refresh cookie working and avoids CORS. In development Vite
+does this proxying (`frontend/vite.config.ts`). Terminate HTTPS at the proxy and forward the `X-Forwarded-*` headers.
 
-Configure the following environment variables in your deployment dashboard (e.g. Vercel Project Settings):
-
-```env
-# Database
-DATABASE_URL="postgresql://user:password@host:5432/zestora?sslmode=require"
-
-# Next.js App
-NEXT_PUBLIC_APP_URL="https://your-domain.com"
-NEXT_PUBLIC_APP_NAME="Zestora"
-NEXT_PUBLIC_APP_CITY="Bhatkal"
-NEXT_PUBLIC_PLATFORM_COMMISSION_RATE=0.20
-
-# Optional Payment Gateway
-RAZORPAY_KEY_ID="rzp_live_xxxxxxxxxx"
-RAZORPAY_KEY_SECRET="your_live_secret"
-```
-
----
-
-## 3. Deploying to Vercel
-
-1. Push your repository to GitHub / GitLab.
-2. Import the project into the [Vercel Dashboard](https://vercel.com).
-3. Set the Framework Preset to **Next.js**.
-4. Set the Root Directory to `./` or `zestora/` depending on your repository layout.
-5. Add the environment variables specified in `.env.example`.
-6. Click **Deploy**.
-
----
-
-## 4. Docker Deployment
-
-```dockerfile
-FROM node:20-alpine AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
-
-FROM node:20-alpine AS runner
-WORKDIR /app
-ENV NODE_ENV=production
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-
-EXPOSE 3000
-ENV PORT 3000
-CMD ["node", "server.js"]
-```
-
----
-
-## 5. Automated CI/CD Health Checks
-
-Ensure the following passes on every PR:
-```bash
-# Run unit & integration tests
-npm test
-
-# Run production build
-npm run build
-```
+## 3. Release checklist
+- [ ] `mvn verify` and `npm test` pass (CI does this on every push)
+- [ ] Production secrets are set and rotated; no `.env` file on the server
+- [ ] `SPRING_PROFILES_ACTIVE=prod`; confirm `/api/v1/payments/{id}/simulate` returns 404
+- [ ] Razorpay webhook configured and tested with a test payment
+- [ ] Database backups and monitoring enabled; health check: `GET /actuator/health`
+- [ ] Demo accounts and the `bhatkal` profile were never used against this database

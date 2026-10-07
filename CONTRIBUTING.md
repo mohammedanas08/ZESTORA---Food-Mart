@@ -1,45 +1,21 @@
 # Contributing to Zestora
 
-Thank you for contributing to the Zestora Food Delivery & Quick-Commerce ecosystem!
+## Setup
+Follow the quick start in `README.md`. Backend tests need Docker running; they create their own PostgreSQL and random secrets, so no `.env` is required.
 
----
+## Ground rules
+- **No secrets in the repo.** Credentials and keys go in `backend/.env` (git-ignored) or environment variables. Update `backend/.env.example` with a placeholder when you add a variable. Tests must use `TestSecrets` (random per run), never literals.
+- **Prices are computed on the server.** The client sends product ids and quantities only. Change pricing in `PricingEngine` and keep `frontend/src/lib/pricing.ts` (the checkout estimate) in step; both are covered by tests with the same numbers.
+- **Order status changes go through `OrderStateMachine`** (who may set which status, and legal moves). Every order endpoint must also pass `OrderAccess` (ownership), so users cannot touch other people's orders.
+- **Schema changes are new Flyway migrations** (`backend/src/main/resources/db/migration/V<next>__name.sql`). Never edit an applied migration: it changes its checksum and breaks existing databases.
+- **Route guards in the React app are cosmetic.** Real permission checks belong in the backend (and need a test).
 
-## 1. Development Environment Setup
-
+## Before you push
 ```bash
-# Clone the repository
-git clone https://github.com/your-username/zestora.git
-cd zestora
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
+cd backend  && mvn verify
+cd frontend && npm run typecheck && npm test && npm run build
 ```
+CI runs the same checks. Keep `PROGRESS.md` up to date after meaningful changes.
 
-Visit `http://localhost:3000` to interact with the platform.
-
----
-
-## 2. Code Architecture & Guidelines
-
-- **Next.js App Router**: Route segments live in `app/`. Use client components (`'use client'`) only when interactive state, effects, or browser APIs are required.
-- **Design System & Tailwind**: Follow the Zestora color palette (brand saffron `#FF6B00`, emerald green `#059669`, warm neutrals) and typography tokens defined in `tailwind.config.js`.
-- **State & Pricing**: Authoritative order pricing must always be calculated through `dataStore.ts` / server logic. Do not calculate net payable totals solely on the client.
-- **Order State Machine**: Any modifications to order status progression must adhere to the transitions defined in `types/index.ts` and validated in `server/dataStore.ts`.
-
----
-
-## 3. Pull Request Checklist
-
-Before submitting a PR:
-1. Ensure all automated tests pass:
-   ```bash
-   npm test
-   ```
-2. Ensure the production build completes without errors or type warnings:
-   ```bash
-   npm run build
-   ```
-3. Test your changes across all relevant actor dashboards using the top role switcher bar.
+## Demo data
+`mvn spring-boot:run -Dspring-boot.run.profiles=dev,bhatkal` seeds real places from OpenStreetMap with **sample** menus. Do not scrape Google Maps; use the official Places API with your own key if you need more places.

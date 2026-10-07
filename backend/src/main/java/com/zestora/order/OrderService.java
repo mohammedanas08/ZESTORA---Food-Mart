@@ -11,8 +11,6 @@ import com.zestora.security.AuthUser;
 import com.zestora.user.Role;
 import com.zestora.user.User;
 import com.zestora.user.UserRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -30,7 +28,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
-    private static final Logger log = LoggerFactory.getLogger(OrderService.class);
     private static final SecureRandom RANDOM = new SecureRandom();
     private static final DateTimeFormatter DAY = DateTimeFormatter.ofPattern("yyyyMMdd");
 

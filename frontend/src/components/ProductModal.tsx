@@ -28,7 +28,7 @@ export default function ProductModal({
 
   return (
     <div className="fixed inset-0 z-40 flex items-end justify-center bg-black/40 p-0 sm:items-center sm:p-4" role="dialog" aria-modal="true" aria-label={product.name}>
-      <div className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-t-2xl bg-white p-5 sm:rounded-2xl">
+      <div className="max-h-[90dvh] w-full max-w-md overflow-y-auto rounded-t-2xl bg-white p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] sm:rounded-2xl">
         <h2 className="text-lg font-bold">{product.name}</h2>
         {product.description && <p className="mb-3 text-sm text-stone-500">{product.description}</p>}
 
