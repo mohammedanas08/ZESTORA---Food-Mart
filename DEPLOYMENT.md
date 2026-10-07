@@ -66,3 +66,7 @@ Use `backend/Dockerfile` on any container host (Render, Railway, Fly.io, Koyeb..
 ## 8. Running production without Razorpay (demo only)
 Set `ALLOW_PAYMENT_SIMULATION=true` instead of the Razorpay keys. The checkout then shows the "Simulate successful payment" button and **anyone can mark an order paid without paying**.
 Use it only while there are no real customers; set the Razorpay keys and delete the variable before taking real orders. The API logs a warning at start-up while it is on.
+
+## 9. Rider account
+Set `RIDER_EMAIL` and `RIDER_PASSWORD` (at least 12 characters, optional `RIDER_NAME`) in the API's environment and start it. A rider with an online delivery profile is created if the email does not exist yet.
+The vehicle details are left empty. Remove `RIDER_PASSWORD` afterwards; the account keeps working.

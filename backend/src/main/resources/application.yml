@@ -58,6 +58,10 @@ zestora:
   admin:                                   # first-admin bootstrap, see AdminBootstrap; leave empty normally
     email: ${ADMIN_EMAIL:}
     password: ${ADMIN_PASSWORD:}
+  rider:                                   # optional rider account bootstrap, see RiderBootstrap
+    email: ${RIDER_EMAIL:}
+    password: ${RIDER_PASSWORD:}
+    name: ${RIDER_NAME:}
   cloudinary:
     cloud-name: ${CLOUDINARY_CLOUD_NAME:}
     api-key: ${CLOUDINARY_API_KEY:}
