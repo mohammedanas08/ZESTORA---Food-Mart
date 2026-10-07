@@ -1,3 +1,6 @@
 {
-  "rewrites": [{ "source": "/((?!assets/|restaurants/).*)", "destination": "/index.html" }]
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://zestora-food-mart-production.up.railway.app/api/:path*" },
+    { "source": "/((?!assets/|restaurants/).*)", "destination": "/index.html" }
+  ]
 }
