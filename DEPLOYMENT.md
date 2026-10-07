@@ -49,3 +49,16 @@ log in at `/login`, then **remove both variables**. It never changes an account 
 Vercel runs short-lived serverless functions (Node, Python, Go, Ruby); it has no long-running Java process. The API needs one: WebSocket order updates,
 scheduled jobs (unpaid orders are cancelled after 30 minutes), an in-memory login rate limit and Flyway at start-up. Running it on Vercel would mean rewriting the backend.
 Use `backend/Dockerfile` on any container host (Render, Railway, Fly.io, Koyeb...): build context `backend`, set the environment variables from `backend/.env.example`, port 8080.
+
+## 7. Railway (API) step by step
+1. Railway → New Project → Deploy from GitHub repo → pick this repo. In the service's Settings set **Root Directory** to `backend` (`backend/railway.json` selects the Dockerfile and the `/actuator/health` check).
+2. Settings → Networking → Generate Domain. Railway supplies `PORT` itself.
+3. Variables (never commit them):
+   - `SPRING_PROFILES_ACTIVE=prod`
+   - `DATABASE_URL=jdbc:postgresql://<supabase-pooler-host>:5432/postgres?sslmode=require`, `DATABASE_USERNAME=postgres.<project-ref>`, `DATABASE_PASSWORD`
+   - `JWT_SECRET` (`openssl rand -hex 48`), `COOKIE_SECURE=true`
+   - `CORS_ALLOWED_ORIGINS=https://<your-vercel-domain>`
+   - `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`, `RAZORPAY_WEBHOOK_SECRET`
+   - `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`
+   - `ADMIN_EMAIL`, `ADMIN_PASSWORD` for the first start only, then delete them
+4. In `frontend/vercel.json` add `{ "source": "/api/:path*", "destination": "https://<railway-domain>/api/:path*" }` before the catch-all rewrite, then redeploy Vercel.
